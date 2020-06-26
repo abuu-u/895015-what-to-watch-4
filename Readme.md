@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [abuu](https://up.htmlacademy.ru/react/4/user/895015).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Приходько](https://up.htmlacademy.ru/react/4/user/1012525).
 
 ---
 
