@@ -14,5 +14,5 @@ ReactDOM.render(
       genre={Settings.GENRE}
       releaseDate={Settings.RELEASE_DATE}
     />,
-    document.querySelector(`#root`)
+    document.getElementById(`root`)
 );
