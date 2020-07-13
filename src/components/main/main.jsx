@@ -2,6 +2,8 @@ import React from "react";
 import Film from "../film/film.jsx";
 import PropTypes from "prop-types";
 
+const onHeaderClick = () => {};
+
 const Main = (props) => {
   const {promoFilm, films} = props;
 
@@ -100,7 +102,11 @@ const Main = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {films.map((film, index) => <Film key={film + index} film={film}/>)}
+          {films.map((film, index) => <Film
+            key={film + index}
+            film={film}
+            onHeaderClick={onHeaderClick}
+          />)}
         </div>
 
         <div className="catalog__more">
