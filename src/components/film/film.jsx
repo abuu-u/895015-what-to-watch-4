@@ -8,7 +8,7 @@ const Film = (props) => {
     <article
       id={film.id}
       className="small-movie-card catalog__movies-card"
-      onMouseOver={(evt) => onFilmHover(evt.currentTarget.id)}
+      onMouseOver={onFilmHover}
     >
       <div className="small-movie-card__image">
         <img src={film.previewImage} alt={film.name} width="280" height="175" />

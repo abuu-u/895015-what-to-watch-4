@@ -31,8 +31,8 @@ class FilmList extends React.PureComponent {
 
   onHeaderClick() {}
 
-  onFilmHover(id) {
-    this.setState({activeFilmId: id});
+  onFilmHover(evt) {
+    this.setState({activeFilmId: evt.currentTarget.id});
   }
 }
 
