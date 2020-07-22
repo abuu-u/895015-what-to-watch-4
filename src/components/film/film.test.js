@@ -4,7 +4,10 @@ import Film from "./film.jsx";
 
 const onHeaderClick = () => {};
 
+const onFilmHover = () => {};
+
 const film = {
+  id: 1,
   name: `Fantastic Beasts`,
   previewImage: `img/bohemian-rhapsody.jpg`,
 };
@@ -14,6 +17,7 @@ it(`Render Film`, () => {
     .create(<Film
       film={film}
       onHeaderClick={onHeaderClick}
+      onFilmHover={onFilmHover}
     />)
     .toJSON();
 

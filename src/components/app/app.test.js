@@ -10,14 +10,17 @@ const PromoFilm = {
 
 const films = [
   {
+    id: 1,
     name: `Fantastic Beasts`,
     previewImage: `img/bohemian-rhapsody.jpg`,
   },
   {
+    id: 2,
     name: `Bohemian Rhapsody`,
     previewImage: `img/bohemian-rhapsody.jpg`,
   },
   {
+    id: 3,
     name: `Macbeth`,
     previewImage: `img/bohemian-rhapsody.jpg`,
   },
