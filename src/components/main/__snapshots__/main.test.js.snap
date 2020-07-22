@@ -259,6 +259,8 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          id={1}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
@@ -284,6 +286,8 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          id={2}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
@@ -309,6 +313,8 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          id={3}
+          onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"

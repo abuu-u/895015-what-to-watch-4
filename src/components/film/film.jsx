@@ -2,10 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Film = (props) => {
-  const {film, onHeaderClick} = props;
+  const {film, onHeaderClick, onFilmHover} = props;
 
   return (
-    <article className="small-movie-card catalog__movies-card">
+    <article
+      id={film.id}
+      className="small-movie-card catalog__movies-card"
+      onMouseOver={(evt) => onFilmHover(evt.currentTarget.id)}
+    >
       <div className="small-movie-card__image">
         <img src={film.previewImage} alt={film.name} width="280" height="175" />
       </div>
@@ -22,10 +26,12 @@ const Film = (props) => {
 
 Film.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
   }).isRequired,
   onHeaderClick: PropTypes.func.isRequired,
+  onFilmHover: PropTypes.func.isRequired,
 };
 
 export default Film;

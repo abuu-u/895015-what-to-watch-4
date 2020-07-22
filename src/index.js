@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
+import {generateFilms} from "./mock/film";
 
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
@@ -8,20 +9,7 @@ const PromoFilm = {
   RELEASE_DATE: 2014,
 };
 
-const films = [
-  {
-    name: `Fantastic Beasts`,
-    previewImage: `img/bohemian-rhapsody.jpg`,
-  },
-  {
-    name: `Bohemian Rhapsody`,
-    previewImage: `img/bohemian-rhapsody.jpg`,
-  },
-  {
-    name: `Macbeth`,
-    previewImage: `img/bohemian-rhapsody.jpg`,
-  },
-];
+const films = generateFilms(10);
 
 ReactDOM.render(
     <App
