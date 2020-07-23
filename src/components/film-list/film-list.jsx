@@ -10,26 +10,24 @@ class FilmList extends React.PureComponent {
       activeFilmId: null,
     };
 
-    this.onHeaderClick = this.onHeaderClick.bind(this);
     this.onFilmHover = this.onFilmHover.bind(this);
   }
 
   render() {
-    const {films} = this.props;
+    const {films, onFilmClick} = this.props;
 
     return (
       <div className="catalog__movies-list">
         {films.map((film, index) => <Film
           film={film}
-          onHeaderClick={this.onHeaderClick}
+          onFilmClick={onFilmClick}
           onFilmHover={this.onFilmHover}
           key={film + index}
+          index={index}
         />)}
       </div>
     );
   }
-
-  onHeaderClick() {}
 
   onFilmHover(evt) {
     this.setState({activeFilmId: evt.currentTarget.id});
@@ -42,6 +40,7 @@ FilmList.propTypes = {
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
   })).isRequired,
+  onFilmClick: PropTypes.func.isRequired,
 };
 
 export default FilmList;

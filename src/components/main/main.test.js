@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
+const onFilmClick = () => {};
+
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
@@ -31,6 +33,7 @@ it(`Render Main`, () => {
     .create(<Main
       promoFilm={PromoFilm}
       films={films}
+      onFilmClick={onFilmClick}
     />)
     .toJSON();
 

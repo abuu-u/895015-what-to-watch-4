@@ -3,7 +3,9 @@
 exports[`Render Film 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  data-index={1}
   id={1}
+  onClick={[Function]}
   onMouseOver={[Function]}
 >
   <div
@@ -22,7 +24,6 @@ exports[`Render Film 1`] = `
     <a
       className="small-movie-card__link"
       href="movie-page.html"
-      onClick={[Function]}
     >
       Fantastic Beasts
     </a>

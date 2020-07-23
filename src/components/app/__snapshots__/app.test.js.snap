@@ -259,14 +259,16 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
+          data-index={0}
           id={1}
+          onClick={[Function]}
           onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Fantastic Beasts"
+              alt="The Grand Budapest Hotel"
               height="175"
               src="img/bohemian-rhapsody.jpg"
               width="280"
@@ -278,22 +280,23 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Fantastic Beasts
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          data-index={1}
           id={2}
+          onClick={[Function]}
           onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Bohemian Rhapsody"
+              alt="The Grand Budapest Hotel"
               height="175"
               src="img/bohemian-rhapsody.jpg"
               width="280"
@@ -305,22 +308,23 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Bohemian Rhapsody
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
+          data-index={2}
           id={3}
+          onClick={[Function]}
           onMouseOver={[Function]}
         >
           <div
             className="small-movie-card__image"
           >
             <img
-              alt="Macbeth"
+              alt="The Grand Budapest Hotel"
               height="175"
               src="img/bohemian-rhapsody.jpg"
               width="280"
@@ -332,9 +336,8 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-              onClick={[Function]}
             >
-              Macbeth
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>
