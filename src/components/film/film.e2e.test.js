@@ -14,22 +14,21 @@ Enzyme.configure({
 });
 
 it(`Should handlers be called`, () => {
-  const onHeaderClick = jest.fn();
+  const onFilmClick = jest.fn();
   const onFilmHover = jest.fn();
 
   const filmComponent = shallow(
       <Film
         film={film}
-        onHeaderClick={onHeaderClick}
+        onFilmClick={onFilmClick}
         onFilmHover={onFilmHover}
+        index={1}
       />
   );
 
-  const header = filmComponent.find(`.small-movie-card__link`);
-
-  header.simulate(`click`);
   filmComponent.simulate(`mouseOver`);
+  filmComponent.simulate(`click`);
 
-  expect(onHeaderClick).toHaveBeenCalledTimes(1);
+  expect(onFilmClick).toHaveBeenCalledTimes(1);
   expect(onFilmHover).toHaveBeenCalledTimes(1);
 });

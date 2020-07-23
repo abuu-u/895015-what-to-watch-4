@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Film from "./film.jsx";
 
-const onHeaderClick = () => {};
+const onFilmClick = () => {};
 
 const onFilmHover = () => {};
 
@@ -16,8 +16,9 @@ it(`Render Film`, () => {
   const tree = renderer
     .create(<Film
       film={film}
-      onHeaderClick={onHeaderClick}
+      onFilmClick={onFilmClick}
       onFilmHover={onFilmHover}
+      index={1}
     />)
     .toJSON();
 

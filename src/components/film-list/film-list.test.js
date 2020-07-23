@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FilmList from "./film-list.jsx";
 
+const onFilmClick = () => {};
+
 const films = [
   {
     id: 1,
@@ -24,6 +26,7 @@ it(`Render Main`, () => {
   const tree = renderer
     .create(<FilmList
       films={films}
+      onFilmClick={onFilmClick}
     />)
     .toJSON();
 
