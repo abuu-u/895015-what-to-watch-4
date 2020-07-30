@@ -1,23 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
+import PreviewPlayer from "../preview-player/preview-player.jsx";
 
 const Film = (props) => {
-  const {film, onFilmClick, onFilmHover, index} = props;
+  const {
+    film,
+    onFilmClick,
+    onFilmMouseOver,
+    onFilmMouseLeave,
+    index,
+    isActive,
+  } = props;
 
   return (
     <article
       id={film.id}
       className="small-movie-card catalog__movies-card"
-      onMouseOver={onFilmHover}
       onClick={onFilmClick}
+      onMouseOver={onFilmMouseOver}
+      onMouseLeave={onFilmMouseLeave}
       data-index={index}
     >
       <div className="small-movie-card__image">
-        <img
-          src={film.previewImage}
-          alt={film.name}
-          width="280" height="175"
-        />
+        {isActive ? <PreviewPlayer
+          previewVideoLink={film.previewVideoLink}
+        /> :
+          <img
+            src={film.previewImage}
+            alt={film.name}
+            width="280" height="175"
+          />}
       </div>
       <h3 className="small-movie-card__title">
         <a className="small-movie-card__link" href="movie-page.html">{film.name}</a>
@@ -31,10 +43,13 @@ Film.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
+    previewVideoLink: PropTypes.string.isRequired,
   }).isRequired,
   onFilmClick: PropTypes.func.isRequired,
-  onFilmHover: PropTypes.func.isRequired,
+  onFilmMouseOver: PropTypes.func.isRequired,
+  onFilmMouseLeave: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Film;

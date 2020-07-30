@@ -7,6 +7,7 @@ const film = {
   id: 1,
   name: `Fantastic Beasts`,
   previewImage: `img/bohemian-rhapsody.jpg`,
+  previewVideoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
 Enzyme.configure({
@@ -15,20 +16,25 @@ Enzyme.configure({
 
 it(`Should handlers be called`, () => {
   const onFilmClick = jest.fn();
-  const onFilmHover = jest.fn();
+  const onFilmMouseOver = jest.fn();
+  const onFilmMouseLeave = jest.fn();
 
   const filmComponent = shallow(
       <Film
         film={film}
         onFilmClick={onFilmClick}
-        onFilmHover={onFilmHover}
+        onFilmMouseOver={onFilmMouseOver}
+        onFilmMouseLeave={onFilmMouseLeave}
         index={1}
+        isActive={false}
       />
   );
 
-  filmComponent.simulate(`mouseOver`);
   filmComponent.simulate(`click`);
+  filmComponent.simulate(`mouseOver`);
+  filmComponent.simulate(`mouseLeave`);
 
   expect(onFilmClick).toHaveBeenCalledTimes(1);
-  expect(onFilmHover).toHaveBeenCalledTimes(1);
+  expect(onFilmMouseOver).toHaveBeenCalledTimes(1);
+  expect(onFilmMouseLeave).toHaveBeenCalledTimes(1);
 });
