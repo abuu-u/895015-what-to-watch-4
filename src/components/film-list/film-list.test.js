@@ -3,6 +3,8 @@ import renderer from "react-test-renderer";
 import FilmList from "./film-list.jsx";
 
 const onFilmClick = () => {};
+const onFilmMouseOver = () => {};
+const onFilmMouseLeave = () => {};
 
 const films = [
   {
@@ -29,7 +31,10 @@ it(`Render Main`, () => {
   const tree = renderer
     .create(<FilmList
       films={films}
+      activeFilmId={-1}
       onFilmClick={onFilmClick}
+      onFilmMouseOver={onFilmMouseOver}
+      onFilmMouseLeave={onFilmMouseLeave}
     />)
     .toJSON();
 

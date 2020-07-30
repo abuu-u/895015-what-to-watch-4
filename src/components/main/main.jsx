@@ -1,6 +1,9 @@
 import React from "react";
 import FilmList from "../film-list/film-list.jsx";
+import withActiveFilm from "../../hocs/with-active-film";
 import PropTypes from "prop-types";
+
+const FilmListWrapped = withActiveFilm(FilmList);
 
 const Main = (props) => {
   const {promoFilm, films, onFilmClick} = props;
@@ -99,7 +102,7 @@ const Main = (props) => {
           </li>
         </ul>
 
-        <FilmList
+        <FilmListWrapped
           films={films}
           onFilmClick={onFilmClick}
         />
