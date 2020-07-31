@@ -262,6 +262,7 @@ Array [
           data-index={0}
           id={1}
           onClick={[Function]}
+          onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <div
@@ -290,6 +291,7 @@ Array [
           data-index={1}
           id={2}
           onClick={[Function]}
+          onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <div
@@ -318,6 +320,7 @@ Array [
           data-index={2}
           id={3}
           onClick={[Function]}
+          onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <div
