@@ -136,11 +136,7 @@ Main.propTypes = {
     GENRE: PropTypes.string.isRequired,
     RELEASE_DATE: PropTypes.number.isRequired,
   }).isRequired,
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-  })).isRequired,
+  films: PropTypes.array.isRequired,
   onFilmClick: PropTypes.func.isRequired,
 };
 

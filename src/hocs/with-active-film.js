@@ -28,6 +28,10 @@ const withActiveFilm = (Component) => {
       />;
     }
 
+    componentWillUnmount() {
+      clearTimeout(this.timerId);
+    }
+
     _handleFilmMouseOver(evt) {
       const id = parseInt(evt.currentTarget.id, 10);
 

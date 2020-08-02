@@ -3,8 +3,8 @@ import renderer from "react-test-renderer";
 import Film from "./film.jsx";
 
 const onFilmClick = () => {};
-const onMouseOver = () => {};
-const onMouseLeave = () => {};
+const onFilmMouseOver = () => {};
+const onFilmMouseLeave = () => {};
 
 const film = {
   id: 1,
@@ -18,8 +18,8 @@ it(`Render Film`, () => {
     .create(<Film
       film={film}
       onFilmClick={onFilmClick}
-      onMouseOver={onMouseOver}
-      onMouseLeave={onMouseLeave}
+      onFilmMouseOver={onFilmMouseOver}
+      onFilmMouseLeave={onFilmMouseLeave}
       index={1}
       isActive={false}
     />)

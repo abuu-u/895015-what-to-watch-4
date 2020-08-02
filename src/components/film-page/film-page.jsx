@@ -1,56 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Tabs from "../tabs/tabs.jsx";
+import FilmList from "../film-list/film-list.jsx";
+import withActiveFilm from "../../hocs/with-active-film";
+import withActiveTab from '../../hocs/with-active-tab';
 
-const RATING = {
-  bad: {
-    text: `Bad`,
-    max: 3,
-  },
-  normal: {
-    text: `Normal`,
-    max: 5,
-  },
-  good: {
-    text: `Good`,
-    max: 8,
-  },
-  veryGood: {
-    text: `Very good`,
-    max: 10,
-  },
-  awesome: {
-    text: `Awesome`,
-  },
-};
+const MORE_LIKE_FILMS_COUNT = 4;
 
-const getRatingLevel = (rating) => {
-  let ratingText = ``;
+const FilmListWrapped = withActiveFilm(FilmList);
 
-  Object.values(RATING).some((it) => {
-    if (it.max > rating) {
-      ratingText = it.text;
-      return true;
-    }
-
-    return false;
-  });
-
-  return ratingText;
-};
+const TabsWrapped = withActiveTab(Tabs);
 
 const FilmPage = (props) => {
+  const {film, films, onFilmClick} = props;
   const {
     name,
     posterImage,
     backgroundImage,
-    description,
-    rating,
-    scoresCount,
-    director,
-    starring,
     genre,
     released,
-  } = props.film;
+  } = film;
 
   return (
     <>
@@ -110,37 +79,9 @@ const FilmPage = (props) => {
           <div className="movie-card__poster movie-card__poster--big">
             <img src={posterImage} alt={name} width="218" height="327" />
           </div>
-
-          <div className="movie-card__desc">
-            <nav className="movie-nav movie-card__nav">
-              <ul className="movie-nav__list">
-                <li className="movie-nav__item movie-nav__item--active">
-                  <a href="#" className="movie-nav__link">Overview</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Details</a>
-                </li>
-                <li className="movie-nav__item">
-                  <a href="#" className="movie-nav__link">Reviews</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div className="movie-rating">
-              <div className="movie-rating__score">{rating}</div>
-              <p className="movie-rating__meta">
-                <span className="movie-rating__level">{getRatingLevel(rating)}</span>
-                <span className="movie-rating__count">{scoresCount} ratings</span>
-              </p>
-            </div>
-
-            <div className="movie-card__text">
-              <p>{description}</p>
-              <p className="movie-card__director"><strong>Director: {director}</strong></p>
-
-              <p className="movie-card__starring"><strong>Starring: {starring.join(`, `)}</strong></p>
-            </div>
-          </div>
+          <TabsWrapped
+            film={film}
+          />
         </div>
       </div>
     </section >
@@ -149,43 +90,10 @@ const FilmPage = (props) => {
       <section className="catalog catalog--like-this">
         <h2 className="catalog__title">More like this</h2>
 
-        <div className="catalog__movies-list">
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-            </h3>
-          </article>
-
-          <article className="small-movie-card catalog__movies-card">
-            <div className="small-movie-card__image">
-              <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-            </div>
-            <h3 className="small-movie-card__title">
-              <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-            </h3>
-          </article>
-        </div>
+        <FilmListWrapped
+          films={films.filter((it) => it.genre === film.genre).slice(0, MORE_LIKE_FILMS_COUNT)}
+          onFilmClick={onFilmClick}
+        />
       </section>
 
       <footer className="page-footer">
@@ -211,14 +119,11 @@ FilmPage.propTypes = {
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
   }).isRequired,
+  films: PropTypes.array.isRequired,
+  onFilmClick: PropTypes.func.isRequired,
 };
 
 export default FilmPage;
