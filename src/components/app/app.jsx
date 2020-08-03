@@ -25,6 +25,8 @@ class App extends React.PureComponent {
             {this.state.filmDetails ?
               <FilmPage
                 film={this.state.filmDetails}
+                films={films}
+                onFilmClick={this.onFilmClick}
               /> :
               <Main
                 promoFilm={promoFilm}
@@ -35,6 +37,8 @@ class App extends React.PureComponent {
           <Route exact path="/film-page">
             <FilmPage
               film={films[0]}
+              films={films}
+              onFilmClick={this.onFilmClick}
             />
           </Route>
         </Switch>
@@ -49,25 +53,8 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  promoFilm: PropTypes.shape({
-    NAME: PropTypes.string.isRequired,
-    GENRE: PropTypes.string.isRequired,
-    RELEASE_DATE: PropTypes.number.isRequired,
-  }).isRequired,
-  films: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    scoresCount: PropTypes.number.isRequired,
-    director: PropTypes.string.isRequired,
-    starring: PropTypes.arrayOf(PropTypes.string.isRequired),
-    genre: PropTypes.string.isRequired,
-    released: PropTypes.number.isRequired,
-  })).isRequired,
+  promoFilm: PropTypes.object.isRequired,
+  films: PropTypes.array.isRequired,
 };
 
 export default App;
