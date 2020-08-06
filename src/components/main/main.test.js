@@ -4,6 +4,8 @@ import Main from "./main.jsx";
 
 const onFilmClick = () => {};
 
+const onGenreClick = () => {};
+
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
@@ -36,7 +38,9 @@ it(`Render Main`, () => {
     .create(<Main
       promoFilm={PromoFilm}
       films={films}
+      activeGenre={`Comedy`}
       onFilmClick={onFilmClick}
+      onGenreClick={onGenreClick}
     />)
     .toJSON();
 

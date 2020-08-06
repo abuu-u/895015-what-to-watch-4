@@ -6,7 +6,10 @@ const TAB = {
 
 const TABS = Object.values(TAB);
 
+const DEFAULT_GENRE = `All genres`;
+
 export {
   TAB,
   TABS,
+  DEFAULT_GENRE,
 };

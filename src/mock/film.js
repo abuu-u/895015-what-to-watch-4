@@ -1,3 +1,15 @@
+const genres = [
+  `Comedy`,
+  `Crime`,
+  `Documentary`,
+  `Drama`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci - Fi`,
+  `Thriller`,
+];
+
 const generateFilm = (it, index) => {
   it = {
     id: index,
@@ -14,7 +26,7 @@ const generateFilm = (it, index) => {
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     runTime: 99,
-    genre: `Comedy`,
+    genre: genres[Math.floor(Math.random() * genres.length)],
     released: 2014,
     isFavorite: false
   };
