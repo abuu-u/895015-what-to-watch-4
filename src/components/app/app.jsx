@@ -66,12 +66,11 @@ App.propTypes = {
   promoFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
   onGenreClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  genre: state.genre,
+  activeGenre: state.activeGenre,
   films: state.films,
 });
 

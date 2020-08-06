@@ -2,7 +2,7 @@ import {extend} from "./utils.js";
 import {DEFAULT_GENRE} from './const';
 
 const initialState = {
-  genre: DEFAULT_GENRE,
+  activeGenre: DEFAULT_GENRE,
   films: [],
 };
 
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_GENRE:
       return extend(state, {
-        genre: action.payload,
+        activeGenre: action.payload,
       });
     case ActionType.SET_FILMS:
       return extend(state, {

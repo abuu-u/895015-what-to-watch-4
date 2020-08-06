@@ -166,13 +166,16 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item catalog__genres-item"
+          className="catalog__genres-item catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
+            data-id="Comedy"
             href="#"
             onClick={[Function]}
-          />
+          >
+            Comedy
+          </a>
         </li>
       </ul>
       <div

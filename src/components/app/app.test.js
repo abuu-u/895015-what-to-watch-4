@@ -77,7 +77,7 @@ const films = [
 
 it(`Render App`, () => {
   const store = mockStore({
-    genre: `Comedy`,
+    activeGenre: `Comedy`,
     films,
   });
 
@@ -85,8 +85,8 @@ it(`Render App`, () => {
     .create(
         <Provider store={store}>
           <App
-            promoFilm={PromoFilm}
             films={films}
+            promoFilm={PromoFilm}
             activeGenre={`Comedy`}
             onGenreClick={onGenreClick}
           />

@@ -17,7 +17,7 @@ const mockFilms = [
     director: `Wes Andreson`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
     runTime: 99,
-    genre: `Comedy`,
+    activeGenre: `Comedy`,
     released: 2014,
     isFavorite: false
   },
@@ -44,39 +44,39 @@ const mockFilms = [
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
-    genre: DEFAULT_GENRE,
+    activeGenre: DEFAULT_GENRE,
     films: [],
   });
 });
 
-it(`Reducer should set genre`, () => {
+it(`Reducer should set activeGenre`, () => {
   expect(reducer({
-    genre: DEFAULT_GENRE,
+    activeGenre: DEFAULT_GENRE,
     films: [],
   }, {
     type: ActionType.SET_GENRE,
     payload: `Comedy`,
   })).toEqual({
-    genre: `Comedy`,
+    activeGenre: `Comedy`,
     films: [],
   });
 });
 
 it(`Reducer should set films`, () => {
   expect(reducer({
-    genre: DEFAULT_GENRE,
+    activeGenre: DEFAULT_GENRE,
     films: [],
   }, {
     type: ActionType.SET_FILMS,
     payload: mockFilms,
   })).toEqual({
-    genre: DEFAULT_GENRE,
+    activeGenre: DEFAULT_GENRE,
     films: mockFilms,
   });
 });
 
 describe(`Action creators work correctly`, () => {
-  it(`Action creator for setting genre returns correct action`, () => {
+  it(`Action creator for setting active genre returns correct action`, () => {
     expect(ActionCreator.setGenre(`Comedy`)).toEqual({
       type: ActionType.SET_GENRE,
       payload: `Comedy`,
