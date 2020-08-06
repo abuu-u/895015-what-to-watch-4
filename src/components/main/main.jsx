@@ -3,6 +3,7 @@ import FilmList from "../film-list/film-list.jsx";
 import GenresFilter from "../genres-filter/genres-filter.jsx";
 import withActiveFilm from "../../hocs/with-active-film";
 import PropTypes from "prop-types";
+import {filterFilmsByGenre} from '../../utils';
 
 const FilmListWrapped = withActiveFilm(FilmList);
 
@@ -83,7 +84,7 @@ const Main = (props) => {
         />
 
         <FilmListWrapped
-          films={films}
+          films={filterFilmsByGenre(activeGenre, films)}
           onFilmClick={onFilmClick}
         />
 

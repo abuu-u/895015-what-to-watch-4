@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import FilmPage from "../film-page/film-page.jsx";
 import {connect} from "react-redux";
-import {filterFilmsByGenre} from '../../utils';
 import {ActionCreator} from '../../reducer';
 
 class App extends React.PureComponent {
@@ -38,7 +37,7 @@ class App extends React.PureComponent {
               /> :
               <Main
                 promoFilm={promoFilm}
-                films={filterFilmsByGenre(activeGenre, films)}
+                films={films}
                 activeGenre={activeGenre}
                 onFilmClick={this.onFilmClick}
                 onGenreClick={onGenreClick}
