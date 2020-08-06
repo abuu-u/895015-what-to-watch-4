@@ -1,6 +1,7 @@
 import React from "react";
 import FilmList from "../film-list/film-list.jsx";
 import GenresFilter from "../genres-filter/genres-filter.jsx";
+import ShowMore from "../show-more/show-more.jsx";
 import withActiveFilm from "../../hocs/with-active-film";
 import PropTypes from "prop-types";
 import {filterFilmsByGenre} from '../../utils';
@@ -12,9 +13,13 @@ const Main = (props) => {
     promoFilm,
     films,
     activeGenre,
+    showingFilmsCount,
     onFilmClick,
     onGenreClick,
+    onShowMoreClick,
   } = props;
+
+  const filteredFilms = filterFilmsByGenre(activeGenre, films);
 
   return (
   <>
@@ -84,13 +89,14 @@ const Main = (props) => {
         />
 
         <FilmListWrapped
-          films={filterFilmsByGenre(activeGenre, films)}
+          films={filteredFilms}
+          showingFilmsCount={showingFilmsCount}
           onFilmClick={onFilmClick}
         />
 
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        {filteredFilms.length > showingFilmsCount && <ShowMore
+          onShowMoreClick={onShowMoreClick}
+        />}
       </section>
 
       <footer className="page-footer">
@@ -119,8 +125,10 @@ Main.propTypes = {
   }).isRequired,
   films: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
+  showingFilmsCount: PropTypes.number.isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
 };
 
 export default Main;

@@ -1,5 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {DEFAULT_GENRE} from './const';
+import {DEFAULT_GENRE, SHOWING_FILMS_COUNT} from './const';
 
 const mockFilms = [
   {
@@ -46,6 +46,7 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     activeGenre: DEFAULT_GENRE,
     films: [],
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   });
 });
 
@@ -53,12 +54,14 @@ it(`Reducer should set activeGenre`, () => {
   expect(reducer({
     activeGenre: DEFAULT_GENRE,
     films: [],
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   }, {
     type: ActionType.SET_GENRE,
     payload: `Comedy`,
   })).toEqual({
     activeGenre: `Comedy`,
     films: [],
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   });
 });
 
@@ -66,12 +69,44 @@ it(`Reducer should set films`, () => {
   expect(reducer({
     activeGenre: DEFAULT_GENRE,
     films: [],
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   }, {
     type: ActionType.SET_FILMS,
     payload: mockFilms,
   })).toEqual({
     activeGenre: DEFAULT_GENRE,
     films: mockFilms,
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
+  });
+});
+
+it(`Reducer should increment showing films count`, () => {
+  expect(reducer({
+    activeGenre: DEFAULT_GENRE,
+    films: mockFilms,
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
+  }, {
+    type: ActionType.INCREMENT_SHOWING_FILMS_COUNT,
+    payload: 8,
+  })).toEqual({
+    activeGenre: DEFAULT_GENRE,
+    films: mockFilms,
+    showingFilmsCount: 16,
+  });
+});
+
+it(`Reducer should reset showing films count`, () => {
+  expect(reducer({
+    activeGenre: DEFAULT_GENRE,
+    films: mockFilms,
+    showingFilmsCount: 16,
+  }, {
+    type: ActionType.RESET_SHOWING_FILMS_COUNT,
+    payload: 8,
+  })).toEqual({
+    activeGenre: DEFAULT_GENRE,
+    films: mockFilms,
+    showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   });
 });
 
@@ -87,6 +122,20 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.setFilms(mockFilms)).toEqual({
       type: ActionType.SET_FILMS,
       payload: mockFilms,
+    });
+  });
+
+  it(`Action creator for incrementing showing films count returns correct action`, () => {
+    expect(ActionCreator.incrementShowingFilmsCount()).toEqual({
+      type: ActionType.INCREMENT_SHOWING_FILMS_COUNT,
+      payload: 8,
+    });
+  });
+
+  it(`Action creator for resettins showing films count returns correct action`, () => {
+    expect(ActionCreator.resetShowingFilmsCount()).toEqual({
+      type: ActionType.RESET_SHOWING_FILMS_COUNT,
+      payload: 8,
     });
   });
 });

@@ -22,7 +22,9 @@ class App extends React.PureComponent {
       promoFilm,
       films,
       activeGenre,
+      showingFilmsCount,
       onGenreClick,
+      onShowMoreClick,
     } = this.props;
 
     return (
@@ -39,8 +41,10 @@ class App extends React.PureComponent {
                 promoFilm={promoFilm}
                 films={films}
                 activeGenre={activeGenre}
+                showingFilmsCount={showingFilmsCount}
                 onFilmClick={this.onFilmClick}
                 onGenreClick={onGenreClick}
+                onShowMoreClick={onShowMoreClick}
               />}
           </Route>
           <Route exact path="/film-page">
@@ -65,12 +69,15 @@ App.propTypes = {
   promoFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
+  showingFilmsCount: PropTypes.number.isRequired,
   onGenreClick: PropTypes.func.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeGenre: state.activeGenre,
   films: state.films,
+  showingFilmsCount: state.showingFilmsCount,
 });
 
 
@@ -78,6 +85,10 @@ const mapDispatchToProps = (dispatch) => ({
   onGenreClick(evt) {
     evt.preventDefault();
     dispatch(ActionCreator.setGenre(evt.currentTarget.dataset.id));
+    dispatch(ActionCreator.resetShowingFilmsCount());
+  },
+  onShowMoreClick() {
+    dispatch(ActionCreator.incrementShowingFilmsCount());
   },
 });
 

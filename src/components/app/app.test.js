@@ -8,6 +8,8 @@ const mockStore = configureStore([]);
 
 const onGenreClick = () => {};
 
+const onShowMoreClick = () => {};
+
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
@@ -79,6 +81,7 @@ it(`Render App`, () => {
   const store = mockStore({
     activeGenre: `Comedy`,
     films,
+    showingFilmsCount: 8,
   });
 
   const tree = renderer
@@ -88,7 +91,9 @@ it(`Render App`, () => {
             films={films}
             promoFilm={PromoFilm}
             activeGenre={`Comedy`}
+            showingFilmsCount={8}
             onGenreClick={onGenreClick}
+            onShowMoreClick={onShowMoreClick}
           />
         </Provider>
     )

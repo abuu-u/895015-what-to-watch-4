@@ -6,6 +6,8 @@ const onFilmClick = () => {};
 
 const onGenreClick = () => {};
 
+const onShowMoreClick = () => {};
+
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
@@ -42,8 +44,10 @@ it(`Render Main`, () => {
       promoFilm={PromoFilm}
       films={films}
       activeGenre={`Comedy`}
+      showingFilmsCount={8}
       onFilmClick={onFilmClick}
       onGenreClick={onGenreClick}
+      onShowMoreClick={onShowMoreClick}
     />)
     .toJSON();
 
