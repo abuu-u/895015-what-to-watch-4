@@ -27,10 +27,11 @@ const films = [
   },
 ];
 
-it(`Render Main`, () => {
+it(`Render FilmList`, () => {
   const tree = renderer
     .create(<FilmList
       films={films}
+      showingFilmsCount={8}
       activeFilmId={-1}
       onFilmClick={onFilmClick}
       onFilmMouseOver={onFilmMouseOver}

@@ -91,7 +91,8 @@ const FilmPage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <FilmListWrapped
-          films={films.filter((it) => it.genre === film.genre && it !== film).slice(0, MORE_LIKE_FILMS_COUNT)}
+          films={films.filter((it) => it.genre === film.genre && it !== film)}
+          showingFilmsCount={MORE_LIKE_FILMS_COUNT}
           onFilmClick={onFilmClick}
         />
       </section>

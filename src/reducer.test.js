@@ -44,6 +44,7 @@ const mockFilms = [
 
 const initialState = {
   activeGenre: `All genres`,
+  activeFilm: null,
   films: [],
   showingFilmsCount: 8,
 };
@@ -52,12 +53,24 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual(initialState);
 });
 
-it(`Reducer should set activeGenre`, () => {
+it(`Reducer should set active genre`, () => {
   expect(reducer(initialState, {
     type: ActionType.SET_GENRE,
     payload: `Comedy`,
   })).toEqual(extend(initialState, {
     activeGenre: `Comedy`,
+  }));
+});
+
+it(`Reducer should set active film`, () => {
+  expect(reducer(extend(initialState, {
+    films: mockFilms,
+  }), {
+    type: ActionType.SET_ACTIVE_FILM,
+    payload: 1,
+  })).toEqual(extend(initialState, {
+    films: mockFilms,
+    activeFilm: mockFilms[1],
   }));
 });
 
@@ -95,6 +108,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.setGenre(`Comedy`)).toEqual({
       type: ActionType.SET_GENRE,
       payload: `Comedy`,
+    });
+  });
+
+  it(`Action creator for setting active film returns correct action`, () => {
+    expect(ActionCreator.setActiveFilm(0)).toEqual({
+      type: ActionType.SET_ACTIVE_FILM,
+      payload: 0,
     });
   });
 
