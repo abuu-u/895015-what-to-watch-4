@@ -13,7 +13,10 @@ const PromoFilm = {
   RELEASE_DATE: 2014,
 };
 
-const store = createStore(reducer);
+const store = createStore(
+    reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+);
 store.dispatch(ActionCreator.setFilms(generateFilms(10)));
 
 ReactDOM.render(
