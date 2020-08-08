@@ -12,7 +12,12 @@ const FilmListWrapped = withActiveFilm(FilmList);
 const TabsWrapped = withActiveTab(Tabs);
 
 const FilmPage = (props) => {
-  const {film, films, onFilmClick} = props;
+  const {
+    film,
+    films,
+    onFilmClick,
+    onFilmPlayClick,
+  } = props;
   const {
     name,
     posterImage,
@@ -56,7 +61,13 @@ const FilmPage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button
+                className="btn btn--play movie-card__button"
+                type="button"
+                onClick={() => {
+                  onFilmPlayClick(film);
+                }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -125,6 +136,7 @@ FilmPage.propTypes = {
   }).isRequired,
   films: PropTypes.array.isRequired,
   onFilmClick: PropTypes.func.isRequired,
+  onFilmPlayClick: PropTypes.func.isRequired,
 };
 
 export default FilmPage;

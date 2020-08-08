@@ -6,6 +6,7 @@ const initialState = {
   activeFilm: null,
   films: [],
   showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
+  playingFilm: null,
 };
 
 const ActionType = {
@@ -14,6 +15,7 @@ const ActionType = {
   SET_FILMS: `SET_FILMS`,
   INCREMENT_SHOWING_FILMS_COUNT: `INCREMENT_SHOWING_FILMS_COUNT`,
   RESET_SHOWING_FILMS_COUNT: `RESET_SHOWING_FILMS_COUNT`,
+  SET_PLAYING_FILM: `SET_PLAYING_FILM`,
 };
 
 const ActionCreator = {
@@ -28,6 +30,10 @@ const ActionCreator = {
   setFilms: (films) => ({
     type: ActionType.SET_FILMS,
     payload: films,
+  }),
+  setPlayingFilm: (film) => ({
+    type: ActionType.SET_PLAYING_FILM,
+    payload: film,
   }),
   incrementShowingFilmsCount: () => ({
     type: ActionType.INCREMENT_SHOWING_FILMS_COUNT,
@@ -52,6 +58,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_FILMS:
       return extend(state, {
         films: action.payload,
+      });
+    case ActionType.SET_PLAYING_FILM:
+      return extend(state, {
+        playingFilm: action.payload,
       });
     case ActionType.INCREMENT_SHOWING_FILMS_COUNT:
       return extend(state, {

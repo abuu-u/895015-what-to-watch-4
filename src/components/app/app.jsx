@@ -3,52 +3,88 @@ import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import FilmPage from "../film-page/film-page.jsx";
+import FilmPlayer from "../film-player/film-player.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from '../../reducer';
+import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
 
-const App = (props) => {
-  const {
-    promoFilm,
-    films,
-    activeGenre,
-    activeFilm,
-    showingFilmsCount,
-    onGenreClick,
-    onShowMoreClick,
-    onFilmClick,
-  } = props;
+const FilmPlayerWrapper = withFilmPlayer(FilmPlayer);
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          {activeFilm ?
+class App extends React.PureComponent {
+  _renderScreen() {
+    const {
+      promoFilm,
+      films,
+      activeGenre,
+      activeFilm,
+      playingFilm,
+      showingFilmsCount,
+      onGenreClick,
+      onShowMoreClick,
+      onFilmClick,
+      onFilmPlayClick,
+    } = this.props;
+
+    if (playingFilm) {
+      return (
+        <FilmPlayerWrapper
+          film={playingFilm}
+        />
+      );
+    }
+
+    if (activeFilm) {
+      return (
+        <FilmPage
+          film={activeFilm}
+          films={films}
+          onFilmClick={onFilmClick}
+          onFilmPlayClick={onFilmPlayClick}
+        />
+      );
+    }
+
+    return (
+      <Main
+        promoFilm={promoFilm}
+        films={films}
+        activeGenre={activeGenre}
+        showingFilmsCount={showingFilmsCount}
+        onFilmClick={onFilmClick}
+        onGenreClick={onGenreClick}
+        onShowMoreClick={onShowMoreClick}
+        onFilmPlayClick={onFilmPlayClick}
+      />
+    );
+  }
+
+  render() {
+    const {films, onFilmClick, onFilmPlayClick} = this.props;
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderScreen()}
+          </Route>
+          <Route exact path="/film-page">
             <FilmPage
-              film={activeFilm}
+              film={films[0]}
               films={films}
               onFilmClick={onFilmClick}
-            /> :
-            <Main
-              promoFilm={promoFilm}
-              films={films}
-              activeGenre={activeGenre}
-              showingFilmsCount={showingFilmsCount}
-              onFilmClick={onFilmClick}
-              onGenreClick={onGenreClick}
-              onShowMoreClick={onShowMoreClick}
-            />}
-        </Route>
-        <Route exact path="/film-page">
-          <FilmPage
-            film={films[0]}
-            films={films}
-            onFilmClick={onFilmClick}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+              onFilmPlayClick={onFilmPlayClick}
+            />
+          </Route>
+          <Route exact path="/player">
+            <FilmPlayerWrapper
+              film={films[0]}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+}
 
 App.propTypes = {
   promoFilm: PropTypes.object.isRequired,
@@ -56,9 +92,11 @@ App.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   activeFilm: PropTypes.object,
   showingFilmsCount: PropTypes.number.isRequired,
+  playingFilm: PropTypes.object,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
   onFilmClick: PropTypes.func.isRequired,
+  onFilmPlayClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -66,8 +104,8 @@ const mapStateToProps = (state) => ({
   activeFilm: state.activeFilm,
   films: state.films,
   showingFilmsCount: state.showingFilmsCount,
+  playingFilm: state.playingFilm,
 });
-
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(evt) {
@@ -80,6 +118,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onFilmClick(evt) {
     dispatch(ActionCreator.setActiveFilm(evt.currentTarget.dataset.index));
+  },
+  onFilmPlayClick(film) {
+    dispatch(ActionCreator.setPlayingFilm(film));
   },
 });
 
