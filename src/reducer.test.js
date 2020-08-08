@@ -47,6 +47,7 @@ const initialState = {
   activeFilm: null,
   films: [],
   showingFilmsCount: 8,
+  playingFilm: null,
 };
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -80,6 +81,15 @@ it(`Reducer should set films`, () => {
     payload: mockFilms,
   })).toEqual(extend(initialState, {
     films: mockFilms,
+  }));
+});
+
+it(`Reducer should set playing filn`, () => {
+  expect(reducer(initialState, {
+    type: ActionType.SET_PLAYING_FILM,
+    payload: mockFilms[0],
+  })).toEqual(extend(initialState, {
+    playingFilm: mockFilms[0],
   }));
 });
 
@@ -122,6 +132,13 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.setFilms(mockFilms)).toEqual({
       type: ActionType.SET_FILMS,
       payload: mockFilms,
+    });
+  });
+
+  it(`Action creator for setting playing film returns correct action`, () => {
+    expect(ActionCreator.setPlayingFilm(mockFilms[0])).toEqual({
+      type: ActionType.SET_PLAYING_FILM,
+      payload: mockFilms[0],
     });
   });
 

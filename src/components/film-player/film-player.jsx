@@ -80,7 +80,7 @@ FilmPlayer.propTypes = {
     PropTypes.node
   ]).isRequired,
   progress: PropTypes.number.isRequired,
-  duration: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
   onExitButtonClick: PropTypes.func.isRequired,
