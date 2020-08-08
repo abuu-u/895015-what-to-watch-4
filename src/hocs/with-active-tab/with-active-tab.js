@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {TAB} from '../const';
+import {TAB} from '../../const';
 
 const withActiveTab = (Component) => {
   class WithActiveTab extends PureComponent {

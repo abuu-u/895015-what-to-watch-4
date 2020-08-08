@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmList from "../film-list/film-list.jsx";
-import withActiveFilm from "../../hocs/with-active-film";
-import withActiveTab from '../../hocs/with-active-tab';
+import withActiveFilm from "../../hocs/with-active-film/with-active-film";
+import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
 
 const MORE_LIKE_FILMS_COUNT = 4;
 

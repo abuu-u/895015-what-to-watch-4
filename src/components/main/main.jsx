@@ -2,7 +2,7 @@ import React from "react";
 import FilmList from "../film-list/film-list.jsx";
 import GenresFilter from "../genres-filter/genres-filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
-import withActiveFilm from "../../hocs/with-active-film";
+import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import PropTypes from "prop-types";
 import {filterFilmsByGenre} from '../../utils';
 
