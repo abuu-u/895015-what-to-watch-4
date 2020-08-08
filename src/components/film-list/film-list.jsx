@@ -6,6 +6,7 @@ const FilmList = (props) => {
   const {
     films,
     activeFilmId,
+    showingFilmsCount,
     onFilmClick,
     onFilmMouseOver,
     onFilmMouseLeave,
@@ -13,7 +14,7 @@ const FilmList = (props) => {
 
   return (
     <div className="catalog__movies-list">
-      {films.map((film, index) => <Film
+      {films.slice(0, showingFilmsCount).map((film, index) => <Film
         film={film}
         onFilmClick={onFilmClick}
         onFilmMouseOver={onFilmMouseOver}
@@ -34,6 +35,7 @@ FilmList.propTypes = {
     previewVideoLink: PropTypes.string.isRequired,
   })).isRequired,
   activeFilmId: PropTypes.number.isRequired,
+  showingFilmsCount: PropTypes.number.isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onFilmMouseOver: PropTypes.func.isRequired,
   onFilmMouseLeave: PropTypes.func.isRequired,

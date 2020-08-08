@@ -6,7 +6,16 @@ const TAB = {
 
 const TABS = Object.values(TAB);
 
+const DEFAULT_GENRE = `All genres`;
+
+const SHOWING_FILMS_COUNT = {
+  onStart: 8,
+  byButton: 8,
+};
+
 export {
   TAB,
   TABS,
+  DEFAULT_GENRE,
+  SHOWING_FILMS_COUNT,
 };
