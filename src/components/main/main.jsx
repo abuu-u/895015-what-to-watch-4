@@ -4,7 +4,6 @@ import GenresFilter from "../genres-filter/genres-filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import PropTypes from "prop-types";
-import {filterFilmsByGenre} from '../../utils';
 
 const FilmListWrapped = withActiveFilm(FilmList);
 
@@ -12,6 +11,7 @@ const Main = (props) => {
   const {
     promoFilm,
     films,
+    filmsByGenre,
     activeGenre,
     showingFilmsCount,
     onFilmClick,
@@ -19,8 +19,6 @@ const Main = (props) => {
     onShowMoreClick,
     onFilmPlayClick,
   } = props;
-
-  const filteredFilms = filterFilmsByGenre(activeGenre, films);
 
   return (
   <>
@@ -54,10 +52,10 @@ const Main = (props) => {
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">{promoFilm.NAME}</h2>
+            <h2 className="movie-card__title">{promoFilm.name}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{promoFilm.GENRE}</span>
-              <span className="movie-card__year">{promoFilm.RELEASE_DATE}</span>
+              <span className="movie-card__genre">{promoFilm.genre}</span>
+              <span className="movie-card__year">{promoFilm.released}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -96,12 +94,12 @@ const Main = (props) => {
         />
 
         <FilmListWrapped
-          films={filteredFilms}
+          films={filmsByGenre}
           showingFilmsCount={showingFilmsCount}
           onFilmClick={onFilmClick}
         />
 
-        {filteredFilms.length > showingFilmsCount && <ShowMore
+        {filmsByGenre.length > showingFilmsCount && <ShowMore
           onShowMoreClick={onShowMoreClick}
         />}
       </section>
@@ -126,11 +124,12 @@ const Main = (props) => {
 
 Main.propTypes = {
   promoFilm: PropTypes.shape({
-    NAME: PropTypes.string.isRequired,
-    GENRE: PropTypes.string.isRequired,
-    RELEASE_DATE: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    released: PropTypes.number.isRequired,
   }).isRequired,
   films: PropTypes.array.isRequired,
+  filmsByGenre: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
   showingFilmsCount: PropTypes.number.isRequired,
   onFilmClick: PropTypes.func.isRequired,

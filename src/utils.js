@@ -43,7 +43,16 @@ const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+const filterFilmsByGenre = (genre, films) => {
+  if (genre === DEFAULT_GENRE) {
+    return films;
+  }
+
+  return films.filter((film) => film.genre === genre);
+};
+
 export {
   formatTime,
   extend,
+  filterFilmsByGenre,
 };

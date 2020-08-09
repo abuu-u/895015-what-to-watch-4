@@ -5,14 +5,20 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import FilmPage from "../film-page/film-page.jsx";
 import FilmPlayer from "../film-player/film-player.jsx";
 import {connect} from "react-redux";
-import {ActionCreator} from '../../reducer';
+import {ActionCreator} from "../../reducer/film/film.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
-
+import {getActiveFilm, getActiveGenre, getPlayingFilm, getShowingFilmsCount} from "../../reducer/film/selectors.js";
+import {getFilms, getFilmsByGenre, getPromoFilm} from "../../reducer/data/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 const FilmPlayerWrapper = withFilmPlayer(FilmPlayer);
 
 class App extends React.PureComponent {
   _renderScreen() {
     const {
+      authorizationStatus,
+      login,
       promoFilm,
       films,
       activeGenre,
@@ -23,6 +29,7 @@ class App extends React.PureComponent {
       onShowMoreClick,
       onFilmClick,
       onFilmPlayClick,
+      filmsByGenre,
     } = this.props;
 
     if (playingFilm) {
@@ -48,6 +55,7 @@ class App extends React.PureComponent {
       <Main
         promoFilm={promoFilm}
         films={films}
+        filmsByGenre={filmsByGenre}
         activeGenre={activeGenre}
         showingFilmsCount={showingFilmsCount}
         onFilmClick={onFilmClick}
@@ -87,8 +95,11 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
   promoFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
+  filmsByGenre: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
   activeFilm: PropTypes.object,
   showingFilmsCount: PropTypes.number.isRequired,
@@ -100,16 +111,22 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeGenre: state.activeGenre,
-  activeFilm: state.activeFilm,
-  films: state.films,
-  showingFilmsCount: state.showingFilmsCount,
-  playingFilm: state.playingFilm,
+  authorizationStatus: getAuthorizationStatus(state),
+  activeGenre: getActiveGenre(state),
+  activeFilm: getActiveFilm(state),
+  films: getFilms(state),
+  filmsByGenre: getFilmsByGenre(state),
+  showingFilmsCount: getShowingFilmsCount(state),
+  playingFilm: getPlayingFilm(state),
+  promoFilm: getPromoFilm(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreClick(id) {
-    dispatch(ActionCreator.setGenre(id));
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
+  onGenreClick(genre) {
+    dispatch(ActionCreator.setGenre(genre));
     dispatch(ActionCreator.resetShowingFilmsCount());
   },
   onShowMoreClick() {
