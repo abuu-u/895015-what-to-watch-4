@@ -6,6 +6,10 @@ const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
 
+const getPromoFilm = (state) => {
+  return state[NameSpace.DATA].promoFilm;
+};
+
 const getGenre = (state) => {
   return state[NameSpace.FILM].activeGenre;
 };
@@ -22,4 +26,4 @@ const getFilmsByGenre = createSelector(
     }
 );
 
-export {getFilms, getFilmsByGenre};
+export {getFilms, getFilmsByGenre, getPromoFilm};
