@@ -696,13 +696,13 @@ exports[`Render PlayingFilm 1`] = `
         <progress
           className="player__progress"
           max="100"
-          value={NaN}
+          value={0}
         />
         <div
           className="player__toggler"
           style={
             Object {
-              "left": "NaN%",
+              "left": "0%",
             }
           }
         >

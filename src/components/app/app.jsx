@@ -108,9 +108,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onGenreClick(evt) {
-    evt.preventDefault();
-    dispatch(ActionCreator.setGenre(evt.currentTarget.dataset.id));
+  onGenreClick(id) {
+    dispatch(ActionCreator.setGenre(id));
     dispatch(ActionCreator.resetShowingFilmsCount());
   },
   onShowMoreClick() {

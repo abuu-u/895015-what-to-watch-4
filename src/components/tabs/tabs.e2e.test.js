@@ -30,7 +30,7 @@ Enzyme.configure({
 
 it(`Should handlers be called`, () => {
   const onClick = jest.fn();
-  const evt = {
+  const clickEvt = {
     preventDefault() {},
     currentTarget: {dataset: {id: 0}},
   };
@@ -45,7 +45,7 @@ it(`Should handlers be called`, () => {
 
   const links = tabsComponent.find(`.movie-nav__link`);
 
-  links.first().simulate(`click`, evt);
+  links.first().simulate(`click`, clickEvt);
 
   expect(onClick).toHaveBeenCalledTimes(1);
 });

@@ -27,6 +27,10 @@ Enzyme.configure({
 
 it(`Should handlers be called`, () => {
   const onGenreClick = jest.fn();
+  const clickEvt = {
+    preventDefault() {},
+    currentTarget: {dataset: {id: 0}}
+  };
 
   const filmComponent = shallow(
       <GenresFilter
@@ -38,7 +42,7 @@ it(`Should handlers be called`, () => {
 
   const links = filmComponent.find(`.catalog__genres-link`);
 
-  links.first().simulate(`click`);
+  links.first().simulate(`click`, clickEvt);
 
   expect(onGenreClick).toHaveBeenCalledTimes(1);
 });
