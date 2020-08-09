@@ -4,7 +4,6 @@ import {DEFAULT_GENRE, SHOWING_FILMS_COUNT} from './const';
 const initialState = {
   activeGenre: DEFAULT_GENRE,
   activeFilm: null,
-  films: [],
   showingFilmsCount: SHOWING_FILMS_COUNT.onStart,
   playingFilm: null,
 };
@@ -12,7 +11,6 @@ const initialState = {
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
   SET_ACTIVE_FILM: `SET_ACTIVE_FILM`,
-  SET_FILMS: `SET_FILMS`,
   INCREMENT_SHOWING_FILMS_COUNT: `INCREMENT_SHOWING_FILMS_COUNT`,
   RESET_SHOWING_FILMS_COUNT: `RESET_SHOWING_FILMS_COUNT`,
   SET_PLAYING_FILM: `SET_PLAYING_FILM`,
@@ -26,10 +24,6 @@ const ActionCreator = {
   setActiveFilm: (film) => ({
     type: ActionType.SET_ACTIVE_FILM,
     payload: film,
-  }),
-  setFilms: (films) => ({
-    type: ActionType.SET_FILMS,
-    payload: films,
   }),
   setPlayingFilm: (film) => ({
     type: ActionType.SET_PLAYING_FILM,
@@ -54,10 +48,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ACTIVE_FILM:
       return extend(state, {
         activeFilm: action.payload,
-      });
-    case ActionType.SET_FILMS:
-      return extend(state, {
-        films: action.payload,
       });
     case ActionType.SET_PLAYING_FILM:
       return extend(state, {
