@@ -18,6 +18,13 @@ it(`Should handlers be called`, () => {
   const onFilmClick = jest.fn();
   const onFilmMouseOver = jest.fn();
   const onFilmMouseLeave = jest.fn();
+  const mouseOverEvt = {
+    currentTarget: {dataset: {id: 0}},
+  };
+  const clickEvt = {
+    preventDefault() {},
+    currentTarget: {dataset: {index: 0}},
+  };
 
   const filmComponent = shallow(
       <Film
@@ -30,8 +37,8 @@ it(`Should handlers be called`, () => {
       />
   );
 
-  filmComponent.simulate(`click`);
-  filmComponent.simulate(`mouseOver`);
+  filmComponent.simulate(`click`, clickEvt);
+  filmComponent.simulate(`mouseOver`, mouseOverEvt);
   filmComponent.simulate(`mouseLeave`);
 
   expect(onFilmClick).toHaveBeenCalledTimes(1);

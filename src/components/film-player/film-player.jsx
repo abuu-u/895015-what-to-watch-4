@@ -14,7 +14,7 @@ const FilmPlayer = (props) => {
     onExitButtonClick,
   } = props;
 
-  const progress = props.progress / duration * 100;
+  const progress = duration ? props.progress / duration * 100 : 0;
 
   const getElapsedTime = () => {
     const seconds = duration - props.progress;

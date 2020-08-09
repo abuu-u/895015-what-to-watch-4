@@ -14,9 +14,6 @@ const MockComponentWrapped = withActiveFilm(MockComponent);
 it(`withActiveFilm is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
-      films={[]}
-      showingFilmsCount={0}
-      onFilmClick={() => {}}
     />
   )).toJSON();
 

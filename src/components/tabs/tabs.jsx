@@ -26,7 +26,10 @@ const Tabs = (props) => {
                 <a
                   href="#"
                   className="movie-nav__link"
-                  onClick={onClick}
+                  onClick={(evt) => {
+                    evt.preventDefault();
+                    onClick(evt.currentTarget.dataset.id);
+                  }}
                   data-id={tab}
                 >{tab}</a>
               </li>

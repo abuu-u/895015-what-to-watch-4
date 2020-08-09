@@ -23,10 +23,8 @@ const withActiveTab = (Component) => {
       />;
     }
 
-    _handleClick(evt) {
-      evt.preventDefault();
-
-      this.setState({activeTab: evt.currentTarget.dataset.id});
+    _handleClick(id) {
+      this.setState({activeTab: id});
     }
   }
 

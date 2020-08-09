@@ -116,8 +116,8 @@ const mapDispatchToProps = (dispatch) => ({
   onShowMoreClick() {
     dispatch(ActionCreator.incrementShowingFilmsCount());
   },
-  onFilmClick(evt) {
-    dispatch(ActionCreator.setActiveFilm(evt.currentTarget.dataset.index));
+  onFilmClick(index) {
+    dispatch(ActionCreator.setActiveFilm(index));
   },
   onFilmPlayClick(film) {
     dispatch(ActionCreator.setPlayingFilm(film));

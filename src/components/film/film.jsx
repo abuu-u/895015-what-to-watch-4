@@ -16,8 +16,13 @@ const Film = (props) => {
     <article
       id={film.id}
       className="small-movie-card catalog__movies-card"
-      onClick={onFilmClick}
-      onMouseOver={onFilmMouseOver}
+      onClick={(evt) => {
+        evt.preventDefault();
+        onFilmClick(evt.currentTarget.dataset.index);
+      }}
+      onMouseOver={(evt) => {
+        onFilmMouseOver(parseInt(evt.currentTarget.id, 10));
+      }}
       onMouseLeave={onFilmMouseLeave}
       data-index={index}
     >
