@@ -18,7 +18,7 @@ const Film = (props) => {
       className="small-movie-card catalog__movies-card"
       onClick={(evt) => {
         evt.preventDefault();
-        onFilmClick(evt.currentTarget.dataset.index);
+        onFilmClick(film);
       }}
       onMouseOver={(evt) => {
         onFilmMouseOver(parseInt(evt.currentTarget.id, 10));

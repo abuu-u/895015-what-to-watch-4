@@ -23,7 +23,6 @@ it(`Should handlers be called`, () => {
   };
   const clickEvt = {
     preventDefault() {},
-    currentTarget: {dataset: {index: 0}},
   };
 
   const filmComponent = shallow(

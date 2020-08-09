@@ -53,7 +53,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.SET_ACTIVE_FILM:
       return extend(state, {
-        activeFilm: state.films[action.payload],
+        activeFilm: action.payload,
       });
     case ActionType.SET_FILMS:
       return extend(state, {

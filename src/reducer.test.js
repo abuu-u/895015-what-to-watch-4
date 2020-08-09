@@ -64,14 +64,11 @@ it(`Reducer should set active genre`, () => {
 });
 
 it(`Reducer should set active film`, () => {
-  expect(reducer(extend(initialState, {
-    films: mockFilms,
-  }), {
+  expect(reducer(extend(initialState), {
     type: ActionType.SET_ACTIVE_FILM,
-    payload: 1,
+    payload: mockFilms[0],
   })).toEqual(extend(initialState, {
-    films: mockFilms,
-    activeFilm: mockFilms[1],
+    activeFilm: mockFilms[0],
   }));
 });
 
@@ -122,9 +119,9 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for setting active film returns correct action`, () => {
-    expect(ActionCreator.setActiveFilm(0)).toEqual({
+    expect(ActionCreator.setActiveFilm(mockFilms[0])).toEqual({
       type: ActionType.SET_ACTIVE_FILM,
-      payload: 0,
+      payload: mockFilms[0],
     });
   });
 
