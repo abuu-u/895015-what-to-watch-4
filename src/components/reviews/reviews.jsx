@@ -27,7 +27,7 @@ const Reviews = (props) => {
 };
 
 Reviews.propTypes = {
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.array,
 };
 
 export default Reviews;

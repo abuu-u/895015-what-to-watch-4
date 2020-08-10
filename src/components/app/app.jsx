@@ -6,30 +6,32 @@ import FilmPage from "../film-page/film-page.jsx";
 import FilmPlayer from "../film-player/film-player.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/film/film.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
+// import {AuthorizationStatus} from "../../reducer/user/user.js";
 import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
 import {getActiveFilm, getActiveGenre, getPlayingFilm, getShowingFilmsCount} from "../../reducer/film/selectors.js";
-import {getFilms, getFilmsByGenre, getPromoFilm} from "../../reducer/data/selectors.js";
+import {getFilms, getFilmsByGenre, getPromoFilm, getComments} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 const FilmPlayerWrapper = withFilmPlayer(FilmPlayer);
 
 class App extends React.PureComponent {
   _renderScreen() {
     const {
-      authorizationStatus,
-      login,
+      // authorizationStatus,
+      // login,
       promoFilm,
       films,
+      showingFilmsCount,
+      comments,
       activeGenre,
+      filmsByGenre,
       activeFilm,
       playingFilm,
-      showingFilmsCount,
       onGenreClick,
       onShowMoreClick,
       onFilmClick,
       onFilmPlayClick,
-      filmsByGenre,
     } = this.props;
 
     if (playingFilm) {
@@ -45,6 +47,7 @@ class App extends React.PureComponent {
         <FilmPage
           film={activeFilm}
           films={films}
+          comments={comments}
           onFilmClick={onFilmClick}
           onFilmPlayClick={onFilmPlayClick}
         />
@@ -67,26 +70,11 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {films, onFilmClick, onFilmPlayClick} = this.props;
-
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderScreen()}
-          </Route>
-          <Route exact path="/film-page">
-            <FilmPage
-              film={films[0]}
-              films={films}
-              onFilmClick={onFilmClick}
-              onFilmPlayClick={onFilmPlayClick}
-            />
-          </Route>
-          <Route exact path="/player">
-            <FilmPlayerWrapper
-              film={films[0]}
-            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -95,10 +83,11 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  login: PropTypes.func.isRequired,
+  // authorizationStatus: PropTypes.string.isRequired,
+  // login: PropTypes.func.isRequired,
   promoFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
+  comments: PropTypes.array,
   filmsByGenre: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
   activeFilm: PropTypes.object,
@@ -119,6 +108,7 @@ const mapStateToProps = (state) => ({
   showingFilmsCount: getShowingFilmsCount(state),
   playingFilm: getPlayingFilm(state),
   promoFilm: getPromoFilm(state),
+  comments: getComments(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -133,6 +123,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementShowingFilmsCount());
   },
   onFilmClick(film) {
+    dispatch(DataOperation.loadComments(film.id));
     dispatch(ActionCreator.setActiveFilm(film));
   },
   onFilmPlayClick(film) {

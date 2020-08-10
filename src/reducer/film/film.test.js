@@ -1,5 +1,5 @@
-import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {extend} from './utils';
+import {reducer, ActionType, ActionCreator} from "./film.js";
+import {extend} from '../../utils';
 
 const mockFilms = [
   {

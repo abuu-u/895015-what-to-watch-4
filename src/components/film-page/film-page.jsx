@@ -15,6 +15,7 @@ const FilmPage = (props) => {
   const {
     film,
     films,
+    comments,
     onFilmClick,
     onFilmPlayClick,
   } = props;
@@ -92,6 +93,7 @@ const FilmPage = (props) => {
           </div>
           <TabsWrapped
             film={film}
+            comments={comments}
           />
         </div>
       </div>
@@ -135,6 +137,7 @@ FilmPage.propTypes = {
     released: PropTypes.number.isRequired,
   }).isRequired,
   films: PropTypes.array.isRequired,
+  comments: PropTypes.array,
   onFilmClick: PropTypes.func.isRequired,
   onFilmPlayClick: PropTypes.func.isRequired,
 };

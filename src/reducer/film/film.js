@@ -1,5 +1,5 @@
-import {extend} from "./utils.js";
-import {DEFAULT_GENRE, SHOWING_FILMS_COUNT} from './const';
+import {extend} from "../../utils.js";
+import {DEFAULT_GENRE, SHOWING_FILMS_COUNT} from '../../const';
 
 const initialState = {
   activeGenre: DEFAULT_GENRE,

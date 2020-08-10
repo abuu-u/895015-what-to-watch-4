@@ -1,7 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation, ActionCreator} from "./data.js";
-import {extend} from './utils';
+import {extend} from '../../utils';
 
 const api = createAPI(() => {});
 
@@ -54,9 +54,61 @@ const mockFilms = [
   }
 ];
 
+const comments = {
+  id: 1,
+  user: {
+    id: 4,
+    name: `Kate Muir`
+  },
+  rating: 8.9,
+  comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+  date: `2019-05-08T14:13:56.569Z`
+};
+
+const filmResponse = `{
+  "id": 1,
+  "name": "The Grand Budapest Hotel",
+  "poster_image": "img/the-grand-budapest-hotel-poster.jpg",
+  "preview_image": "img/the-grand-budapest-hotel.jpg",
+  "background_image": "img/the-grand-budapest-hotel-bg.jpg",
+  "background_color": "#ffffff",
+  "video_link": "https://some-link",
+  "preview_video_link": "https://some-link",
+  "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.",
+  "rating": 8.9,
+  "scores_count": 240,
+  "director": "Wes Andreson",
+  "starring": ["Bill Murray", "Edward Norton", "Jude Law", "Willem Dafoe", "Saoirse Ronan"],
+  "run_time": 99,
+  "genre": "Comedy",
+  "released": 2014,
+  "is_favorite": false
+}`;
+
+const filmAdapted = {
+  id: 1,
+  name: `The Grand Budapest Hotel`,
+  posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
+  previewImage: `img/the-grand-budapest-hotel.jpg`,
+  backgroundImage: `img/the-grand-budapest-hotel-bg.jpg`,
+  backgroundColor: `#ffffff`,
+  videoLink: `https://some-link`,
+  previewVideoLink: `https://some-link`,
+  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+  rating: 8.9,
+  scoresCount: 240,
+  director: `Wes Andreson`,
+  starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+  runTime: 99,
+  genre: `Comedy`,
+  released: 2014,
+  isFavorite: false
+};
+
 const initialState = {
   films: [],
   promoFilm: {},
+  comments: [],
 };
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -70,6 +122,9 @@ it(`Reducer should update films by load films`, () => {
   })).toEqual(extend(initialState, {
     films: mockFilms,
   }));
+});
+
+it(`Reducer should update promoFilm by load promoFilm`, () => {
   expect(reducer(initialState, {
     type: ActionType.LOAD_PROMO_FILM,
     payload: promoFilm,
@@ -78,18 +133,34 @@ it(`Reducer should update films by load films`, () => {
   }));
 });
 
+it(`Reducer should update comments by load comments`, () => {
+  expect(reducer(initialState, {
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
+  })).toEqual(extend(initialState, {
+    comments,
+  }));
+});
+
 describe(`Action creators work correctly`, () => {
   it(`Action creator for loading films returns correct action`, () => {
     expect(ActionCreator.loadFilms(mockFilms)).toEqual({
-      type: ActionType.SET_FILMS,
+      type: ActionType.LOAD_FILMS,
       payload: mockFilms,
     });
   });
 
   it(`Action creator for loading promo film returns correct action`, () => {
     expect(ActionCreator.loadPromoFilm(promoFilm)).toEqual({
-      type: ActionType.SET_PROMO_FILM,
+      type: ActionType.LOAD_PROMO_FILM,
       payload: promoFilm,
+    });
+  });
+
+  it(`Action creator for loading comments returns correct action`, () => {
+    expect(ActionCreator.loadComments(comments)).toEqual({
+      type: ActionType.LOAD_COMMENTS,
+      payload: comments,
     });
   });
 });
@@ -102,14 +173,14 @@ describe(`Operation work correctly`, () => {
 
     apiMock
       .onGet(`/films`)
-      .reply(200, [{fake: true}]);
+      .reply(200, `[${filmResponse}, ${filmResponse}]`);
 
     return filmsLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
-          payload: [{fake: true}],
+          payload: [filmAdapted, filmAdapted],
         });
       });
   });
@@ -120,14 +191,33 @@ describe(`Operation work correctly`, () => {
     const promoFilmLoader = Operation.loadPromoFilm();
 
     apiMock
-      .onGet(`/film/promo`)
-      .reply(200, [{fake: true}]);
+      .onGet(`/films/promo`)
+      .reply(200, filmResponse);
 
     return promoFilmLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_PROMO_FILM,
+          payload: filmAdapted,
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/1`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.loadComments(1);
+
+    apiMock
+      .onGet(`/comments/1`)
+      .reply(200, [{fake: true}]);
+
+    return commentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
           payload: [{fake: true}],
         });
       });

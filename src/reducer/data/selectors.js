@@ -14,9 +14,14 @@ const getGenre = (state) => {
   return state[NameSpace.FILM].activeGenre;
 };
 
+const getComments = (state) => {
+  return state[NameSpace.DATA].comments;
+};
+
 const getFilmsByGenre = createSelector(
-    getGenre,    getFilms,
+    getGenre,
+    getFilms,
     filterFilmsByGenre
 );
 
-export {getFilms, getFilmsByGenre, getPromoFilm};
+export {getFilms, getFilmsByGenre, getPromoFilm, getComments};

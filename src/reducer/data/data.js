@@ -1,13 +1,16 @@
-import {extend} from "./utils.js";
+import {extend} from "../../utils.js";
+import {filmAdapter} from '../../adapter/film';
 
 const initialState = {
   films: [],
   promoFilm: {},
+  comments: [],
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
+  LOAD_COMMENTS: `LOAD_COMMENTS`,
 };
 
 const ActionCreator = {
@@ -18,6 +21,10 @@ const ActionCreator = {
   loadPromoFilm: (film) => ({
     type: ActionType.LOAD_PROMO_FILM,
     payload: film,
+  }),
+  loadComments: (comments) => ({
+    type: ActionType.LOAD_COMMENTS,
+    payload: comments,
   }),
 };
 
@@ -31,6 +38,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         promoFilm: action.payload,
       });
+    case ActionType.LOAD_COMMENTS:
+      return extend(state, {
+        comments: action.payload,
+      });
   }
 
   return state;
@@ -39,14 +50,22 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
-      .then((response) => {
-        dispatch(ActionCreator.loadFilms(response.data));
+      .then((response) => response.data.map(filmAdapter))
+      .then((films) => {
+        dispatch(ActionCreator.loadFilms(films));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
+      .then((response) => filmAdapter(response.data))
+      .then((film) => {
+        dispatch(ActionCreator.loadPromoFilm(film));
+      });
+  },
+  loadComments: (filmId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${filmId}`)
       .then((response) => {
-        dispatch(ActionCreator.loadPromoFilm(response.data));
+        dispatch(ActionCreator.loadComments(response.data));
       });
   },
 };

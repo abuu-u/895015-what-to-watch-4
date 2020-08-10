@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
@@ -73,13 +74,36 @@ const films = [
 
 ];
 
+const comments = [
+  {
+    id: 1,
+    user: {
+      id: 4,
+      name: `Kate Muir`,
+    },
+    rating: 8.9,
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  },
+  {
+    id: 2,
+    user: {
+      id: 4,
+      name: `Kate Muir`,
+    },
+    rating: 8.9,
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  }
+];
+
 it(`Render App`, () => {
   const store = mockStore({
-    activeGenre: `Comedy`,
-    films,
-    showingFilmsCount: 8,
-    activeFilm: null,
-    playingFilm: null,
+    [NameSpace.FILM]: {
+      activeGenre: `Comedy`,
+      activeFilm: null,
+      playingFilm: null,
+    },
   });
 
   const tree = renderer
@@ -87,6 +111,8 @@ it(`Render App`, () => {
         <Provider store={store}>
           <App
             films={films}
+            filmsByGenre={films}
+            comments={comments}
             promoFilm={PromoFilm}
             activeGenre={`Comedy`}
             activeFilm={null}
@@ -106,11 +132,11 @@ it(`Render App`, () => {
 
 it(`Render ActiveFilm`, () => {
   const store = mockStore({
-    activeGenre: `Comedy`,
-    films,
-    showingFilmsCount: 8,
-    activeFilm: films[0],
-    playingFilm: null,
+    [NameSpace.FILM]: {
+      activeGenre: `Comedy`,
+      activeFilm: films[0],
+      playingFilm: null,
+    },
   });
 
   const tree = renderer
@@ -118,6 +144,8 @@ it(`Render ActiveFilm`, () => {
         <Provider store={store}>
           <App
             films={films}
+            filmsByGenre={films}
+            comments={comments}
             promoFilm={PromoFilm}
             activeGenre={`Comedy`}
             activeFilm={films[0]}
@@ -137,11 +165,11 @@ it(`Render ActiveFilm`, () => {
 
 it(`Render PlayingFilm`, () => {
   const store = mockStore({
-    activeGenre: `Comedy`,
-    films,
-    showingFilmsCount: 8,
-    activeFilm: null,
-    playingFilm: films[0],
+    [NameSpace.FILM]: {
+      activeGenre: `Comedy`,
+      activeFilm: null,
+      playingFilm: films[0],
+    },
   });
 
   const tree = renderer
@@ -149,6 +177,8 @@ it(`Render PlayingFilm`, () => {
         <Provider store={store}>
           <App
             films={films}
+            filmsByGenre={films}
+            comments={comments}
             promoFilm={PromoFilm}
             activeGenre={`Comedy`}
             activeFilm={null}

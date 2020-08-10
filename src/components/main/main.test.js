@@ -3,11 +3,11 @@ import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
 const PromoFilm = {
-  NAME: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  RELEASE_DATE: 2014,
-  previewImage: `img/bohemian-rhapsody.jpg`,
-  videoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  name: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  released: 2014,
+  posterImage: `img/bohemian-rhapsody-poster.jpg`,
+  backgroundImage: `img/bg-bohemian-rhapsody.jpg`,
 };
 
 const films = [
@@ -34,11 +34,36 @@ const films = [
   },
 ];
 
+const comments = [
+  {
+    id: 1,
+    user: {
+      id: 4,
+      name: `Kate Muir`,
+    },
+    rating: 8.9,
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  },
+  {
+    id: 2,
+    user: {
+      id: 4,
+      name: `Kate Muir`,
+    },
+    rating: 8.9,
+    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  }
+];
+
 it(`Render Main`, () => {
   const tree = renderer
     .create(<Main
       promoFilm={PromoFilm}
       films={films}
+      filmsByGenre={films}
+      comments={comments}
       activeGenre={`Comedy`}
       showingFilmsCount={8}
       onFilmClick={() => {}}
