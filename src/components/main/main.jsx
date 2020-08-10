@@ -2,7 +2,7 @@ import React from "react";
 import FilmList from "../film-list/film-list.jsx";
 import GenresFilter from "../genres-filter/genres-filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
-import withActiveFilm from "../../hocs/with-active-film";
+import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import PropTypes from "prop-types";
 import {filterFilmsByGenre} from '../../utils';
 
@@ -17,6 +17,7 @@ const Main = (props) => {
     onFilmClick,
     onGenreClick,
     onShowMoreClick,
+    onFilmPlayClick,
   } = props;
 
   const filteredFilms = filterFilmsByGenre(activeGenre, films);
@@ -60,7 +61,13 @@ const Main = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button
+                className="btn btn--play movie-card__button"
+                type="button"
+                onClick={() => {
+                  onFilmPlayClick(promoFilm);
+                }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -129,6 +136,7 @@ Main.propTypes = {
   onFilmClick: PropTypes.func.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
+  onFilmPlayClick: PropTypes.func.isRequired,
 };
 
 export default Main;

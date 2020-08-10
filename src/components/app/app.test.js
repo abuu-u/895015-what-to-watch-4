@@ -6,10 +6,6 @@ import configureStore from "redux-mock-store";
 
 const mockStore = configureStore([]);
 
-const onGenreClick = () => {};
-
-const onShowMoreClick = () => {};
-
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
@@ -82,6 +78,8 @@ it(`Render App`, () => {
     activeGenre: `Comedy`,
     films,
     showingFilmsCount: 8,
+    activeFilm: null,
+    playingFilm: null,
   });
 
   const tree = renderer
@@ -91,11 +89,81 @@ it(`Render App`, () => {
             films={films}
             promoFilm={PromoFilm}
             activeGenre={`Comedy`}
+            activeFilm={null}
+            playingFilm={null}
             showingFilmsCount={8}
-            onGenreClick={onGenreClick}
-            onShowMoreClick={onShowMoreClick}
+            onGenreClick={() => {}}
+            onShowMoreClick={() => {}}
+            onFilmClick={() => {}}
+            onFilmPlayClick={() => {}}
           />
         </Provider>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render ActiveFilm`, () => {
+  const store = mockStore({
+    activeGenre: `Comedy`,
+    films,
+    showingFilmsCount: 8,
+    activeFilm: films[0],
+    playingFilm: null,
+  });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            films={films}
+            promoFilm={PromoFilm}
+            activeGenre={`Comedy`}
+            activeFilm={films[0]}
+            playingFilm={null}
+            showingFilmsCount={8}
+            onGenreClick={() => {}}
+            onShowMoreClick={() => {}}
+            onFilmClick={() => {}}
+            onFilmPlayClick={() => {}}
+          />
+        </Provider>
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it(`Render PlayingFilm`, () => {
+  const store = mockStore({
+    activeGenre: `Comedy`,
+    films,
+    showingFilmsCount: 8,
+    activeFilm: null,
+    playingFilm: films[0],
+  });
+
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            films={films}
+            promoFilm={PromoFilm}
+            activeGenre={`Comedy`}
+            activeFilm={null}
+            playingFilm={films[0]}
+            showingFilmsCount={8}
+            onGenreClick={() => {}}
+            onShowMoreClick={() => {}}
+            onFilmClick={() => {}}
+            onFilmPlayClick={() => {}}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return {};
+          }
+        }
     )
     .toJSON();
 

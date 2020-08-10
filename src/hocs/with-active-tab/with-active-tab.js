@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {TAB} from '../const';
+import {TAB} from '../../const';
 
 const withActiveTab = (Component) => {
   class WithActiveTab extends PureComponent {
@@ -23,10 +23,8 @@ const withActiveTab = (Component) => {
       />;
     }
 
-    _handleClick(evt) {
-      evt.preventDefault();
-
-      this.setState({activeTab: evt.currentTarget.dataset.id});
+    _handleClick(id) {
+      this.setState({activeTab: id});
     }
   }
 

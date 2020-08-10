@@ -2,16 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Main from "./main.jsx";
 
-const onFilmClick = () => {};
-
-const onGenreClick = () => {};
-
-const onShowMoreClick = () => {};
-
 const PromoFilm = {
   NAME: `The Grand Budapest Hotel`,
   GENRE: `Drama`,
   RELEASE_DATE: 2014,
+  previewImage: `img/bohemian-rhapsody.jpg`,
+  videoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
 const films = [
@@ -45,9 +41,10 @@ it(`Render Main`, () => {
       films={films}
       activeGenre={`Comedy`}
       showingFilmsCount={8}
-      onFilmClick={onFilmClick}
-      onGenreClick={onGenreClick}
-      onShowMoreClick={onShowMoreClick}
+      onFilmClick={() => {}}
+      onGenreClick={() => {}}
+      onShowMoreClick={() => {}}
+      onFilmPlayClick={() => {}}
     />)
     .toJSON();
 

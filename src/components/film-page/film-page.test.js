@@ -56,14 +56,13 @@ const films = [
   },
 ];
 
-const onFilmClick = () => {};
-
 it(`Render FilmPage`, () => {
   const tree = renderer
     .create(<FilmPage
       film={film}
       films={films}
-      onFilmClick={onFilmClick}
+      onFilmClick={() => {}}
+      onFilmPlayClick={() => {}}
     />)
     .toJSON();
 

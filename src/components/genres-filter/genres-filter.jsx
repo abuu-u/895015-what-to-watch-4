@@ -21,7 +21,10 @@ const GenresFilter = (props) => {
         <a
           href="#"
           className="catalog__genres-link"
-          onClick={onGenreClick}
+          onClick={(evt) => {
+            evt.preventDefault();
+            onGenreClick(evt.currentTarget.dataset.id);
+          }}
           data-id={DEFAULT_GENRE}
         >{DEFAULT_GENRE}</a>
       </li>
@@ -34,7 +37,10 @@ const GenresFilter = (props) => {
             <a
               href="#"
               className="catalog__genres-link"
-              onClick={onGenreClick}
+              onClick={(evt) => {
+                evt.preventDefault();
+                onGenreClick(evt.currentTarget.dataset.id);
+              }}
               data-id={genre}
             >{genre}</a>
           </li>

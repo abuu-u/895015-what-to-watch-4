@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmList from "../film-list/film-list.jsx";
-import withActiveFilm from "../../hocs/with-active-film";
-import withActiveTab from '../../hocs/with-active-tab';
+import withActiveFilm from "../../hocs/with-active-film/with-active-film";
+import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
 
 const MORE_LIKE_FILMS_COUNT = 4;
 
@@ -12,7 +12,12 @@ const FilmListWrapped = withActiveFilm(FilmList);
 const TabsWrapped = withActiveTab(Tabs);
 
 const FilmPage = (props) => {
-  const {film, films, onFilmClick} = props;
+  const {
+    film,
+    films,
+    onFilmClick,
+    onFilmPlayClick,
+  } = props;
   const {
     name,
     posterImage,
@@ -56,7 +61,13 @@ const FilmPage = (props) => {
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button
+                className="btn btn--play movie-card__button"
+                type="button"
+                onClick={() => {
+                  onFilmPlayClick(film);
+                }}
+              >
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -91,7 +102,8 @@ const FilmPage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <FilmListWrapped
-          films={films.filter((it) => it.genre === film.genre && it !== film).slice(0, MORE_LIKE_FILMS_COUNT)}
+          films={films.filter((it) => it.genre === film.genre && it !== film)}
+          showingFilmsCount={MORE_LIKE_FILMS_COUNT}
           onFilmClick={onFilmClick}
         />
       </section>
@@ -124,6 +136,7 @@ FilmPage.propTypes = {
   }).isRequired,
   films: PropTypes.array.isRequired,
   onFilmClick: PropTypes.func.isRequired,
+  onFilmPlayClick: PropTypes.func.isRequired,
 };
 
 export default FilmPage;
