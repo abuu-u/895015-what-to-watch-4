@@ -7,10 +7,12 @@ import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
-const PromoFilm = {
-  NAME: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  RELEASE_DATE: 2014,
+const promoFilm = {
+  name: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  released: 2014,
+  posterImage: `img/bohemian-rhapsody-poster.jpg`,
+  backgroundImage: `img/bg-bohemian-rhapsody.jpg`,
 };
 
 const films = [
@@ -97,12 +99,23 @@ const comments = [
   }
 ];
 
+const authInfo = {
+  id: 1,
+  email: `Oliver.conner@gmail.com`,
+  name: `Oliver.conner`,
+  avatarUrl: `img/1.png`
+};
+
 it(`Render App`, () => {
   const store = mockStore({
     [NameSpace.FILM]: {
       activeGenre: `Comedy`,
       activeFilm: null,
       playingFilm: null,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      authInfo,
     },
   });
 
@@ -113,7 +126,7 @@ it(`Render App`, () => {
             films={films}
             filmsByGenre={films}
             comments={comments}
-            promoFilm={PromoFilm}
+            promoFilm={promoFilm}
             activeGenre={`Comedy`}
             activeFilm={null}
             playingFilm={null}
@@ -122,6 +135,7 @@ it(`Render App`, () => {
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            login={() => {}}
           />
         </Provider>
     )
@@ -137,6 +151,10 @@ it(`Render ActiveFilm`, () => {
       activeFilm: films[0],
       playingFilm: null,
     },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      authInfo,
+    },
   });
 
   const tree = renderer
@@ -146,7 +164,7 @@ it(`Render ActiveFilm`, () => {
             films={films}
             filmsByGenre={films}
             comments={comments}
-            promoFilm={PromoFilm}
+            promoFilm={promoFilm}
             activeGenre={`Comedy`}
             activeFilm={films[0]}
             playingFilm={null}
@@ -155,6 +173,7 @@ it(`Render ActiveFilm`, () => {
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            login={() => {}}
           />
         </Provider>
     )
@@ -170,6 +189,10 @@ it(`Render PlayingFilm`, () => {
       activeFilm: null,
       playingFilm: films[0],
     },
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      authInfo,
+    },
   });
 
   const tree = renderer
@@ -179,7 +202,7 @@ it(`Render PlayingFilm`, () => {
             films={films}
             filmsByGenre={films}
             comments={comments}
-            promoFilm={PromoFilm}
+            promoFilm={promoFilm}
             activeGenre={`Comedy`}
             activeFilm={null}
             playingFilm={films[0]}
@@ -188,6 +211,7 @@ it(`Render PlayingFilm`, () => {
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            login={() => {}}
           />
         </Provider>, {
           createNodeMock: () => {

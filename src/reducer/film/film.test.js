@@ -63,7 +63,7 @@ it(`Reducer should set active genre`, () => {
 });
 
 it(`Reducer should set active film`, () => {
-  expect(reducer(extend(initialState), {
+  expect(reducer(initialState, {
     type: ActionType.SET_ACTIVE_FILM,
     payload: mockFilms[0],
   })).toEqual(extend(initialState, {

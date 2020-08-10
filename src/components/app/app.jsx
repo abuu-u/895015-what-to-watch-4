@@ -6,20 +6,19 @@ import FilmPage from "../film-page/film-page.jsx";
 import FilmPlayer from "../film-player/film-player.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/film/film.js";
-// import {AuthorizationStatus} from "../../reducer/user/user.js";
 import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
 import {getActiveFilm, getActiveGenre, getPlayingFilm, getShowingFilmsCount} from "../../reducer/film/selectors.js";
 import {getFilms, getFilmsByGenre, getPromoFilm, getComments} from "../../reducer/data/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
+import SignIn from '../sign-in/sign-in.jsx';
+
 const FilmPlayerWrapper = withFilmPlayer(FilmPlayer);
 
 class App extends React.PureComponent {
   _renderScreen() {
     const {
-      // authorizationStatus,
-      // login,
       promoFilm,
       films,
       showingFilmsCount,
@@ -70,11 +69,18 @@ class App extends React.PureComponent {
   }
 
   render() {
+    const {login} = this.props;
+
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
             {this._renderScreen()}
+          </Route>
+          <Route exact path="/sign-in">
+            <SignIn
+              onSubmit={login}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -83,8 +89,7 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  // authorizationStatus: PropTypes.string.isRequired,
-  // login: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
   promoFilm: PropTypes.object.isRequired,
   films: PropTypes.array.isRequired,
   comments: PropTypes.array,

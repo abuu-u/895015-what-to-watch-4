@@ -19,7 +19,7 @@ Array [
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header"
     >
       <div
         className="logo"
@@ -53,7 +53,7 @@ Array [
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="https://4.react.pages.academyimg/1.png"
             width="63"
           />
         </div>

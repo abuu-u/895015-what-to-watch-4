@@ -22,14 +22,13 @@ Array [
         WTW
       </h1>
       <header
-        className="page-header movie-card__head"
+        className="page-header"
       >
         <div
           className="logo"
         >
           <a
             className="logo__link"
-            href="main.html"
           >
             <span
               className="logo__letter logo__letter--1"
@@ -57,7 +56,7 @@ Array [
             <img
               alt="User avatar"
               height="63"
-              src="img/avatar.jpg"
+              src="https://4.react.pages.academyimg/1.png"
               width="63"
             />
           </div>
