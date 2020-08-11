@@ -15,17 +15,21 @@ const Main = (props) => {
     filmsByGenre,
     activeGenre,
     showingFilmsCount,
+    authorizationStatus,
     onFilmClick,
     onGenreClick,
     onShowMoreClick,
     onFilmPlayClick,
+    onPromFilmAddToFavorites,
   } = props;
 
   return (
     <>
     <PromoFilm
       promoFilm={promoFilm}
+      authorizationStatus={authorizationStatus}
       onFilmPlayClick={onFilmPlayClick}
+      onPromFilmAddToFavorites={onPromFilmAddToFavorites}
     />
 
     <div className="page-content">
@@ -73,10 +77,12 @@ Main.propTypes = {
   filmsByGenre: PropTypes.array.isRequired,
   activeGenre: PropTypes.string.isRequired,
   showingFilmsCount: PropTypes.number.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
   onFilmPlayClick: PropTypes.func.isRequired,
+  onPromFilmAddToFavorites: PropTypes.func.isRequired,
 };
 
 export default Main;

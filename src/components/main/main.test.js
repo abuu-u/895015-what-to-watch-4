@@ -10,6 +10,8 @@ import history from "../../history.js";
 const mockStore = configureStore([]);
 
 const PromoFilm = {
+  id: 1,
+  isFavorite: true,
   name: `The Grand Budapest Hotel`,
   genre: `Drama`,
   released: 2014,
@@ -41,29 +43,6 @@ const films = [
   },
 ];
 
-const comments = [
-  {
-    id: 1,
-    user: {
-      id: 4,
-      name: `Kate Muir`,
-    },
-    rating: 8.9,
-    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    date: `2019-05-08T14:13:56.569Z`,
-  },
-  {
-    id: 2,
-    user: {
-      id: 4,
-      name: `Kate Muir`,
-    },
-    rating: 8.9,
-    comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-    date: `2019-05-08T14:13:56.569Z`,
-  }
-];
-
 const authInfo = {
   id: 1,
   email: `Oliver.conner@gmail.com`,
@@ -89,13 +68,14 @@ it(`Render Main`, () => {
               promoFilm={PromoFilm}
               films={films}
               filmsByGenre={films}
-              comments={comments}
               activeGenre={`Comedy`}
               showingFilmsCount={8}
+              authorizationStatus={`AUTH`}
               onFilmClick={() => {}}
               onGenreClick={() => {}}
               onShowMoreClick={() => {}}
               onFilmPlayClick={() => {}}
+              onPromFilmAddToFavorites={() => {}}
             />
           </Provider>
         </Router>

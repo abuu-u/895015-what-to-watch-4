@@ -11,6 +11,8 @@ const mockStore = configureStore([]);
 
 
 const film = {
+  id: 1,
+  isFavorite: true,
   name: `The Grand Budapest Hotel`,
   posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
   backgroundImage: `img/the-grand-budapest-hotel-bg.jpg`,
@@ -116,6 +118,7 @@ it(`Render FilmPage`, () => {
               authorizationStatus={`AUTH`}
               onFilmClick={() => {}}
               onFilmPlayClick={() => {}}
+              onFilmAddToFavorites={() => {}}
             />
           </Provider>
         </Router>

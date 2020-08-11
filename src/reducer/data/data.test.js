@@ -2,6 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api.js";
 import {reducer, ActionType, Operation, ActionCreator} from "./data.js";
 import {extend} from '../../utils';
+import NameSpace from '../name-space';
 
 const api = createAPI(() => {});
 
@@ -190,7 +191,7 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /film/promo`, () => {
+  it(`Should make a correct API call to /films/promo`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const promoFilmLoader = Operation.loadPromoFilm();
@@ -209,7 +210,7 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/1`, () => {
+  it(`Should make a correct API call to /comments/:film_id`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const commentsLoader = Operation.loadComments(1);
@@ -228,7 +229,7 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /comments/1`, () => {
+  it(`Should make a correct API call to /comments/:film_id`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
     const commentsLoader = Operation.submitComment(userComment, 1);
@@ -246,4 +247,58 @@ describe(`Operation work correctly`, () => {
         });
       });
   });
+});
+
+it(`Should make a correct API call to /favorite/:film_id/:status`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const getState = () => ({[NameSpace.DATA]: {films: [filmAdapted]}});
+  const addFilmToFavorites = Operation.addFilmToFavorites(filmAdapted.id, 1);
+
+  apiMock
+    .onPost(`/favorite/${filmAdapted.id}/1`)
+    .reply(200, JSON.stringify(
+        extend(JSON.parse(filmResponse), {
+          [`is_favorite`]: true,
+        })
+    ));
+
+  return addFilmToFavorites(dispatch, getState, api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_FILMS,
+        payload: [
+          extend(filmAdapted, {
+            isFavorite: true,
+          })
+        ],
+      });
+    });
+});
+
+it(`Should make a correct API call to /favorite/:film_id/:status`, () => {
+  const apiMock = new MockAdapter(api);
+  const dispatch = jest.fn();
+  const addPromoFilmToFavorites = Operation.addPromoFilmToFavorites(filmAdapted.id, 1);
+
+  apiMock
+    .onPost(`/favorite/${filmAdapted.id}/1`)
+    .reply(200, JSON.stringify(
+        extend(JSON.parse(filmResponse), {
+          [`is_favorite`]: true,
+        })
+    ));
+
+  return addPromoFilmToFavorites(dispatch, () => {}, api)
+    .then(() => {
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenNthCalledWith(1, {
+        type: ActionType.LOAD_PROMO_FILM,
+        payload:
+          extend(filmAdapted, {
+            isFavorite: true,
+          }),
+      });
+    });
 });

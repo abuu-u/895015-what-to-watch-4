@@ -1,14 +1,16 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import PromoFilm from "./promo-film.jsx";
+import FilmDescription from "./film-description.jsx";
 
-const promoFilm = {
+const film = {
+  id: 1,
   name: `The Grand Budapest Hotel`,
-  genre: `Drama`,
+  posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
+  backgroundImage: `img/the-grand-budapest-hotel-bg.jpg`,
+  genre: `Comedy`,
   released: 2014,
-  posterImage: `img/bohemian-rhapsody-poster.jpg`,
-  backgroundImage: `img/bg-bohemian-rhapsody.jpg`,
+  isFavorite: false
 };
 
 Enzyme.configure({
@@ -17,15 +19,20 @@ Enzyme.configure({
 
 it(`Should handlers be called`, () => {
   const onFilmPlayClick = jest.fn();
+  const onAddToFavorites = jest.fn();
 
   const filmComponent = shallow(
-      <PromoFilm
-        promoFilm={promoFilm}
+      <FilmDescription
+        film={film}
+        authorizationStatus={`AUTH`}
         onFilmPlayClick={onFilmPlayClick}
+        onAddToFavorites={onAddToFavorites}
       />
   );
 
   filmComponent.find(`.btn.btn--play.movie-card__button`).simulate(`click`);
+  filmComponent.find(`.btn.btn--list.movie-card__button`).simulate(`click`);
 
   expect(onFilmPlayClick).toHaveBeenCalledTimes(1);
+  expect(onAddToFavorites).toHaveBeenCalledTimes(1);
 });

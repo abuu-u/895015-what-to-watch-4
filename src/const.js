@@ -18,10 +18,16 @@ const AppRoute = {
   LOGIN: `/login`,
 };
 
+const STATUS = {
+  add: 1,
+  remove: 0,
+};
+
 export {
   TAB,
   TABS,
   DEFAULT_GENRE,
   SHOWING_FILMS_COUNT,
   AppRoute,
+  STATUS,
 };

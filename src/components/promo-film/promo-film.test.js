@@ -10,6 +10,8 @@ import history from "../../history.js";
 const mockStore = configureStore([]);
 
 const promoFilm = {
+  id: 1,
+  isFavorite: true,
   name: `The Grand Budapest Hotel`,
   genre: `Drama`,
   released: 2014,
@@ -40,7 +42,9 @@ it(`Render PromoFilm`, () => {
           <Provider store={store}>
             <PromoFilm
               promoFilm={promoFilm}
+              authorizationStatus={`AUTH`}
               onFilmPlayClick={() => {}}
+              onPromFilmAddToFavorites={() => {}}
             />
           </Provider>
         </Router>

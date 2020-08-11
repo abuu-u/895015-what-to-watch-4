@@ -43,6 +43,8 @@ class App extends React.PureComponent {
       onShowMoreClick,
       onFilmClick,
       onFilmPlayClick,
+      onFilmAddToFavorites,
+      onPromFilmAddToFavorites,
     } = this.props;
 
     if (playingFilm) {
@@ -62,11 +64,12 @@ class App extends React.PureComponent {
           authorizationStatus={authorizationStatus}
           onFilmClick={onFilmClick}
           onFilmPlayClick={onFilmPlayClick}
+          onFilmAddToFavorites={onFilmAddToFavorites}
         />
       );
     }
 
-    if (films && !promoFilm && filmsByGenre) {
+    if (films && promoFilm && filmsByGenre) {
       return (
         <Main
           promoFilm={promoFilm}
@@ -74,10 +77,12 @@ class App extends React.PureComponent {
           filmsByGenre={filmsByGenre}
           activeGenre={activeGenre}
           showingFilmsCount={showingFilmsCount}
+          authorizationStatus={authorizationStatus}
           onFilmClick={onFilmClick}
           onGenreClick={onGenreClick}
           onShowMoreClick={onShowMoreClick}
           onFilmPlayClick={onFilmPlayClick}
+          onPromFilmAddToFavorites={onPromFilmAddToFavorites}
         />
       );
     }
@@ -133,6 +138,8 @@ App.propTypes = {
   onFilmClick: PropTypes.func.isRequired,
   onFilmPlayClick: PropTypes.func.isRequired,
   onCommentSubmit: PropTypes.func.isRequired,
+  onFilmAddToFavorites: PropTypes.func.isRequired,
+  onPromFilmAddToFavorites: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -167,6 +174,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onCommentSubmit(comment, filmId) {
     dispatch(DataOperation.submitComment(comment, filmId));
+  },
+  onFilmAddToFavorites(filmId, status) {
+    dispatch(DataOperation.addFilmToFavorites(filmId, status));
+  },
+  onPromFilmAddToFavorites(filmId, status) {
+    dispatch(DataOperation.addPromoFilmToFavorites(filmId, status));
   },
 });
 

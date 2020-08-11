@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tabs from "../tabs/tabs.jsx";
 import FilmList from "../film-list/film-list.jsx";
+import FilmDescription from "../film-description/film-description.jsx";
 import Header from "../header/header.jsx";
 import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
@@ -21,13 +22,13 @@ const FilmPage = (props) => {
     authorizationStatus,
     onFilmClick,
     onFilmPlayClick,
+    onFilmAddToFavorites,
   } = props;
   const {
     name,
     posterImage,
     backgroundImage,
     genre,
-    released,
   } = film;
 
   return (
@@ -43,38 +44,17 @@ const FilmPage = (props) => {
         <Header/>
 
         <div className="movie-card__wrap">
-          <div className="movie-card__desc">
-            <h2 className="movie-card__title">{name}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{released}</span>
-            </p>
-
-            <div className="movie-card__buttons">
-              <button
-                className="btn btn--play movie-card__button"
-                type="button"
-                onClick={() => {
-                  onFilmPlayClick(film);
-                }}
-              >
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-              {authorizationStatus === AuthorizationStatus.AUTH && <a
-                href="add-review"
-                className="btn movie-card__button"
-              >Add review</a>}
-            </div>
-          </div>
+          <FilmDescription
+            film={film}
+            authorizationStatus={authorizationStatus}
+            onFilmPlayClick={onFilmPlayClick}
+            onAddToFavorites={onFilmAddToFavorites}
+          >
+            {authorizationStatus === AuthorizationStatus.AUTH && <a
+              href="add-review"
+              className="btn movie-card__button"
+            >Add review</a>}
+          </FilmDescription>
         </div>
       </div >
 
@@ -96,7 +76,7 @@ const FilmPage = (props) => {
         <h2 className="catalog__title">More like this</h2>
 
         <FilmListWrapped
-          films={films.filter((it) => it.genre === film.genre && it !== film)}
+          films={films.filter((it) => it.genre === genre && it !== film)}
           showingFilmsCount={MORE_LIKE_FILMS_COUNT}
           onFilmClick={onFilmClick}
         />
@@ -122,17 +102,20 @@ const FilmPage = (props) => {
 
 FilmPage.propTypes = {
   film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     released: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
   films: PropTypes.array.isRequired,
   comments: PropTypes.array,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onFilmPlayClick: PropTypes.func.isRequired,
+  onFilmAddToFavorites: PropTypes.func.isRequired,
 };
 
 export default FilmPage;

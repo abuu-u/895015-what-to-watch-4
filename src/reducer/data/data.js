@@ -1,5 +1,6 @@
 import {extend} from "../../utils.js";
 import {filmAdapter} from '../../adapter/film';
+import {getFilms} from './selectors';
 
 const initialState = {
   films: [],
@@ -72,6 +73,33 @@ const Operation = {
     return api.post(`/comments/${filmId}`, comment)
       .then((response) => {
         dispatch(ActionCreator.loadComments(response.data));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+  addFilmToFavorites: (filmId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${filmId}/${status}`)
+      .then((response) => filmAdapter(response.data))
+      .then((film) => {
+        const films = getFilms(getState());
+        const index = films.findIndex((it) => it.id === film.id);
+
+        dispatch(ActionCreator.loadFilms([
+          ...films.slice(0, index),
+          film,
+          ...films.slice(index + 1)
+        ]));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+  addPromoFilmToFavorites: (filmId, status) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${filmId}/${status}`)
+      .then((response) => filmAdapter(response.data))
+      .then((film) => {
+        dispatch(ActionCreator.loadPromoFilm(film));
       })
       .catch((err) => {
         throw err;

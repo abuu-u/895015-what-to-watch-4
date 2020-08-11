@@ -8,6 +8,8 @@ import NameSpace from "../../reducer/name-space.js";
 const mockStore = configureStore([]);
 
 const promoFilm = {
+  id: 1,
+  isFavorite: true,
   name: `The Grand Budapest Hotel`,
   genre: `Drama`,
   released: 2014,
@@ -137,6 +139,8 @@ it(`Render App`, () => {
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
             onCommentSubmit={() => {}}
+            onFilmAddToFavorites={() => {}}
+            onPromFilmAddToFavorites={() => {}}
             login={() => {}}
           />
         </Provider>
@@ -177,6 +181,8 @@ it(`Render ActiveFilm`, () => {
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
             onCommentSubmit={() => {}}
+            onFilmAddToFavorites={() => {}}
+            onPromFilmAddToFavorites={() => {}}
             login={() => {}}
           />
         </Provider>
@@ -217,6 +223,8 @@ it(`Render PlayingFilm`, () => {
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
             onCommentSubmit={() => {}}
+            onFilmAddToFavorites={() => {}}
+            onPromFilmAddToFavorites={() => {}}
             login={() => {}}
           />
         </Provider>, {
