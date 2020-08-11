@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors.js";
 
 const Header = (props) => {
-  const {authorizationStatus, authInfo} = props;
+  const {authorizationStatus, authInfo, children} = props;
 
   return (
     <header className="page-header">
@@ -16,6 +16,8 @@ const Header = (props) => {
           <span className="logo__letter logo__letter--3">W</span>
         </a>
       </div>
+
+      {children}
 
       <div className="user-block">
         {authorizationStatus === AuthorizationStatus.NO_AUTH ?
@@ -33,6 +35,10 @@ Header.propTypes = {
   authInfo: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,
   }),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
 };
 
 const mapStateToProps = (state) => ({

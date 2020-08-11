@@ -105,6 +105,11 @@ const filmAdapted = {
   isFavorite: false
 };
 
+const userComment = {
+  rating: 5,
+  comment: `qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq`,
+};
+
 const initialState = {
   films: [],
   promoFilm: {},
@@ -219,6 +224,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_COMMENTS,
           payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments/1`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const commentsLoader = Operation.submitComment(userComment, 1);
+
+    apiMock
+      .onPost(`/comments/1`)
+      .reply(200, userComment);
+
+    return commentsLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: userComment,
         });
       });
   });
