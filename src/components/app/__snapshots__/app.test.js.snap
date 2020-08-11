@@ -127,7 +127,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="add-review.html"
+              href="add-review"
             >
               Add review
             </a>

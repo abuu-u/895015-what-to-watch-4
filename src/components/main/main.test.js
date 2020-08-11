@@ -7,7 +7,6 @@ import NameSpace from "../../reducer/name-space.js";
 
 const mockStore = configureStore([]);
 
-
 const PromoFilm = {
   name: `The Grand Budapest Hotel`,
   genre: `Drama`,

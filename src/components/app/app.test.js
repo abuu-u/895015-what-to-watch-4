@@ -131,10 +131,12 @@ it(`Render App`, () => {
             activeFilm={null}
             playingFilm={null}
             showingFilmsCount={8}
+            authorizationStatus={`AUTH`}
             onGenreClick={() => {}}
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            onCommentSubmit={() => {}}
             login={() => {}}
           />
         </Provider>
@@ -169,10 +171,12 @@ it(`Render ActiveFilm`, () => {
             activeFilm={films[0]}
             playingFilm={null}
             showingFilmsCount={8}
+            authorizationStatus={`AUTH`}
             onGenreClick={() => {}}
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            onCommentSubmit={() => {}}
             login={() => {}}
           />
         </Provider>
@@ -207,10 +211,12 @@ it(`Render PlayingFilm`, () => {
             activeFilm={null}
             playingFilm={films[0]}
             showingFilmsCount={8}
+            authorizationStatus={`AUTH`}
             onGenreClick={() => {}}
             onShowMoreClick={() => {}}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
+            onCommentSubmit={() => {}}
             login={() => {}}
           />
         </Provider>, {

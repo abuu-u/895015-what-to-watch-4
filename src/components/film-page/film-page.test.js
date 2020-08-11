@@ -108,6 +108,7 @@ it(`Render FilmPage`, () => {
             film={film}
             films={films}
             comments={comments}
+            authorizationStatus={`AUTH`}
             onFilmClick={() => {}}
             onFilmPlayClick={() => {}}
           />

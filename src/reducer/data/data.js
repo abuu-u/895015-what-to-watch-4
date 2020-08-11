@@ -68,6 +68,15 @@ const Operation = {
         dispatch(ActionCreator.loadComments(response.data));
       });
   },
+  submitComment: (comment, filmId) => (dispatch, getState, api) => {
+    return api.post(`/comments/${filmId}`, comment)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(response.data));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
 export {reducer, ActionType, ActionCreator, Operation};

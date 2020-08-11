@@ -5,6 +5,7 @@ import FilmList from "../film-list/film-list.jsx";
 import Header from "../header/header.jsx";
 import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
+import {AuthorizationStatus} from '../../reducer/user/user';
 
 const MORE_LIKE_FILMS_COUNT = 4;
 
@@ -17,6 +18,7 @@ const FilmPage = (props) => {
     film,
     films,
     comments,
+    authorizationStatus,
     onFilmClick,
     onFilmPlayClick,
   } = props;
@@ -67,7 +69,10 @@ const FilmPage = (props) => {
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              {authorizationStatus === AuthorizationStatus.AUTH && <a
+                href="add-review"
+                className="btn movie-card__button"
+              >Add review</a>}
             </div>
           </div>
         </div>
@@ -125,6 +130,7 @@ FilmPage.propTypes = {
   }).isRequired,
   films: PropTypes.array.isRequired,
   comments: PropTypes.array,
+  authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   onFilmClick: PropTypes.func.isRequired,
   onFilmPlayClick: PropTypes.func.isRequired,
 };
