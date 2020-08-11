@@ -9,6 +9,8 @@ exports[`Render authorized Header 1`] = `
   >
     <a
       className="logo__link"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -53,6 +55,8 @@ exports[`Render unauthorized Header 1`] = `
   >
     <a
       className="logo__link"
+      href="/"
+      onClick={[Function]}
     >
       <span
         className="logo__letter logo__letter--1"
@@ -74,12 +78,16 @@ exports[`Render unauthorized Header 1`] = `
   <div
     className="user-block"
   >
-    <a
-      className="user-block__link"
-      href="sign-in"
+    <div
+      className="user-block__avatar"
     >
-      Sign in
-    </a>
+      <img
+        alt="User avatar"
+        height="63"
+        src="https://4.react.pages.academyimg/1.png"
+        width="63"
+      />
+    </div>
   </div>
 </header>
 `;

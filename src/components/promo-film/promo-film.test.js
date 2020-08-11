@@ -4,6 +4,8 @@ import PromoFilm from "./promo-film.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
 const mockStore = configureStore([]);
 
@@ -32,13 +34,17 @@ it(`Render PromoFilm`, () => {
 
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <PromoFilm
-            promoFilm={promoFilm}
-            onFilmPlayClick={() => {}}
-          />
-        </Provider>)
-    .toJSON();
+        <Router
+          history={history}
+        >
+          <Provider store={store}>
+            <PromoFilm
+              promoFilm={promoFilm}
+              onFilmPlayClick={() => {}}
+            />
+          </Provider>
+        </Router>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

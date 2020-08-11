@@ -1,13 +1,17 @@
 import React from "react";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+
+import history from '../../history';
+import {AppRoute} from '../../const';
 
 import Main from "../main/main.jsx";
 import FilmPage from "../film-page/film-page.jsx";
 import FilmPlayer from "../film-player/film-player.jsx";
 import SignIn from '../sign-in/sign-in.jsx';
 import AddReview from '../add-review/add-review.jsx';
+import PrivateRout from '../private-route/private-route.jsx';
 
 import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
 import withSubmit from '../../hocs/with-submit/with-submit';
@@ -49,7 +53,7 @@ class App extends React.PureComponent {
       );
     }
 
-    if (activeFilm) {
+    if (activeFilm && films && comments) {
       return (
         <FilmPage
           film={activeFilm}
@@ -62,48 +66,53 @@ class App extends React.PureComponent {
       );
     }
 
-    return (
-      <Main
-        promoFilm={promoFilm}
-        films={films}
-        filmsByGenre={filmsByGenre}
-        activeGenre={activeGenre}
-        showingFilmsCount={showingFilmsCount}
-        onFilmClick={onFilmClick}
-        onGenreClick={onGenreClick}
-        onShowMoreClick={onShowMoreClick}
-        onFilmPlayClick={onFilmPlayClick}
-      />
-    );
+    if (films && !promoFilm && filmsByGenre) {
+      return (
+        <Main
+          promoFilm={promoFilm}
+          films={films}
+          filmsByGenre={filmsByGenre}
+          activeGenre={activeGenre}
+          showingFilmsCount={showingFilmsCount}
+          onFilmClick={onFilmClick}
+          onGenreClick={onGenreClick}
+          onShowMoreClick={onShowMoreClick}
+          onFilmPlayClick={onFilmPlayClick}
+        />
+      );
+    }
+
+    return null;
   }
 
   render() {
-    const {login, onCommentSubmit} = this.props;
+    const {login, onCommentSubmit, authorizationStatus, activeFilm} = this.props;
 
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.ROOT}>
             {this._renderScreen()}
           </Route>
-          <Route exact path="/sign-in">
+          <Route exact path={AppRoute.LOGIN}>
             <SignIn
               onSubmit={login}
             />
           </Route>
-          <Route exact path="/add-review">
-            <AddReviewWrapper
-              activeFilm={{
-                id: 1,
-                name: `The Grand Budapest Hotel`,
-                posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
-                backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
-              }}
-              onSubmit={onCommentSubmit}
-            />
-          </Route>
+          <PrivateRout
+            exact path="/dev-review"
+            authorizationStatus={authorizationStatus}
+            render={() => (
+              <AddReviewWrapper
+                activeFilm={activeFilm}
+                onSubmit={onCommentSubmit}
+              />
+            )}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

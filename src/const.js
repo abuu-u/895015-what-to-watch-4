@@ -13,9 +13,15 @@ const SHOWING_FILMS_COUNT = {
   byButton: 8,
 };
 
+const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+};
+
 export {
   TAB,
   TABS,
   DEFAULT_GENRE,
   SHOWING_FILMS_COUNT,
+  AppRoute,
 };
