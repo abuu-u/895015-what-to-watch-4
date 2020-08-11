@@ -1,5 +1,5 @@
-import {reducer, ActionType, ActionCreator} from "./reducer.js";
-import {extend} from './utils';
+import {reducer, ActionType, ActionCreator} from "./film.js";
+import {extend} from '../../utils';
 
 const mockFilms = [
   {
@@ -45,7 +45,6 @@ const mockFilms = [
 const initialState = {
   activeGenre: `All genres`,
   activeFilm: null,
-  films: [],
   showingFilmsCount: 8,
   playingFilm: null,
 };
@@ -64,20 +63,11 @@ it(`Reducer should set active genre`, () => {
 });
 
 it(`Reducer should set active film`, () => {
-  expect(reducer(extend(initialState), {
+  expect(reducer(initialState, {
     type: ActionType.SET_ACTIVE_FILM,
     payload: mockFilms[0],
   })).toEqual(extend(initialState, {
     activeFilm: mockFilms[0],
-  }));
-});
-
-it(`Reducer should set films`, () => {
-  expect(reducer(initialState, {
-    type: ActionType.SET_FILMS,
-    payload: mockFilms,
-  })).toEqual(extend(initialState, {
-    films: mockFilms,
   }));
 });
 
@@ -122,13 +112,6 @@ describe(`Action creators work correctly`, () => {
     expect(ActionCreator.setActiveFilm(mockFilms[0])).toEqual({
       type: ActionType.SET_ACTIVE_FILM,
       payload: mockFilms[0],
-    });
-  });
-
-  it(`Action creator for setting films returns correct action`, () => {
-    expect(ActionCreator.setFilms(mockFilms)).toEqual({
-      type: ActionType.SET_FILMS,
-      payload: mockFilms,
     });
   });
 

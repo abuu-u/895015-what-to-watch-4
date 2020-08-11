@@ -2,16 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Tab from '../tab/tab.jsx';
 import {TABS} from '../../const';
-import {generateComments} from '../../mock/comment';
-
-const COMMENTS_COUNT = 9;
-
-const comments = generateComments(COMMENTS_COUNT);
 
 const activeClass = `movie-nav__item--active`;
 
 const Tabs = (props) => {
-  const {film, activeTab, onClick} = props;
+  const {film, activeTab, comments, onClick} = props;
 
   return (
     <div className="movie-card__desc">
@@ -49,6 +44,7 @@ const Tabs = (props) => {
 Tabs.propTypes = {
   film: PropTypes.object.isRequired,
   activeTab: PropTypes.oneOf(TABS).isRequired,
+  comments: PropTypes.array,
   onClick: PropTypes.func.isRequired,
 };
 

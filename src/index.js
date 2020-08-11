@@ -1,31 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer.js";
-import {ActionCreator} from "./reducer.js";
-import {generateFilms} from './mock/film';
+import thunk from "redux-thunk";
+import reducer from "./reducer/reducer.js";
+import {Operation as DataOperation} from "./reducer/data/data.js";
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
+import {createAPI} from "./api.js";
 
-const PromoFilm = {
-  NAME: `The Grand Budapest Hotel`,
-  GENRE: `Drama`,
-  RELEASE_DATE: 2014,
-  previewImage: `img/bohemian-rhapsody.jpg`,
-  videoLink: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
 };
+
+const onBadRequest = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
+const api = createAPI(onUnauthorized, onBadRequest);
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    applyMiddleware(thunk.withExtraArgument(api))
 );
-store.dispatch(ActionCreator.setFilms(generateFilms(10)));
+
+store.dispatch(DataOperation.loadFilms());
+store.dispatch(DataOperation.loadPromoFilm());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>
-      <App
-        promoFilm={PromoFilm}
-      />
+      <App/>
     </Provider>,
     document.getElementById(`root`)
 );

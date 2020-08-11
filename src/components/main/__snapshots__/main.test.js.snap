@@ -10,7 +10,7 @@ Array [
     >
       <img
         alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        src="img/bg-bohemian-rhapsody.jpg"
       />
     </div>
     <h1
@@ -19,7 +19,7 @@ Array [
       WTW
     </h1>
     <header
-      className="page-header movie-card__head"
+      className="page-header"
     >
       <div
         className="logo"
@@ -53,7 +53,7 @@ Array [
           <img
             alt="User avatar"
             height="63"
-            src="img/avatar.jpg"
+            src="https://4.react.pages.academyimg/1.png"
             width="63"
           />
         </div>
@@ -69,9 +69,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="The Grand Budapest Hotel"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="img/bohemian-rhapsody-poster.jpg"
             width="218"
           />
         </div>

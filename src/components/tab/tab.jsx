@@ -32,7 +32,7 @@ const Tab = (props) => {
 
 Tab.propTypes = {
   film: PropTypes.object.isRequired,
-  comments: PropTypes.array.isRequired,
+  comments: PropTypes.array,
   activeTab: PropTypes.oneOf(TABS).isRequired,
 };
 
