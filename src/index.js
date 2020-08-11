@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
 import {createStore, applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
 import reducer from "./reducer/reducer.js";
@@ -21,7 +22,9 @@ const api = createAPI(onUnauthorized, onBadRequest);
 
 const store = createStore(
     reducer,
-    applyMiddleware(thunk.withExtraArgument(api))
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
 
 store.dispatch(DataOperation.loadFilms());
