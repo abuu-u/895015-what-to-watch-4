@@ -26,7 +26,9 @@ const Header = (props) => {
       <div className="user-block">
         {authInfo.avatarUrl
           ? <div className="user-block__avatar">
-            <img src={`https://4.react.pages.academy${authInfo.avatarUrl}`} alt="User avatar" width="63" height="63" />
+            <Link to={AppRoute.MY_LIST}>
+              <img src={`https://4.react.pages.academy${authInfo.avatarUrl}`} alt="User avatar" width="63" height="63" />
+            </Link>
           </div>
           : <Link
             to={AppRoute.LOGIN}

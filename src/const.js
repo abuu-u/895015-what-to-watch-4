@@ -16,6 +16,7 @@ const SHOWING_FILMS_COUNT = {
 const AppRoute = {
   ROOT: `/`,
   LOGIN: `/login`,
+  MY_LIST: `mylist`,
 };
 
 const STATUS = {
