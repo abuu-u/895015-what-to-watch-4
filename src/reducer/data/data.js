@@ -29,7 +29,7 @@ const ActionCreator = {
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
   }),
-  loadfavoriteFilms: (films) => ({
+  loadFavoriteFilms: (films) => ({
     type: ActionType.LOAD_FAVORITE_FILMS,
     payload: films,
   }),
@@ -70,7 +70,7 @@ const Operation = {
     return api.get(`/favorite`)
       .then((response) => response.data.map(filmAdapter))
       .then((films) => {
-        dispatch(ActionCreator.loadFilms(films));
+        dispatch(ActionCreator.loadFavoriteFilms(films));
       });
   },
   loadPromoFilm: () => (dispatch, getState, api) => {

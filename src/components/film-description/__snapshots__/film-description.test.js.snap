@@ -26,8 +26,9 @@ exports[`Render FilmDescription 1`] = `
   <div
     className="movie-card__buttons"
   >
-    <button
+    <a
       className="btn btn--play movie-card__button"
+      href="/player1"
       onClick={[Function]}
       type="button"
     >
@@ -43,10 +44,9 @@ exports[`Render FilmDescription 1`] = `
       <span>
         Play
       </span>
-    </button>
-    <a
+    </a>
+    <button
       className="btn btn--list movie-card__button"
-      href="/"
       onClick={[Function]}
       type="button"
     >
@@ -62,7 +62,7 @@ exports[`Render FilmDescription 1`] = `
       <span>
         My list
       </span>
-    </a>
+    </button>
   </div>
 </div>
 `;

@@ -14,6 +14,7 @@ const MockComponentWrapped = withSubmit(MockComponent);
 it(`withSubmit is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
+      onSubmit={() => {}}
     />
   )).toJSON();
 

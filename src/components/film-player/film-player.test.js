@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FilmPlayer} from "./film-player.jsx";
+import FilmPlayer from "./film-player.jsx";
 
 const film = {
   previewImage: `img/bohemian-rhapsody.jpg`,
@@ -17,7 +17,6 @@ it(`Render FilmPlayer`, () => {
       progress={70}
       onPlayButtonClick={() => {}}
       onFullScreenButtonClick={() => {}}
-      onExitButtonClick={() => {}}
       onMount={() => {}}
     >
       <video/>

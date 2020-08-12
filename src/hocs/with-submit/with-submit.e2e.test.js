@@ -24,6 +24,7 @@ const MockComponentWrapped = withSubmit(MockComponent);
 
 it(`Should change isSubmitDisabled`, () => {
   const wrapper = shallow(<MockComponentWrapped
+    onSubmit={() => {}}
   />);
 
   expect(wrapper.props().isSubmitDisabled).toEqual(true);

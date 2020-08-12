@@ -59,7 +59,8 @@ exports[`Render AddReview 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="movie-page.html"
+              href="/films/1"
+              onClick={[Function]}
             >
               The Grand Budapest Hotel
             </a>
@@ -112,6 +113,7 @@ exports[`Render AddReview 1`] = `
     <form
       action="#"
       className="add-review__form"
+      disabled={false}
       onChange={[Function]}
       onSubmit={[Function]}
     >
@@ -189,6 +191,7 @@ exports[`Render AddReview 1`] = `
           </label>
         </div>
       </div>
+      
       <div
         className="add-review__text"
       >

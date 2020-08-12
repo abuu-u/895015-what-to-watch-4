@@ -1,8 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Film from "./film.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
 
-const onFilmClick = () => {};
 const onFilmMouseOver = () => {};
 const onFilmMouseLeave = () => {};
 
@@ -15,15 +16,19 @@ const film = {
 
 it(`Render Film`, () => {
   const tree = renderer
-    .create(<Film
-      film={film}
-      onFilmClick={onFilmClick}
-      onFilmMouseOver={onFilmMouseOver}
-      onFilmMouseLeave={onFilmMouseLeave}
-      index={1}
-      isActive={false}
-    />)
-    .toJSON();
+    .create(
+        <Router
+          history={history}
+        >
+          <Film
+            film={film}
+            onFilmMouseOver={onFilmMouseOver}
+            onFilmMouseLeave={onFilmMouseLeave}
+            index={1}
+            isActive={false}
+          />
+        </Router>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -9,7 +9,6 @@ import history from "../../history.js";
 
 const mockStore = configureStore([]);
 
-
 const film = {
   id: 1,
   isFavorite: true,

@@ -4,6 +4,19 @@ import PropTypes from "prop-types";
 import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import withFilmPlayer from "./with-film-player.js";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
+
+const authInfo = {
+  id: 1,
+  email: `Oliver.conner@gmail.com`,
+  name: `Oliver.conner`,
+  avatarUrl: `img/1.png`
+};
+
 
 const film = {
   previewImage: `img/bohemian-rhapsody.jpg`,
@@ -31,17 +44,27 @@ Player.propTypes = {
 };
 
 it(`Checks that HOC's callback turn on and turn off video (play and pause)`, () => {
-  const PlayerWrapped = withFilmPlayer(Player);
-  const wrapper = mount(<PlayerWrapped
-    isPlaying={false}
-    onPlayButtonClick={() => {}}
-    onMount={() => {}}
-    film={film}
-  />, {
-    createNodeMock() {
-      return {};
-    }
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      authInfo,
+    },
   });
+
+  const PlayerWrapped = withFilmPlayer(Player);
+  const wrapper = mount(
+      <Provider store={store}>
+        <PlayerWrapped
+          isPlaying={false}
+          onPlayButtonClick={() => {}}
+          onMount={() => {}}
+          film={film}
+        />ilm={film}
+      </Provider>, {
+        createNodeMock() {
+          return {};
+        }
+      });
 
   window.HTMLMediaElement.prototype.play = () => {};
   window.HTMLMediaElement.prototype.pause = () => {};

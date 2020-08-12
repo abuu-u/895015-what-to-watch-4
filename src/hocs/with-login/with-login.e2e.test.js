@@ -8,7 +8,7 @@ configure({adapter: new Adapter()});
 const MockComponent = () => <div />;
 const MockComponentWrapped = withLogin(MockComponent);
 
-it(`Should change activeTab`, () => {
+it(`Should change errorText`, () => {
   const wrapper = shallow(<MockComponentWrapped
     onSubmit={() => {}}
   />);
@@ -16,5 +16,5 @@ it(`Should change activeTab`, () => {
   expect(wrapper.props().errorText).toEqual(``);
 
   wrapper.props().onSubmit({login: 123, password: 123});
-  expect(wrapper.props().activeTab).toEqual(`Please enter a valid email address`);
+  expect(wrapper.props().errorText).toEqual(`Please enter a valid email address`);
 });

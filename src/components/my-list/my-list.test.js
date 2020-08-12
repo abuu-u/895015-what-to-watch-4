@@ -1,6 +1,20 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {MyList} from "./my-list.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history.js";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
+
+const authInfo = {
+  id: 1,
+  email: `Oliver.conner@gmail.com`,
+  name: `Oliver.conner`,
+  avatarUrl: `img/1.png`
+};
 
 const films = [
   {
@@ -24,11 +38,25 @@ const films = [
 ];
 
 it(`Render MyList`, () => {
+  const store = mockStore({
+    [NameSpace.USER]: {
+      authorizationStatus: `AUTH`,
+      authInfo,
+    },
+  });
+
   const tree = renderer
-    .create(<MyList
-      films={films}
-    />)
-    .toJSON();
+    .create(
+        <Router
+          history={history}
+        >
+          <Provider store={store}>
+            <MyList
+              films={films}
+            />
+          </Provider>
+        </Router>
+    ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

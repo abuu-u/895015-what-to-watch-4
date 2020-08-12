@@ -15,20 +15,15 @@ Enzyme.configure({
 });
 
 it(`Should handlers be called`, () => {
-  const onFilmClick = jest.fn();
   const onFilmMouseOver = jest.fn();
   const onFilmMouseLeave = jest.fn();
   const mouseOverEvt = {
     currentTarget: {dataset: {id: 0}},
   };
-  const clickEvt = {
-    preventDefault() {},
-  };
 
   const filmComponent = shallow(
       <Film
         film={film}
-        onFilmClick={onFilmClick}
         onFilmMouseOver={onFilmMouseOver}
         onFilmMouseLeave={onFilmMouseLeave}
         index={1}
@@ -36,11 +31,9 @@ it(`Should handlers be called`, () => {
       />
   );
 
-  filmComponent.simulate(`click`, clickEvt);
   filmComponent.simulate(`mouseOver`, mouseOverEvt);
   filmComponent.simulate(`mouseLeave`);
 
-  expect(onFilmClick).toHaveBeenCalledTimes(1);
   expect(onFilmMouseOver).toHaveBeenCalledTimes(1);
   expect(onFilmMouseLeave).toHaveBeenCalledTimes(1);
 });
