@@ -8,26 +8,31 @@ exports[`Render FilmList 1`] = `
     className="small-movie-card catalog__movies-card"
     data-index={0}
     id={1}
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/films/1"
+      onClick={[Function]}
     >
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Fantastic Beasts"
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts
       </a>
@@ -37,26 +42,31 @@ exports[`Render FilmList 1`] = `
     className="small-movie-card catalog__movies-card"
     data-index={1}
     id={1}
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/films/1"
+      onClick={[Function]}
     >
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Fantastic Beasts"
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts
       </a>
@@ -66,26 +76,31 @@ exports[`Render FilmList 1`] = `
     className="small-movie-card catalog__movies-card"
     data-index={2}
     id={1}
-    onClick={[Function]}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
-    <div
-      className="small-movie-card__image"
+    <a
+      href="/films/1"
+      onClick={[Function]}
     >
-      <img
-        alt="Fantastic Beasts"
-        height="175"
-        src="img/bohemian-rhapsody.jpg"
-        width="280"
-      />
-    </div>
+      <div
+        className="small-movie-card__image"
+      >
+        <img
+          alt="Fantastic Beasts"
+          height="175"
+          src="img/bohemian-rhapsody.jpg"
+          width="280"
+        />
+      </div>
+    </a>
     <h3
       className="small-movie-card__title"
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/films/1"
+        onClick={[Function]}
       >
         Fantastic Beasts
       </a>

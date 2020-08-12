@@ -12,7 +12,8 @@ exports[`Render SignIn 1`] = `
     >
       <a
         className="logo__link"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
@@ -46,7 +47,14 @@ exports[`Render SignIn 1`] = `
       onSubmit={[Function]}
     >
       <div
-        className="sign-in__fields"
+        className="sign-in__message"
+      >
+        <p>
+          
+        </p>
+      </div>
+      <div
+        className="sign-in__fields "
       >
         <div
           className="sign-in__field"
@@ -56,7 +64,7 @@ exports[`Render SignIn 1`] = `
             id="user-email"
             name="user-email"
             placeholder="Email address"
-            type="email"
+            type="text"
           />
           <label
             className="sign-in__label visually-hidden"
@@ -103,7 +111,8 @@ exports[`Render SignIn 1`] = `
     >
       <a
         className="logo__link logo__link--light"
-        href="main.html"
+        href="/"
+        onClick={[Function]}
       >
         <span
           className="logo__letter logo__letter--1"
