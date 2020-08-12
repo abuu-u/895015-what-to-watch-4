@@ -7,6 +7,14 @@ import Header from "../header/header.jsx";
 import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import {connect} from "react-redux";
+
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {getFilms, getComments, getFilmById} from "../../reducer/data/selectors.js";
+
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const MORE_LIKE_FILMS_COUNT = 4;
 
@@ -20,8 +28,6 @@ const FilmPage = (props) => {
     films,
     comments,
     authorizationStatus,
-    onFilmClick,
-    onFilmPlayClick,
     onFilmAddToFavorites,
   } = props;
   const {
@@ -47,13 +53,14 @@ const FilmPage = (props) => {
           <FilmDescription
             film={film}
             authorizationStatus={authorizationStatus}
-            onFilmPlayClick={onFilmPlayClick}
             onAddToFavorites={onFilmAddToFavorites}
           >
-            {authorizationStatus === AuthorizationStatus.AUTH && <a
-              href="add-review"
-              className="btn movie-card__button"
-            >Add review</a>}
+            {authorizationStatus === AuthorizationStatus.AUTH &&
+                <Link
+                  to={`${AppRoute.FILMS}${film.id}${AppRoute.REVIEW}`}
+                  href="add-review"
+                  className="btn movie-card__button"
+                >Add review</Link>}
           </FilmDescription>
         </div>
       </div >
@@ -78,17 +85,20 @@ const FilmPage = (props) => {
         <FilmListWrapped
           films={films.filter((it) => it.genre === genre && it !== film)}
           showingFilmsCount={MORE_LIKE_FILMS_COUNT}
-          onFilmClick={onFilmClick}
         />
       </section>
 
       <footer className="page-footer">
         <div className="logo">
-          <a href="main.html" className="logo__link logo__link--light">
+          <Link
+            to={AppRoute.ROOT}
+            href="main.html"
+            className="logo__link logo__link--light"
+          >
             <span className="logo__letter logo__letter--1">W</span>
             <span className="logo__letter logo__letter--2">T</span>
             <span className="logo__letter logo__letter--3">W</span>
-          </a>
+          </Link>
         </div>
 
         <div className="copyright">
@@ -113,9 +123,21 @@ FilmPage.propTypes = {
   films: PropTypes.array.isRequired,
   comments: PropTypes.array,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
-  onFilmClick: PropTypes.func.isRequired,
-  onFilmPlayClick: PropTypes.func.isRequired,
   onFilmAddToFavorites: PropTypes.func.isRequired,
 };
 
-export default FilmPage;
+const mapStateToProps = (state, props) => ({
+  film: getFilmById(state, props.id),
+  authorizationStatus: getAuthorizationStatus(state),
+  films: getFilms(state),
+  comments: getComments(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onFilmAddToFavorites(filmId, status) {
+    dispatch(DataOperation.addFilmToFavorites(filmId, status));
+  },
+});
+
+export {FilmPage};
+export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);

@@ -1,5 +1,7 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilmById} from "../../reducer/data/selectors";
 
 const PLAYER_CLASS = `player__video`;
 
@@ -115,7 +117,12 @@ const withFilmPlayer = (Component) => {
     }).isRequired,
   };
 
-  return WithFilmPlayer;
+  const mapStateToProps = (state, props) => ({
+    film: getFilmById(state, props.id),
+  });
+
+  return connect(mapStateToProps)(WithFilmPlayer);
+
 };
 
 export default withFilmPlayer;

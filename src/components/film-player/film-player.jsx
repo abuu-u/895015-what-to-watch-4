@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {ActionCreator} from '../../reducer/film/film';
+import history from "../../history";
 
 const FilmPlayer = (props) => {
   const {
@@ -11,7 +10,6 @@ const FilmPlayer = (props) => {
     duration,
     onPlayButtonClick,
     onFullScreenButtonClick,
-    onExitButtonClick,
   } = props;
 
   const progress = duration ? props.progress / duration * 100 : 0;
@@ -30,7 +28,7 @@ const FilmPlayer = (props) => {
       <button
         type="button"
         className="player__exit"
-        onClick={onExitButtonClick}
+        onClick={() => history.goBack()}
       >Exit</button>
 
       <div className="player__controls">
@@ -86,11 +84,4 @@ FilmPlayer.propTypes = {
   onExitButtonClick: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onExitButtonClick() {
-    dispatch(ActionCreator.setPlayingFilm(null));
-  },
-});
-
-export {FilmPlayer};
-export default connect(null, mapDispatchToProps)(FilmPlayer);
+export default FilmPlayer;

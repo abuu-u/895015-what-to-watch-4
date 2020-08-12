@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {STATUS, AppRoute} from '../../const';
 import {AuthorizationStatus} from '../../reducer/user/user';
+import history from "../../history";
 import {Link} from "react-router-dom";
 
 const FilmDescription = (props) => {
   const {
     film,
     authorizationStatus,
-    onFilmPlayClick,
     onAddToFavorites,
     children,
   } = props;
@@ -29,24 +29,23 @@ const FilmDescription = (props) => {
       </p>
 
       <div className="movie-card__buttons">
-        <button
+        <Link to={`${AppRoute.FILMS}${film.id}${AppRoute.PLAYER}`}
           className="btn btn--play movie-card__button"
           type="button"
-          onClick={() => {
-            onFilmPlayClick(film);
-          }}
         >
           <svg viewBox="0 0 19 19" width="19" height="19">
             <use xlinkHref="#play-s"></use>
           </svg>
           <span>Play</span>
-        </button>
-        <Link to={authorizationStatus === AuthorizationStatus.AUTH ? `` : AppRoute.LOGIN}
+        </Link>
+        <button
           className="btn btn--list movie-card__button"
           type="button"
-          onClick={() => {
-            onAddToFavorites(id, isFavorite ? STATUS.remove : STATUS.add);
-          }}
+          onClick={() => (
+            authorizationStatus === AuthorizationStatus.AUTH
+              ? onAddToFavorites(id, isFavorite ? STATUS.remove : STATUS.add)
+              : history.push(AppRoute.LOGIN)
+          )}
         >
           {isFavorite
             ? <svg viewBox="0 0 18 14" width="18" height="14">
@@ -56,7 +55,7 @@ const FilmDescription = (props) => {
               <use xlinkHref="#add"></use>
             </svg>}
           <span>My list</span>
-        </Link>
+        </button>
         {children}
       </div>
     </div>

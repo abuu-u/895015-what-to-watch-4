@@ -24,4 +24,9 @@ const getFilmsByGenre = createSelector(
     filterFilmsByGenre
 );
 
-export {getFilms, getFilmsByGenre, getPromoFilm, getComments};
+const getFilmById = (state, id) => createSelector(
+    getFilms,
+    (films) => films.find((film) => film.id === id)
+)(state);
+
+export {getFilms, getFilmsByGenre, getPromoFilm, getComments, getFilmById};

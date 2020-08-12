@@ -17,7 +17,7 @@ import withFilmPlayer from '../../hocs/with-film-player/with-film-player';
 import withSubmit from '../../hocs/with-submit/with-submit';
 
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getFilms, getFilmsByGenre, getPromoFilm, getComments} from "../../reducer/data/selectors.js";
+import {getFilms, getFilmsByGenre, getPromoFilm, getComments, getFilmById} from "../../reducer/data/selectors.js";
 import {getActiveFilm, getActiveGenre, getPlayingFilm, getShowingFilmsCount} from "../../reducer/film/selectors.js";
 
 import {Operation as UserOperation} from "../../reducer/user/user.js";
@@ -56,17 +56,7 @@ class App extends React.PureComponent {
     }
 
     if (activeFilm && films && comments) {
-      return (
-        <FilmPage
-          film={activeFilm}
-          films={films}
-          comments={comments}
-          authorizationStatus={authorizationStatus}
-          onFilmClick={onFilmClick}
-          onFilmPlayClick={onFilmPlayClick}
-          onFilmAddToFavorites={onFilmAddToFavorites}
-        />
-      );
+      history.push();
     }
 
     if (films && promoFilm && filmsByGenre) {
@@ -91,7 +81,25 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {login, onCommentSubmit, authorizationStatus, activeFilm} = this.props;
+    const {
+      promoFilm,
+      films,
+      showingFilmsCount,
+      authorizationStatus,
+      comments,
+      activeGenre,
+      filmsByGenre,
+      activeFilm,
+      playingFilm,
+      onGenreClick,
+      onShowMoreClick,
+      onFilmClick,
+      onFilmPlayClick,
+      onFilmAddToFavorites,
+      onPromFilmAddToFavorites,
+      onCommentSubmit,
+      login,
+    } = this.props;
 
     return (
       <Router
@@ -107,14 +115,34 @@ class App extends React.PureComponent {
             />
           </Route>
           <PrivateRout
-            exact path="/dev-review"
+            exact path={`${AppRoute.FILMS}:id${AppRoute.REVIEW}`}
             authorizationStatus={authorizationStatus}
-            render={() => (
+            render={({match}) => (
               <AddReviewWrapper
-                activeFilm={activeFilm}
+                id={Number(match.params.id)}
                 onSubmit={onCommentSubmit}
               />
             )}
+          />
+          <Route
+            exact path={`${AppRoute.FILMS}:id${AppRoute.PLAYER}`}
+            render={({match}) => {
+              return (
+                <FilmPlayerWrapper
+                  id={Number(match.params.id)}
+                />
+              );
+            }}
+          />
+          <Route
+            exact path={`${AppRoute.FILMS}:id`}
+            render={({match}) => {
+              return (
+                <FilmPage
+                  id={Number(match.params.id)}
+                />
+              );
+            }}
           />
         </Switch>
       </Router>
@@ -182,7 +210,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.addPromoFilmToFavorites(filmId, status));
   },
 });
-
 
 export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

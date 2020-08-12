@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PreviewPlayer from "../preview-player/preview-player.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
 
 const Film = (props) => {
   const {
     film,
-    onFilmClick,
     onFilmMouseOver,
     onFilmMouseLeave,
     index,
@@ -16,28 +17,27 @@ const Film = (props) => {
     <article
       id={film.id}
       className="small-movie-card catalog__movies-card"
-      onClick={(evt) => {
-        evt.preventDefault();
-        onFilmClick(film);
-      }}
       onMouseOver={(evt) => {
         onFilmMouseOver(parseInt(evt.currentTarget.id, 10));
       }}
       onMouseLeave={onFilmMouseLeave}
       data-index={index}
     >
-      <div className="small-movie-card__image">
-        {isActive ? <PreviewPlayer
-          previewVideoLink={film.previewVideoLink}
-        /> :
-          <img
-            src={film.previewImage}
-            alt={film.name}
-            width="280" height="175"
-          />}
-      </div>
+      <Link to={`${AppRoute.FILMS}${film.id}`}>
+        <div className="small-movie-card__image">
+          {isActive
+            ? <PreviewPlayer
+              previewVideoLink={film.previewVideoLink}
+            />
+            : <img
+              src={film.previewImage}
+              alt={film.name}
+              width="280" height="175"
+            />}
+        </div>
+      </Link>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{film.name}</a>
+        <Link to={`${AppRoute.FILMS}${film.id}`} className="small-movie-card__link">{film.name}</Link>
       </h3>
     </article>
   );
@@ -50,7 +50,6 @@ Film.propTypes = {
     previewImage: PropTypes.string.isRequired,
     previewVideoLink: PropTypes.string.isRequired,
   }).isRequired,
-  onFilmClick: PropTypes.func.isRequired,
   onFilmMouseOver: PropTypes.func.isRequired,
   onFilmMouseLeave: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,

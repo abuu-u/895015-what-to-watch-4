@@ -1,6 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const.js";
+import {connect} from "react-redux";
+import {getFilmById} from "../../reducer/data/selectors.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 
 const COMMENT = {
   min: 50,
@@ -33,7 +38,11 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">{name}</a>
+                <Link
+                  to={`${AppRoute.FILMS}/${activeFilm.id}`}
+                  href="movie-page.html"
+                  className="breadcrumbs__link"
+                >{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -123,4 +132,15 @@ AddReview.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default AddReview;
+const mapStateToProps = (state, props) => ({
+  activeFilm: getFilmById(state, props.id),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit(comment, filmId) {
+    dispatch(DataOperation.submitComment(comment, filmId));
+  },
+});
+
+export {AddReview};
+export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
