@@ -63,7 +63,9 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-      .then(() => {
+      .then((response) => userAdapter(response.data))
+      .then((authInfo) => {
+        dispatch(ActionCreator.loadAuthInfo(authInfo));
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch((err) => {

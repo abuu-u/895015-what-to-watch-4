@@ -5,7 +5,8 @@ import SignIn from "./sign-in.jsx";
 it(`Render SignIn`, () => {
   const tree = renderer
     .create(<SignIn
-      onSubmit={() => {}}
+      errorText={``}
+      onLogin={() => {}}
     />, {
       createNodeMock() {
         return {};

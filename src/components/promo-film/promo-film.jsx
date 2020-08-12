@@ -7,7 +7,6 @@ const PromoFilm = (props) => {
   const {
     authorizationStatus,
     promoFilm,
-    onFilmPlayClick,
     onPromFilmAddToFavorites,
   } = props;
   const {
@@ -35,7 +34,6 @@ const PromoFilm = (props) => {
           <FilmDescription
             film={promoFilm}
             authorizationStatus={authorizationStatus}
-            onFilmPlayClick={onFilmPlayClick}
             onAddToFavorites={onPromFilmAddToFavorites}
           />
         </div>
@@ -53,7 +51,6 @@ PromoFilm.propTypes = {
     posterImage: PropTypes.string.isRequired,
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  onFilmPlayClick: PropTypes.func.isRequired,
   onPromFilmAddToFavorites: PropTypes.func.isRequired,
 };
 

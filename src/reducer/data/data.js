@@ -6,12 +6,14 @@ const initialState = {
   films: [],
   promoFilm: {},
   comments: [],
+  favoriteFilms: [],
 };
 
 const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_PROMO_FILM: `LOAD_PROMO_FILM`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`,
 };
 
 const ActionCreator = {
@@ -26,6 +28,10 @@ const ActionCreator = {
   loadComments: (comments) => ({
     type: ActionType.LOAD_COMMENTS,
     payload: comments,
+  }),
+  loadfavoriteFilms: (films) => ({
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: films,
   }),
 };
 
@@ -43,6 +49,10 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         comments: action.payload,
       });
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return extend(state, {
+        favoriteFilms: action.payload,
+      });
   }
 
   return state;
@@ -51,6 +61,13 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
+      .then((response) => response.data.map(filmAdapter))
+      .then((films) => {
+        dispatch(ActionCreator.loadFilms(films));
+      });
+  },
+  loadFavoriteFilms: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
       .then((response) => response.data.map(filmAdapter))
       .then((films) => {
         dispatch(ActionCreator.loadFilms(films));

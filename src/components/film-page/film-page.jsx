@@ -22,95 +22,108 @@ const FilmListWrapped = withActiveFilm(FilmList);
 
 const TabsWrapped = withActiveTab(Tabs);
 
-const FilmPage = (props) => {
-  const {
-    film,
-    films,
-    comments,
-    authorizationStatus,
-    onFilmAddToFavorites,
-  } = props;
-  const {
-    name,
-    posterImage,
-    backgroundImage,
-    genre,
-  } = film;
+class FilmPage extends React.PureComponent {
+  componentDidMount() {
+    const {id, loadComments} = this.props;
 
-  return (
-    <>
-    <section className="movie-card movie-card--full">
-      <div className="movie-card__hero">
-        <div className="movie-card__bg">
-          <img src={backgroundImage} alt={name} />
-        </div>
+    loadComments(id);
+  }
+  render() {
+    const {
+      film,
+      films,
+      comments,
+      authorizationStatus,
+      onFilmAddToFavorites,
+    } = this.props;
 
-        <h1 className="visually-hidden">WTW</h1>
+    if (!film || !comments) {
+      return `Loading`;
+    }
 
-        <Header/>
+    const {
+      name,
+      posterImage,
+      backgroundImage,
+      genre,
+    } = film;
 
-        <div className="movie-card__wrap">
-          <FilmDescription
-            film={film}
-            authorizationStatus={authorizationStatus}
-            onAddToFavorites={onFilmAddToFavorites}
-          >
-            {authorizationStatus === AuthorizationStatus.AUTH &&
-                <Link
-                  to={`${AppRoute.FILMS}${film.id}${AppRoute.REVIEW}`}
-                  href="add-review"
-                  className="btn movie-card__button"
-                >Add review</Link>}
-          </FilmDescription>
-        </div>
-      </div >
+    return (
+      <>
+        <section className="movie-card movie-card--full">
+          <div className="movie-card__hero">
+            <div className="movie-card__bg">
+              <img src={backgroundImage} alt={name} />
+            </div>
 
-      <div className="movie-card__wrap movie-card__translate-top">
-        <div className="movie-card__info">
-          <div className="movie-card__poster movie-card__poster--big">
-            <img src={posterImage} alt={name} width="218" height="327" />
+            <h1 className="visually-hidden">WTW</h1>
+
+            <Header />
+
+            <div className="movie-card__wrap">
+              <FilmDescription
+                film={film}
+                authorizationStatus={authorizationStatus}
+                onAddToFavorites={onFilmAddToFavorites}
+              >
+                {authorizationStatus === AuthorizationStatus.AUTH &&
+                  <Link
+                    to={`${AppRoute.FILMS}${film.id}${AppRoute.REVIEW}`}
+                    href="add-review"
+                    className="btn movie-card__button"
+                  >Add review</Link>}
+              </FilmDescription>
+            </div>
+          </div >
+
+          <div className="movie-card__wrap movie-card__translate-top">
+            <div className="movie-card__info">
+              <div className="movie-card__poster movie-card__poster--big">
+                <img src={posterImage} alt={name} width="218" height="327" />
+              </div>
+              <TabsWrapped
+                film={film}
+                comments={comments}
+              />
+            </div>
           </div>
-          <TabsWrapped
-            film={film}
-            comments={comments}
-          />
+        </section >
+
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">More like this</h2>
+
+            <FilmListWrapped
+              films={films.filter((it) => it.genre === genre && it !== film)}
+              showingFilmsCount={MORE_LIKE_FILMS_COUNT}
+            />
+          </section>
+
+          <footer className="page-footer">
+            <div className="logo">
+              <Link
+                to={AppRoute.ROOT}
+                href="main.html"
+                className="logo__link logo__link--light"
+              >
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </Link>
+            </div>
+
+            <div className="copyright">
+              <p>© 2019 What to watch Ltd.</p>
+            </div>
+          </footer>
         </div>
-      </div>
-    </section >
-
-    <div className="page-content">
-      <section className="catalog catalog--like-this">
-        <h2 className="catalog__title">More like this</h2>
-
-        <FilmListWrapped
-          films={films.filter((it) => it.genre === genre && it !== film)}
-          showingFilmsCount={MORE_LIKE_FILMS_COUNT}
-        />
-      </section>
-
-      <footer className="page-footer">
-        <div className="logo">
-          <Link
-            to={AppRoute.ROOT}
-            href="main.html"
-            className="logo__link logo__link--light"
-          >
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
-    </div>
-    </>
-  );
-};
+      </>
+    );
+  }
+}
 
 FilmPage.propTypes = {
+  id: PropTypes.number.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -124,6 +137,7 @@ FilmPage.propTypes = {
   comments: PropTypes.array,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   onFilmAddToFavorites: PropTypes.func.isRequired,
+  loadComments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, props) => ({
@@ -136,6 +150,9 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFilmAddToFavorites(filmId, status) {
     dispatch(DataOperation.addFilmToFavorites(filmId, status));
+  },
+  loadComments(filmId) {
+    dispatch(DataOperation.loadComments(filmId));
   },
 });
 

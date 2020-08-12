@@ -27,13 +27,23 @@ const store = createStore(
     )
 );
 
+const renderApp = () => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById(`root`)
+  );
+};
+
 store.dispatch(DataOperation.loadFilms());
 store.dispatch(DataOperation.loadPromoFilm());
-store.dispatch(UserOperation.checkAuth());
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App/>
-    </Provider>,
-    document.getElementById(`root`)
-);
+store.dispatch(UserOperation.checkAuth()).
+  then(() => {
+    store.dispatch(DataOperation.loadFavoriteFilms());
+    renderApp();
+  })
+  .catch(() => renderApp());
+
+

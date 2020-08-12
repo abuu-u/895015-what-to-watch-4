@@ -29,7 +29,7 @@ const FilmDescription = (props) => {
       </p>
 
       <div className="movie-card__buttons">
-        <Link to={`${AppRoute.FILMS}${film.id}${AppRoute.PLAYER}`}
+        <Link to={`${AppRoute.PLAYER}${film.id}`}
           className="btn btn--play movie-card__button"
           type="button"
         >
@@ -77,7 +77,6 @@ FilmDescription.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
-  onFilmPlayClick: PropTypes.func.isRequired,
   onAddToFavorites: PropTypes.func.isRequired,
 };
 

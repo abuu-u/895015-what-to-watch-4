@@ -35,6 +35,7 @@ it(`Checks that HOC's callback turn on and turn off video (play and pause)`, () 
   const wrapper = mount(<PlayerWrapped
     isPlaying={false}
     onPlayButtonClick={() => {}}
+    onMount={() => {}}
     film={film}
   />, {
     createNodeMock() {

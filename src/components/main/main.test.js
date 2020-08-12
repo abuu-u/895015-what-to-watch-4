@@ -71,10 +71,8 @@ it(`Render Main`, () => {
               activeGenre={`Comedy`}
               showingFilmsCount={8}
               authorizationStatus={`AUTH`}
-              onFilmClick={() => {}}
               onGenreClick={() => {}}
               onShowMoreClick={() => {}}
-              onFilmPlayClick={() => {}}
               onPromFilmAddToFavorites={() => {}}
             />
           </Provider>

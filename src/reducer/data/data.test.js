@@ -115,6 +115,7 @@ const initialState = {
   films: [],
   promoFilm: {},
   comments: [],
+  favoriteFilms: [],
 };
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -127,6 +128,15 @@ it(`Reducer should update films by load films`, () => {
     payload: mockFilms,
   })).toEqual(extend(initialState, {
     films: mockFilms,
+  }));
+});
+
+it(`Reducer should update films by load films`, () => {
+  expect(reducer(initialState, {
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: mockFilms,
+  })).toEqual(extend(initialState, {
+    favoriteFilms: mockFilms,
   }));
 });
 
@@ -152,6 +162,13 @@ describe(`Action creators work correctly`, () => {
   it(`Action creator for loading films returns correct action`, () => {
     expect(ActionCreator.loadFilms(mockFilms)).toEqual({
       type: ActionType.LOAD_FILMS,
+      payload: mockFilms,
+    });
+  });
+
+  it(`Action creator for loading favoriteFilms returns correct action`, () => {
+    expect(ActionCreator.loadFavoriteFilms(mockFilms)).toEqual({
+      type: ActionType.LOAD_FAVORITE_FILMS,
       payload: mockFilms,
     });
   });
@@ -186,6 +203,25 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_FILMS,
+          payload: [filmAdapted, filmAdapted],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const favoriteLoader = Operation.loadFavoriteFilms();
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, `[${filmResponse}, ${filmResponse}]`);
+
+    return favoriteLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITE_FILMS,
           payload: [filmAdapted, filmAdapted],
         });
       });

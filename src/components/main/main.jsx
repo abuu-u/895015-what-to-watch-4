@@ -16,10 +16,8 @@ const Main = (props) => {
     activeGenre,
     showingFilmsCount,
     authorizationStatus,
-    onFilmClick,
     onGenreClick,
     onShowMoreClick,
-    onFilmPlayClick,
     onPromFilmAddToFavorites,
   } = props;
 
@@ -28,7 +26,6 @@ const Main = (props) => {
     <PromoFilm
       promoFilm={promoFilm}
       authorizationStatus={authorizationStatus}
-      onFilmPlayClick={onFilmPlayClick}
       onPromFilmAddToFavorites={onPromFilmAddToFavorites}
     />
 
@@ -45,7 +42,6 @@ const Main = (props) => {
         <FilmListWrapped
           films={filmsByGenre}
           showingFilmsCount={showingFilmsCount}
-          onFilmClick={onFilmClick}
         />
 
         {filmsByGenre.length > showingFilmsCount && <ShowMore
@@ -78,10 +74,8 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   showingFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  onFilmClick: PropTypes.func.isRequired,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
-  onFilmPlayClick: PropTypes.func.isRequired,
   onPromFilmAddToFavorites: PropTypes.func.isRequired,
 };
 

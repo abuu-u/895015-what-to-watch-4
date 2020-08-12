@@ -1,4 +1,7 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
+import history from "../../history";
+import {AppRoute} from "../../const";
 
 const COMMENT = {
   min: 50,
@@ -16,10 +19,13 @@ const withSubmit = (Component) => {
       super(props);
 
       this.state = {
+        errorText: ``,
         isSubmitDisabled: true,
+        isFormDisabled: false,
       };
 
       this.handeChange = this.handeChange.bind(this);
+      this.handeSubmit = this.handeSubmit.bind(this);
     }
 
     handeChange(form) {
@@ -31,20 +37,42 @@ const withSubmit = (Component) => {
       });
     }
 
+    handeSubmit(form, filmId) {
+      const {onSubmit} = this.props;
+      const {rating, comment} = form;
+
+      this.setState({
+        isFormDisabled: true,
+        isSubmitDisabled: true,
+      });
+
+      onSubmit({rating, comment}, filmId)
+        .then(() => history.push(`${AppRoute.FILMS}${filmId}`))
+        .catch((err) => this.setState({
+          errorText: err,
+          isFormDisabled: false,
+        }));
+    }
+
     render() {
-      const {isSubmitDisabled} = this.state;
+      const {isSubmitDisabled, errorText, isFormDisabled} = this.state;
 
       return (
         <Component
           {...this.props}
+          errorText={errorText}
           isSubmitDisabled={isSubmitDisabled}
+          isFormDisabled={isFormDisabled}
           onChange={this.handeChange}
+          onFormSubmit={this.handeSubmit}
         />
       );
     }
   }
 
-  WithSubmit.propTypes = {};
+  WithSubmit.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
 
   return WithSubmit;
 };

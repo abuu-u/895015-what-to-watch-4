@@ -6,6 +6,10 @@ const getFilms = (state) => {
   return state[NameSpace.DATA].films;
 };
 
+const getFavoriteFilms = (state) => {
+  return state[NameSpace.DATA].favoriteFilms;
+};
+
 const getPromoFilm = (state) => {
   return state[NameSpace.DATA].promoFilm;
 };
@@ -29,4 +33,11 @@ const getFilmById = (state, id) => createSelector(
     (films) => films.find((film) => film.id === id)
 )(state);
 
-export {getFilms, getFilmsByGenre, getPromoFilm, getComments, getFilmById};
+export {
+  getFilms,
+  getFilmsByGenre,
+  getPromoFilm,
+  getComments,
+  getFilmById,
+  getFavoriteFilms,
+};

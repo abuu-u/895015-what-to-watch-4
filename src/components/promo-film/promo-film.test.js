@@ -43,7 +43,6 @@ it(`Render PromoFilm`, () => {
             <PromoFilm
               promoFilm={promoFilm}
               authorizationStatus={`AUTH`}
-              onFilmPlayClick={() => {}}
               onPromFilmAddToFavorites={() => {}}
             />
           </Provider>

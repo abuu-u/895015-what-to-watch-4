@@ -15,10 +15,17 @@ const COMMENT = {
 const AddReview = (props) => {
   const {
     activeFilm,
+    errorText,
     isSubmitDisabled,
+    isFormDisabled,
     onChange,
-    onSubmit,
+    onFormSubmit,
   } = props;
+
+  if (!activeFilm) {
+    return `Loading`;
+  }
+
   const {
     backgroundImage,
     posterImage,
@@ -39,7 +46,7 @@ const AddReview = (props) => {
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
                 <Link
-                  to={`${AppRoute.FILMS}/${activeFilm.id}`}
+                  to={`${AppRoute.FILMS}${activeFilm.id}`}
                   href="movie-page.html"
                   className="breadcrumbs__link"
                 >{name}</Link>
@@ -60,6 +67,7 @@ const AddReview = (props) => {
         <form
           action="#"
           className="add-review__form"
+          disabled={isFormDisabled}
           onChange={(evt) => {
             const formData = new FormData(evt.currentTarget);
             const comment = formData.get(`review-text`);
@@ -73,7 +81,7 @@ const AddReview = (props) => {
             const rating = formData.get(`rating`);
 
             evt.preventDefault();
-            onSubmit({rating, comment}, activeFilm.id);
+            onFormSubmit({rating, comment}, activeFilm.id);
           }}
         >
           <div className="rating">
@@ -94,7 +102,9 @@ const AddReview = (props) => {
               <label className="rating__label" htmlFor="star-5">Rating 5</label>
             </div>
           </div>
-
+          {errorText.length
+            ? errorText
+            : ``}
           <div className="add-review__text">
             <textarea
               className="add-review__textarea"
@@ -127,8 +137,10 @@ AddReview.propTypes = {
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
   }).isRequired,
+  errorText: PropTypes.string.isRequired,
   isSubmitDisabled: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  isFormDisabled: PropTypes.bool.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

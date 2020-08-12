@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import FilmPage from "./film-page.jsx";
+import {FilmPage} from "./film-page.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
@@ -112,6 +112,7 @@ it(`Render FilmPage`, () => {
         >
           <Provider store={store}>
             <FilmPage
+              id={1}
               film={film}
               films={films}
               comments={comments}
@@ -119,6 +120,7 @@ it(`Render FilmPage`, () => {
               onFilmClick={() => {}}
               onFilmPlayClick={() => {}}
               onFilmAddToFavorites={() => {}}
+              loadComments={() => {}}
             />
           </Provider>
         </Router>

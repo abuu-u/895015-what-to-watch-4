@@ -18,6 +18,7 @@ it(`Render FilmPlayer`, () => {
       onPlayButtonClick={() => {}}
       onFullScreenButtonClick={() => {}}
       onExitButtonClick={() => {}}
+      onMount={() => {}}
     >
       <video/>
     </FilmPlayer>, {

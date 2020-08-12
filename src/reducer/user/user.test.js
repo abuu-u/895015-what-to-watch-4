@@ -122,12 +122,16 @@ describe(`Operation work correctly`, () => {
 
     apiMock
       .onPost(`/login`)
-      .reply(200, {fake: true});
+      .reply(200, authInfoResponse);
 
     return login(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_AUTH_INFO,
+          payload: authInfo,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.REQUIRED_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });

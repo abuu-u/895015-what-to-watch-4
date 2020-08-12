@@ -14,6 +14,7 @@ it(`Click by Play button calls callback`, () => {
   const handlePlayButtonClick = jest.fn();
   const handleFullScreenButtonClick = jest.fn();
   const handleExitButtonClick = jest.fn();
+  const handleMount = jest.fn();
 
   const wrapper = shallow(<FilmPlayer
     film={film}
@@ -24,6 +25,7 @@ it(`Click by Play button calls callback`, () => {
     onPlayButtonClick={handlePlayButtonClick}
     onFullScreenButtonClick={handleFullScreenButtonClick}
     onExitButtonClick={handleExitButtonClick}
+    onMount={handleMount}
   >
     <audio />
   </FilmPlayer>);
@@ -31,8 +33,10 @@ it(`Click by Play button calls callback`, () => {
   wrapper.find(`.player__play`).simulate(`click`);
   wrapper.find(`.player__full-screen`).simulate(`click`);
   wrapper.find(`.player__exit`).simulate(`click`);
+  wrapper.instance().componentDidMount();
 
   expect(handlePlayButtonClick).toHaveBeenCalledTimes(1);
   expect(handleFullScreenButtonClick).toHaveBeenCalledTimes(1);
   expect(handleExitButtonClick).toHaveBeenCalledTimes(1);
+  expect(handleMount).toHaveBeenCalledTimes(1);
 });

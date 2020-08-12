@@ -21,9 +21,10 @@ const withFilmPlayer = (Component) => {
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
       this._handleFullScreenButtonClick = this._handleFullScreenButtonClick.bind(this);
+      this._handleWrappedComponentMount = this._handleWrappedComponentMount.bind(this);
     }
 
-    componentDidMount() {
+    _handleWrappedComponentMount() {
       const {film} = this.props;
       const video = this._videoRef.current;
 
@@ -82,6 +83,10 @@ const withFilmPlayer = (Component) => {
         duration,
       } = this.state;
 
+      if (!this.props.film) {
+        return `Loading`;
+      }
+
       return (
         <Component
           {...this.props}
@@ -91,6 +96,7 @@ const withFilmPlayer = (Component) => {
           duration={duration}
           onPlayButtonClick={this._handlePlayButtonClick}
           onFullScreenButtonClick={this._handleFullScreenButtonClick}
+          onMount={this._handleWrappedComponentMount}
         >
           <video
             ref={this._videoRef}

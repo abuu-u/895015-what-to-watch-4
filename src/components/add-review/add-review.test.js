@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import AddReview from "./add-review.jsx";
+import {AddReview} from "./add-review.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space.js";
@@ -40,9 +40,11 @@ it(`Render AddReview`, () => {
           <Provider store={store}>
             <AddReview
               activeFilm={activeFilm}
+              errorText={``}
               isSubmitDisabled={false}
-              onSubmit={() => {}}
+              isFormDisabled={false}
               onChange={() => {}}
+              onFormSubmit={() => {}}
             />
           </Provider>
         </Router>
