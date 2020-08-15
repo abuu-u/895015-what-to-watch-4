@@ -2,11 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from '../header/header.jsx';
 import FilmDescription from "../film-description/film-description.jsx";
+import User from "../user/user.jsx";
 
 const PromoFilm = (props) => {
   const {
     authorizationStatus,
     promoFilm,
+    authInfo,
     onPromFilmAddToFavorites,
   } = props;
   const {
@@ -23,7 +25,11 @@ const PromoFilm = (props) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <Header/>
+      <Header>
+        <User
+          authInfo={authInfo}
+        />
+      </Header>
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -51,6 +57,7 @@ PromoFilm.propTypes = {
     posterImage: PropTypes.string.isRequired,
   }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  authInfo: PropTypes.object,
   onPromFilmAddToFavorites: PropTypes.func.isRequired,
 };
 

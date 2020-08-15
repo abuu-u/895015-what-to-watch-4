@@ -5,6 +5,7 @@ import GenresFilter from "../genres-filter/genres-filter.jsx";
 import ShowMore from "../show-more/show-more.jsx";
 import withActiveFilm from "../../hocs/with-active-film/with-active-film";
 import PropTypes from "prop-types";
+import Footer from "../footer/footer.jsx";
 
 const FilmListWrapped = withActiveFilm(FilmList);
 
@@ -16,6 +17,7 @@ const Main = (props) => {
     activeGenre,
     showingFilmsCount,
     authorizationStatus,
+    authInfo,
     onGenreClick,
     onShowMoreClick,
     onPromFilmAddToFavorites,
@@ -26,6 +28,7 @@ const Main = (props) => {
     <PromoFilm
       promoFilm={promoFilm}
       authorizationStatus={authorizationStatus}
+      authInfo={authInfo}
       onPromFilmAddToFavorites={onPromFilmAddToFavorites}
     />
 
@@ -49,19 +52,7 @@ const Main = (props) => {
         />}
       </section>
 
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   </>
   );
@@ -74,6 +65,7 @@ Main.propTypes = {
   activeGenre: PropTypes.string.isRequired,
   showingFilmsCount: PropTypes.number.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  authInfo: PropTypes.object,
   onGenreClick: PropTypes.func.isRequired,
   onShowMoreClick: PropTypes.func.isRequired,
   onPromFilmAddToFavorites: PropTypes.func.isRequired,

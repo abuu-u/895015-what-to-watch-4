@@ -9,7 +9,6 @@ const Film = (props) => {
     film,
     onFilmMouseOver,
     onFilmMouseLeave,
-    index,
     isActive,
   } = props;
 
@@ -18,12 +17,11 @@ const Film = (props) => {
       id={film.id}
       className="small-movie-card catalog__movies-card"
       onMouseOver={(evt) => {
-        onFilmMouseOver(parseInt(evt.currentTarget.id, 10));
+        onFilmMouseOver(Number(evt.currentTarget.id));
       }}
       onMouseLeave={onFilmMouseLeave}
-      data-index={index}
     >
-      <Link to={`${AppRoute.FILMS}${film.id}`}>
+      <Link to={`${AppRoute.FILMS}/${film.id}`}>
         <div className="small-movie-card__image">
           {isActive
             ? <PreviewPlayer
@@ -37,7 +35,7 @@ const Film = (props) => {
         </div>
       </Link>
       <h3 className="small-movie-card__title">
-        <Link to={`${AppRoute.FILMS}${film.id}`} className="small-movie-card__link">{film.name}</Link>
+        <Link to={`${AppRoute.FILMS}/${film.id}`} className="small-movie-card__link">{film.name}</Link>
       </h3>
     </article>
   );
@@ -52,8 +50,7 @@ Film.propTypes = {
   }).isRequired,
   onFilmMouseOver: PropTypes.func.isRequired,
   onFilmMouseLeave: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
 };
 
-export default Film;
+export default React.memo(Film);

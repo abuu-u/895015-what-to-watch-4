@@ -53,6 +53,7 @@ it(`Render MyList`, () => {
           <Provider store={store}>
             <MyList
               films={films}
+              authInfo={authInfo}
             />
           </Provider>
         </Router>

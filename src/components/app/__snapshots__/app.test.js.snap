@@ -193,13 +193,12 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          data-index={0}
           id={1}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films/1"
+            href="/films1"
             onClick={[Function]}
           >
             <div
@@ -218,7 +217,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films/1"
+              href="/films1"
               onClick={[Function]}
             >
               The Grand Budapest Hotel
@@ -227,13 +226,12 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-index={1}
           id={2}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films/2"
+            href="/films2"
             onClick={[Function]}
           >
             <div
@@ -252,7 +250,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films/2"
+              href="/films2"
               onClick={[Function]}
             >
               The Grand Budapest Hotel
@@ -261,13 +259,12 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-index={2}
           id={3}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films/3"
+            href="/films3"
             onClick={[Function]}
           >
             <div
@@ -286,7 +283,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films/3"
+              href="/films3"
               onClick={[Function]}
             >
               The Grand Budapest Hotel

@@ -20,11 +20,7 @@ it(`Render FilmPlayer`, () => {
       onMount={() => {}}
     >
       <video/>
-    </FilmPlayer>, {
-      createNodeMock: () => {
-        return {};
-      }
-    })
+    </FilmPlayer>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

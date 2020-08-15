@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
-import {connect} from "react-redux";
-import {getFilmById} from "../../reducer/data/selectors.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+import User from "../user/user.jsx";
 
 const COMMENT = {
   min: 50,
@@ -14,23 +12,20 @@ const COMMENT = {
 
 const AddReview = (props) => {
   const {
-    activeFilm,
+    film,
     errorText,
+    authInfo,
     isSubmitDisabled,
     isFormDisabled,
     onChange,
     onFormSubmit,
   } = props;
 
-  if (!activeFilm) {
-    return `Loading`;
-  }
-
   const {
     backgroundImage,
     posterImage,
     name,
-  } = activeFilm;
+  } = film;
 
   return (
     <section className="movie-card movie-card--full">
@@ -46,7 +41,7 @@ const AddReview = (props) => {
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
                 <Link
-                  to={`${AppRoute.FILMS}${activeFilm.id}`}
+                  to={`${AppRoute.FILMS}/${film.id}`}
                   href="movie-page.html"
                   className="breadcrumbs__link"
                 >{name}</Link>
@@ -56,6 +51,9 @@ const AddReview = (props) => {
               </li>
             </ul>
           </nav>
+          <User
+            authInfo={authInfo}
+          />
         </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
@@ -81,7 +79,7 @@ const AddReview = (props) => {
             const rating = formData.get(`rating`);
 
             evt.preventDefault();
-            onFormSubmit({rating, comment}, activeFilm.id);
+            onFormSubmit({rating, comment}, film.id);
           }}
         >
           <div className="rating">
@@ -131,28 +129,18 @@ const AddReview = (props) => {
 
 
 AddReview.propTypes = {
-  activeFilm: PropTypes.shape({
+  film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     posterImage: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
   }).isRequired,
   errorText: PropTypes.string.isRequired,
+  authInfo: PropTypes.object,
   isSubmitDisabled: PropTypes.bool.isRequired,
   isFormDisabled: PropTypes.bool.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => ({
-  activeFilm: getFilmById(state, props.id),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(comment, filmId) {
-    dispatch(DataOperation.submitComment(comment, filmId));
-  },
-});
-
-export {AddReview};
-export default connect(mapStateToProps, mapDispatchToProps)(AddReview);
+export default AddReview;

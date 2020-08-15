@@ -1,7 +1,5 @@
 import React, {createRef, PureComponent} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {getFilmById} from "../../reducer/data/selectors";
 
 const PLAYER_CLASS = `player__video`;
 
@@ -21,10 +19,9 @@ const withFilmPlayer = (Component) => {
 
       this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
       this._handleFullScreenButtonClick = this._handleFullScreenButtonClick.bind(this);
-      this._handleWrappedComponentMount = this._handleWrappedComponentMount.bind(this);
     }
 
-    _handleWrappedComponentMount() {
+    componentDidMount() {
       const {film} = this.props;
       const video = this._videoRef.current;
 
@@ -83,10 +80,6 @@ const withFilmPlayer = (Component) => {
         duration,
       } = this.state;
 
-      if (!this.props.film) {
-        return `Loading`;
-      }
-
       return (
         <Component
           {...this.props}
@@ -96,7 +89,6 @@ const withFilmPlayer = (Component) => {
           duration={duration}
           onPlayButtonClick={this._handlePlayButtonClick}
           onFullScreenButtonClick={this._handleFullScreenButtonClick}
-          onMount={this._handleWrappedComponentMount}
         >
           <video
             ref={this._videoRef}
@@ -106,9 +98,7 @@ const withFilmPlayer = (Component) => {
     }
 
     _handlePlayButtonClick() {
-      this.setState((state) => {
-        return {isPlaying: !state.isPlaying};
-      });
+      this.setState((state) => ({isPlaying: !state.isPlaying}));
     }
 
     _handleFullScreenButtonClick() {
@@ -123,12 +113,7 @@ const withFilmPlayer = (Component) => {
     }).isRequired,
   };
 
-  const mapStateToProps = (state, props) => ({
-    film: getFilmById(state, props.id),
-  });
-
-  return connect(mapStateToProps)(WithFilmPlayer);
-
+  return WithFilmPlayer;
 };
 
 export default withFilmPlayer;

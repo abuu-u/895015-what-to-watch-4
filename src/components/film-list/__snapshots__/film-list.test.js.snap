@@ -6,13 +6,12 @@ exports[`Render FilmList 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
-    data-index={0}
     id={1}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
     <a
-      href="/films/1"
+      href="/films1"
       onClick={[Function]}
     >
       <div
@@ -31,7 +30,7 @@ exports[`Render FilmList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/films/1"
+        href="/films1"
         onClick={[Function]}
       >
         Fantastic Beasts
@@ -40,13 +39,12 @@ exports[`Render FilmList 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    data-index={1}
     id={1}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
     <a
-      href="/films/1"
+      href="/films1"
       onClick={[Function]}
     >
       <div
@@ -65,7 +63,7 @@ exports[`Render FilmList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/films/1"
+        href="/films1"
         onClick={[Function]}
       >
         Fantastic Beasts
@@ -74,13 +72,12 @@ exports[`Render FilmList 1`] = `
   </article>
   <article
     className="small-movie-card catalog__movies-card"
-    data-index={2}
     id={1}
     onMouseLeave={[Function]}
     onMouseOver={[Function]}
   >
     <a
-      href="/films/1"
+      href="/films1"
       onClick={[Function]}
     >
       <div
@@ -99,7 +96,7 @@ exports[`Render FilmList 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/films/1"
+        href="/films1"
         onClick={[Function]}
       >
         Fantastic Beasts

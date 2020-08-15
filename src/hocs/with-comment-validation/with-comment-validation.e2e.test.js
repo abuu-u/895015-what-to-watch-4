@@ -1,7 +1,7 @@
 import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import withSubmit from "./with-submit.js";
+import withCommentValidation from "./with-comment-validation.js";
 
 const COMMENT = {
   min: 50,
@@ -20,7 +20,7 @@ const generateComment = (length) => {
 configure({adapter: new Adapter()});
 
 const MockComponent = () => <div />;
-const MockComponentWrapped = withSubmit(MockComponent);
+const MockComponentWrapped = withCommentValidation(MockComponent);
 
 it(`Should change isSubmitDisabled`, () => {
   const wrapper = shallow(<MockComponentWrapped

@@ -26,7 +26,6 @@ it(`Should handlers be called`, () => {
         film={film}
         onFilmMouseOver={onFilmMouseOver}
         onFilmMouseLeave={onFilmMouseLeave}
-        index={1}
         isActive={false}
       />
   );

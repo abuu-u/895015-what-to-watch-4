@@ -1,7 +1,7 @@
 import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import {FilmPlayer} from "./film-player.jsx";
+import FilmPlayer from "./film-player.jsx";
 
 const film = {
   previewImage: `img/bohemian-rhapsody.jpg`,
@@ -24,7 +24,7 @@ it(`Click by Play button calls callback`, () => {
     onFullScreenButtonClick={handleFullScreenButtonClick}
     onMount={() => {}}
   >
-    <audio />
+    <video />
   </FilmPlayer>);
 
   wrapper.find(`.player__play`).simulate(`click`);

@@ -1,7 +1,9 @@
 import React, {createRef} from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
+import history from "../../history";
+import Footer from "../footer/footer.jsx";
+import Header from "../header/header.jsx";
 
 const ERROR_CLASS = `sign-in__field--error`;
 
@@ -14,24 +16,15 @@ class SignIn extends React.PureComponent {
   }
 
   render() {
-    const {onLogin, errorText} = this.props;
+    const {onSubmit, errorText} = this.props;
 
     return (
       <div className="user-page">
-        <header className="page-header user-page__head">
-          <div className="logo">
-            <Link
-              to={AppRoute.ROOT}
-              className="logo__link"
-            >
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
+        <Header
+          isUserPage={true}
+        >
           <h1 className="page-title user-page__title">Sign in</h1>
-        </header>
+        </Header>
 
         <div className="sign-in user-page__content">
           <form
@@ -42,7 +35,8 @@ class SignIn extends React.PureComponent {
               const login = this.loginRef.current.value;
               const password = this.passwordRef.current.value;
 
-              onLogin({login, password});
+              onSubmit({login, password})
+                .then(() => history.push(AppRoute.ROOT));
             }}
           >
             <div className="sign-in__message">
@@ -78,22 +72,7 @@ class SignIn extends React.PureComponent {
           </form>
         </div>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <Link
-              to={AppRoute.ROOT}
-              className="logo__link logo__link--light"
-            >
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer/>
       </div>
     );
   }
@@ -101,7 +80,7 @@ class SignIn extends React.PureComponent {
 
 SignIn.propTypes = {
   errorText: PropTypes.string,
-  onLogin: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 

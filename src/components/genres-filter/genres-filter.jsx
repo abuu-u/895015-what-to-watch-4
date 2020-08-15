@@ -58,4 +58,4 @@ GenresFilter.propTypes = {
   onGenreClick: PropTypes.func.isRequired,
 };
 
-export default GenresFilter;
+export default React.memo(GenresFilter);

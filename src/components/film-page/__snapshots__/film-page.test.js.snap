@@ -136,7 +136,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/films/1/review"
+              href="/films1/review"
               onClick={[Function]}
             >
               Add review
@@ -275,13 +275,12 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          data-index={0}
           id={1}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films/1"
+            href="/films1"
             onClick={[Function]}
           >
             <div
@@ -300,7 +299,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films/1"
+              href="/films1"
               onClick={[Function]}
             >
               The Grand Budapest Hotel
@@ -309,13 +308,12 @@ Array [
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          data-index={1}
           id={1}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films/1"
+            href="/films1"
             onClick={[Function]}
           >
             <div
@@ -334,7 +332,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films/1"
+              href="/films1"
               onClick={[Function]}
             >
               The Grand Budapest Hotel

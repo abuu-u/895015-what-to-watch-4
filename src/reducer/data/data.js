@@ -95,28 +95,25 @@ const Operation = {
         throw err;
       });
   },
-  addFilmToFavorites: (filmId, status) => (dispatch, getState, api) => {
+  addFilmToFavorites: (filmId, status, isFilmPromo) => (dispatch, getState, api) => {
     return api.post(`/favorite/${filmId}/${status}`)
       .then((response) => filmAdapter(response.data))
       .then((film) => {
         const films = getFilms(getState());
         const index = films.findIndex((it) => it.id === film.id);
-
-        dispatch(ActionCreator.loadFilms([
+        const newFilms = [
           ...films.slice(0, index),
           film,
           ...films.slice(index + 1)
-        ]));
-      })
-      .catch((err) => {
-        throw err;
-      });
-  },
-  addPromoFilmToFavorites: (filmId, status) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${filmId}/${status}`)
-      .then((response) => filmAdapter(response.data))
-      .then((film) => {
-        dispatch(ActionCreator.loadPromoFilm(film));
+        ];
+
+        dispatch(ActionCreator.loadFavoriteFilms(newFilms));
+
+        dispatch(ActionCreator.loadFilms(newFilms));
+
+        if (isFilmPromo) {
+          dispatch(ActionCreator.loadPromoFilm(film));
+        }
       })
       .catch((err) => {
         throw err;

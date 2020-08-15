@@ -18,7 +18,6 @@ const FilmList = (props) => {
         onFilmMouseOver={onFilmMouseOver}
         onFilmMouseLeave={onFilmMouseLeave}
         key={film + index}
-        index={index}
         isActive={activeFilmId === film.id}
       />)}
     </div>

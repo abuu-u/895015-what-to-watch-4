@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import withLogin from "./with-login.js";
+import withCommentValidation from "./with-comment-validation.js";
 
 const MockComponent = () => {
   return (
@@ -9,9 +9,9 @@ const MockComponent = () => {
   );
 };
 
-const MockComponentWrapped = withLogin(MockComponent);
+const MockComponentWrapped = withCommentValidation(MockComponent);
 
-it(`withFilmPlayer is rendered correctly`, () => {
+it(`withSubmit is rendered correctly`, () => {
   const tree = renderer.create((
     <MockComponentWrapped
       onSubmit={() => {}}

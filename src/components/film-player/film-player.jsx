@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import history from "../../history";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 class FilmPlayer extends React.PureComponent {
-  componentDidMount() {
-    this.props.onMount();
-  }
-
   render() {
     const {
+      film,
       isLoading,
       isPlaying,
       children,
@@ -30,11 +28,11 @@ class FilmPlayer extends React.PureComponent {
       <div className="player">
         {children}
 
-        <button
+        <Link
+          to={`${AppRoute.FILMS}/${film.id}`}
           type="button"
           className="player__exit"
-          onClick={() => history.goBack()}
-        >Exit</button>
+        >Exit</Link>
 
         <div className="player__controls">
           <div className="player__controls-row">
@@ -77,6 +75,9 @@ class FilmPlayer extends React.PureComponent {
 }
 
 FilmPlayer.propTypes = {
+  film: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
   isLoading: PropTypes.bool.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
@@ -87,7 +88,6 @@ FilmPlayer.propTypes = {
   duration: PropTypes.number.isRequired,
   onPlayButtonClick: PropTypes.func.isRequired,
   onFullScreenButtonClick: PropTypes.func.isRequired,
-  onMount: PropTypes.func.isRequired,
 };
 
 export default FilmPlayer;

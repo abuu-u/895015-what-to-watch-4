@@ -40,10 +40,7 @@ store.dispatch(DataOperation.loadFilms());
 store.dispatch(DataOperation.loadPromoFilm());
 
 store.dispatch(UserOperation.checkAuth()).
-  then(() => {
-    store.dispatch(DataOperation.loadFavoriteFilms());
-    renderApp();
-  })
+  then(() => renderApp())
   .catch(() => renderApp());
 
 

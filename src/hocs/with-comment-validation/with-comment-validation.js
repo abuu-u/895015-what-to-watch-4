@@ -47,9 +47,9 @@ const withSubmit = (Component) => {
       });
 
       onSubmit({rating, comment}, filmId)
-        .then(() => history.push(`${AppRoute.FILMS}${filmId}`))
+        .then(() => history.push(`${AppRoute.FILMS}/${filmId}`))
         .catch((err) => this.setState({
-          errorText: err,
+          errorText: err.response.data.error,
           isFormDisabled: false,
         }));
     }

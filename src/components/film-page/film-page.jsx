@@ -9,121 +9,93 @@ import withActiveTab from '../../hocs/with-active-tab/with-active-tab';
 import {AuthorizationStatus} from '../../reducer/user/user';
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const.js";
-import {connect} from "react-redux";
-
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getFilms, getComments, getFilmById} from "../../reducer/data/selectors.js";
-
-import {Operation as DataOperation} from "../../reducer/data/data.js";
+import Footer from "../footer/footer.jsx";
+import User from "../user/user.jsx";
 
 const MORE_LIKE_FILMS_COUNT = 4;
 
 const FilmListWrapped = withActiveFilm(FilmList);
-
 const TabsWrapped = withActiveTab(Tabs);
 
-class FilmPage extends React.PureComponent {
-  componentDidMount() {
-    const {id, loadComments} = this.props;
+const FilmPage = (props) => {
+  const {
+    film,
+    films,
+    comments,
+    authorizationStatus,
+    authInfo,
+    onFilmAddToFavorites,
+  } = props;
 
-    loadComments(id);
-  }
-  render() {
-    const {
-      film,
-      films,
-      comments,
-      authorizationStatus,
-      onFilmAddToFavorites,
-    } = this.props;
+  const {
+    name,
+    posterImage,
+    backgroundImage,
+    genre,
+  } = film;
 
-    if (!film || !comments) {
-      return `Loading`;
-    }
-
-    const {
-      name,
-      posterImage,
-      backgroundImage,
-      genre,
-    } = film;
-
-    return (
-      <>
-        <section className="movie-card movie-card--full">
-          <div className="movie-card__hero">
-            <div className="movie-card__bg">
-              <img src={backgroundImage} alt={name} />
-            </div>
-
-            <h1 className="visually-hidden">WTW</h1>
-
-            <Header />
-
-            <div className="movie-card__wrap">
-              <FilmDescription
-                film={film}
-                authorizationStatus={authorizationStatus}
-                onAddToFavorites={onFilmAddToFavorites}
-              >
-                {authorizationStatus === AuthorizationStatus.AUTH &&
-                  <Link
-                    to={`${AppRoute.FILMS}${film.id}${AppRoute.REVIEW}`}
-                    href="add-review"
-                    className="btn movie-card__button"
-                  >Add review</Link>}
-              </FilmDescription>
-            </div>
-          </div >
-
-          <div className="movie-card__wrap movie-card__translate-top">
-            <div className="movie-card__info">
-              <div className="movie-card__poster movie-card__poster--big">
-                <img src={posterImage} alt={name} width="218" height="327" />
-              </div>
-              <TabsWrapped
-                film={film}
-                comments={comments}
-              />
-            </div>
+  return (
+    <>
+      <section className="movie-card movie-card--full">
+        <div className="movie-card__hero">
+          <div className="movie-card__bg">
+            <img src={backgroundImage} alt={name} />
           </div>
-        </section >
 
-        <div className="page-content">
-          <section className="catalog catalog--like-this">
-            <h2 className="catalog__title">More like this</h2>
+          <h1 className="visually-hidden">WTW</h1>
 
-            <FilmListWrapped
-              films={films.filter((it) => it.genre === genre && it !== film)}
-              showingFilmsCount={MORE_LIKE_FILMS_COUNT}
+          <Header>
+            <User
+              authInfo={authInfo}
             />
-          </section>
+          </Header>
 
-          <footer className="page-footer">
-            <div className="logo">
-              <Link
-                to={AppRoute.ROOT}
-                href="main.html"
-                className="logo__link logo__link--light"
-              >
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </Link>
-            </div>
+          <div className="movie-card__wrap">
+            <FilmDescription
+              film={film}
+              authorizationStatus={authorizationStatus}
+              onAddToFavorites={onFilmAddToFavorites}
+            >
+              {authorizationStatus === AuthorizationStatus.AUTH &&
+                <Link
+                  to={`${AppRoute.FILMS}/${film.id}${AppRoute.REVIEW}`}
+                  href="add-review"
+                  className="btn movie-card__button"
+                >Add review</Link>}
+            </FilmDescription>
+          </div>
+        </div >
 
-            <div className="copyright">
-              <p>© 2019 What to watch Ltd.</p>
+        <div className="movie-card__wrap movie-card__translate-top">
+          <div className="movie-card__info">
+            <div className="movie-card__poster movie-card__poster--big">
+              <img src={posterImage} alt={name} width="218" height="327" />
             </div>
-          </footer>
+            <TabsWrapped
+              film={film}
+              comments={comments}
+            />
+          </div>
         </div>
-      </>
-    );
-  }
-}
+      </section >
+
+      <div className="page-content">
+        <section className="catalog catalog--like-this">
+          <h2 className="catalog__title">More like this</h2>
+
+          <FilmListWrapped
+            films={films.filter((it) => it.genre === genre && it !== film)}
+            showingFilmsCount={MORE_LIKE_FILMS_COUNT}
+          />
+        </section>
+
+        <Footer/>
+      </div>
+    </>
+  );
+};
 
 FilmPage.propTypes = {
-  id: PropTypes.number.isRequired,
   film: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -136,25 +108,8 @@ FilmPage.propTypes = {
   films: PropTypes.array.isRequired,
   comments: PropTypes.array,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
+  authInfo: PropTypes.object,
   onFilmAddToFavorites: PropTypes.func.isRequired,
-  loadComments: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state, props) => ({
-  film: getFilmById(state, props.id),
-  authorizationStatus: getAuthorizationStatus(state),
-  films: getFilms(state),
-  comments: getComments(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onFilmAddToFavorites(filmId, status) {
-    dispatch(DataOperation.addFilmToFavorites(filmId, status));
-  },
-  loadComments(filmId) {
-    dispatch(DataOperation.loadComments(filmId));
-  },
-});
-
-export {FilmPage};
-export default connect(mapStateToProps, mapDispatchToProps)(FilmPage);
+export default FilmPage;

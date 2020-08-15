@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import {STATUS, AppRoute} from '../../const';
 import {AuthorizationStatus} from '../../reducer/user/user';
-import history from "../../history";
 import {Link} from "react-router-dom";
+import history from "../../history";
 
 const FilmDescription = (props) => {
   const {
@@ -29,7 +29,7 @@ const FilmDescription = (props) => {
       </p>
 
       <div className="movie-card__buttons">
-        <Link to={`${AppRoute.PLAYER}${film.id}`}
+        <Link to={`${AppRoute.PLAYER}/${film.id}`}
           className="btn btn--play movie-card__button"
           type="button"
         >

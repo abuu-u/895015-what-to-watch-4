@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 const EMAIL_VALIDATION_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const EMAIL_IS_NOT_VALID_TEXT = `Please enter a valid email address`;
 
-const withSubmit = (Component) => {
-  class WithSubmit extends PureComponent {
+const withLoginValidation = (Component) => {
+  class WithLoginValidation extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -17,16 +17,19 @@ const withSubmit = (Component) => {
     }
 
     handleSubmit({login, password}) {
-      const {onSubmit} = this.props;
+      const {onLogin} = this.props;
 
       if (!EMAIL_VALIDATION_REGEXP.test(login)) {
         this.setState({errorText: EMAIL_IS_NOT_VALID_TEXT});
       } else {
-        onSubmit({
+        return onLogin({
           login,
           password,
-        }).catch((err) => this.setState({errorText: err.response.data.error}));
+        })
+        .catch((err) => this.setState({errorText: err.response.data.error}));
       }
+
+      return null;
     }
 
     render() {
@@ -36,17 +39,17 @@ const withSubmit = (Component) => {
         <Component
           {...this.props}
           errorText={errorText}
-          onLogin={this.handleSubmit}
+          onSubmit={this.handleSubmit}
         />
       );
     }
   }
 
-  WithSubmit.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+  WithLoginValidation.propTypes = {
+    onLogin: PropTypes.func.isRequired,
   };
 
-  return WithSubmit;
+  return WithLoginValidation;
 };
 
-export default withSubmit;
+export default withLoginValidation;
