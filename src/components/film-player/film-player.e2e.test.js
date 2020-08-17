@@ -4,6 +4,7 @@ import Adapter from "enzyme-adapter-react-16";
 import FilmPlayer from "./film-player.jsx";
 
 const film = {
+  id: 1,
   previewImage: `img/bohemian-rhapsody.jpg`,
   videoLink: `https://some-link`,
 };
@@ -14,18 +15,19 @@ it(`Click by Play button calls callback`, () => {
   const handlePlayButtonClick = jest.fn();
   const handleFullScreenButtonClick = jest.fn();
 
-  const wrapper = shallow(<FilmPlayer
-    film={film}
-    isLoading={false}
-    isPlaying={false}
-    duration={100}
-    progress={70}
-    onPlayButtonClick={handlePlayButtonClick}
-    onFullScreenButtonClick={handleFullScreenButtonClick}
-    onMount={() => {}}
-  >
-    <video />
-  </FilmPlayer>);
+  const wrapper = shallow(
+      <FilmPlayer
+        film={film}
+        isLoading={false}
+        isPlaying={false}
+        duration={100}
+        progress={70}
+        onPlayButtonClick={handlePlayButtonClick}
+        onFullScreenButtonClick={handleFullScreenButtonClick}
+      >
+        <video />
+      </FilmPlayer>
+  );
 
   wrapper.find(`.player__play`).simulate(`click`);
   wrapper.find(`.player__full-screen`).simulate(`click`);

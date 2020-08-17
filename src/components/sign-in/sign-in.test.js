@@ -12,7 +12,7 @@ it(`Render SignIn`, () => {
         >
           <SignIn
             errorText={``}
-            onLogin={() => {}}
+            onSubmit={() => {}}
           />
         </Router>, {
           createNodeMock() {

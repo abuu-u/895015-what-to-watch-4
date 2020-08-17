@@ -21,7 +21,7 @@ exports[`Render AddReview 1`] = `
       WTW
     </h1>
     <header
-      className="page-header"
+      className="page-header "
     >
       <div
         className="logo"
@@ -59,7 +59,7 @@ exports[`Render AddReview 1`] = `
           >
             <a
               className="breadcrumbs__link"
-              href="/films1"
+              href="/films/1"
               onClick={[Function]}
             >
               The Grand Budapest Hotel

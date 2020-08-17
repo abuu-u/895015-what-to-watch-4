@@ -4,9 +4,6 @@ import FilmList from "./film-list.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-const onFilmMouseOver = () => {};
-const onFilmMouseLeave = () => {};
-
 const films = [
   {
     id: 1,
@@ -36,10 +33,10 @@ it(`Render FilmList`, () => {
         >
           <FilmList
             films={films}
-            showingFilmsCount={8}
             activeFilmId={-1}
-            onFilmMouseOver={onFilmMouseOver}
-            onFilmMouseLeave={onFilmMouseLeave}
+            showingFilmsCount={8}
+            onFilmMouseOver={()=>{}}
+            onFilmMouseLeave={()=>{}}
           />
         </Router>).toJSON();
 

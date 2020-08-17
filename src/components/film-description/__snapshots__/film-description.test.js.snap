@@ -28,7 +28,7 @@ exports[`Render FilmDescription 1`] = `
   >
     <a
       className="btn btn--play movie-card__button"
-      href="/player1"
+      href="/player/1"
       onClick={[Function]}
       type="button"
     >

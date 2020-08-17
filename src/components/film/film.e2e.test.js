@@ -17,9 +17,6 @@ Enzyme.configure({
 it(`Should handlers be called`, () => {
   const onFilmMouseOver = jest.fn();
   const onFilmMouseLeave = jest.fn();
-  const mouseOverEvt = {
-    currentTarget: {dataset: {id: 0}},
-  };
 
   const filmComponent = shallow(
       <Film
@@ -30,7 +27,7 @@ it(`Should handlers be called`, () => {
       />
   );
 
-  filmComponent.simulate(`mouseOver`, mouseOverEvt);
+  filmComponent.simulate(`mouseOver`);
   filmComponent.simulate(`mouseLeave`);
 
   expect(onFilmMouseOver).toHaveBeenCalledTimes(1);

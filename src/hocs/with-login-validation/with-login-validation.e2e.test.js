@@ -10,11 +10,11 @@ const MockComponentWrapped = withLoginValidation(MockComponent);
 
 it(`Should change errorText`, () => {
   const wrapper = shallow(<MockComponentWrapped
-    onSubmit={() => {}}
+    onLogin={() => {}}
   />);
 
   expect(wrapper.props().errorText).toEqual(``);
 
-  wrapper.props().onLogin({login: 123, password: 123});
+  wrapper.props().onSubmit({login: 123, password: 123});
   expect(wrapper.props().errorText).toEqual(`Please enter a valid email address`);
 });

@@ -47,9 +47,10 @@ const Main = (props) => {
           showingFilmsCount={showingFilmsCount}
         />
 
-        {filmsByGenre.length > showingFilmsCount && <ShowMore
-          onShowMoreClick={onShowMoreClick}
-        />}
+        {filmsByGenre.length > showingFilmsCount
+          && <ShowMore
+            onShowMoreClick={onShowMoreClick}
+          />}
       </section>
 
       <Footer/>

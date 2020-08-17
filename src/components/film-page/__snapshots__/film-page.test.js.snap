@@ -22,7 +22,7 @@ Array [
         WTW
       </h1>
       <header
-        className="page-header"
+        className="page-header "
       >
         <div
           className="logo"
@@ -99,7 +99,7 @@ Array [
           >
             <a
               className="btn btn--play movie-card__button"
-              href="/player1"
+              href="/player/1"
               onClick={[Function]}
               type="button"
             >
@@ -136,7 +136,7 @@ Array [
             </button>
             <a
               className="btn movie-card__button"
-              href="/films1/review"
+              href="/films/1/review"
               onClick={[Function]}
             >
               Add review
@@ -275,21 +275,18 @@ Array [
       >
         <article
           className="small-movie-card catalog__movies-card"
-          id={1}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films1"
+            href="/films/undefined"
             onClick={[Function]}
           >
             <div
               className="small-movie-card__image"
             >
               <img
-                alt="The Grand Budapest Hotel"
                 height="175"
-                src="img/bohemian-rhapsody.jpg"
                 width="280"
               />
             </div>
@@ -299,30 +296,25 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films1"
+              href="/films/undefined"
               onClick={[Function]}
-            >
-              The Grand Budapest Hotel
-            </a>
+            />
           </h3>
         </article>
         <article
           className="small-movie-card catalog__movies-card"
-          id={1}
           onMouseLeave={[Function]}
           onMouseOver={[Function]}
         >
           <a
-            href="/films1"
+            href="/films/undefined"
             onClick={[Function]}
           >
             <div
               className="small-movie-card__image"
             >
               <img
-                alt="The Grand Budapest Hotel"
                 height="175"
-                src="img/bohemian-rhapsody.jpg"
                 width="280"
               />
             </div>
@@ -332,11 +324,9 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films1"
+              href="/films/undefined"
               onClick={[Function]}
-            >
-              The Grand Budapest Hotel
-            </a>
+            />
           </h3>
         </article>
       </div>

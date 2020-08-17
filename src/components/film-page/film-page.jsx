@@ -105,7 +105,9 @@ FilmPage.propTypes = {
     released: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
-  films: PropTypes.array.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    genre: PropTypes.string.isRequired,
+  })).isRequired,
   comments: PropTypes.array,
   authorizationStatus: PropTypes.oneOf(Object.values(AuthorizationStatus)).isRequired,
   authInfo: PropTypes.object,

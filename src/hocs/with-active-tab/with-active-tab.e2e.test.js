@@ -9,8 +9,7 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withActiveTab(MockComponent);
 
 it(`Should change activeTab`, () => {
-  const wrapper = shallow(<MockComponentWrapped
-  />);
+  const wrapper = shallow(<MockComponentWrapped/>);
 
   expect(wrapper.props().activeTab).toEqual(`Overview`);
 

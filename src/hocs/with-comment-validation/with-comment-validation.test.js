@@ -2,12 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import withCommentValidation from "./with-comment-validation.js";
 
-const MockComponent = () => {
-  return (
-    <div>
-    </div>
-  );
-};
+const MockComponent = () => <div/>;
 
 const MockComponentWrapped = withCommentValidation(MockComponent);
 

@@ -1,17 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {FilmPage} from "./film-page.jsx";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import FilmPage from "./film-page.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-const mockStore = configureStore([]);
 
 const film = {
   id: 1,
-  isFavorite: true,
   name: `The Grand Budapest Hotel`,
   posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
   backgroundImage: `img/the-grand-budapest-hotel-bg.jpg`,
@@ -22,46 +17,15 @@ const film = {
   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
   genre: `Comedy`,
   released: 2014,
+  isFavorite: true,
 };
 
 const films = [
   {
-    id: 1,
-    name: `The Grand Budapest Hotel`,
-    posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    previewImage: `img/bohemian-rhapsody.jpg`,
-    backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
-    backgroundColor: `#ffffff`,
-    videoLink: `https://some-link`,
-    previewVideoLink: `https://some-link`,
-    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    rating: 8.9,
-    scoresCount: 240,
-    director: `Wes Andreson`,
-    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
-    runTime: 99,
     genre: `Comedy`,
-    released: 2014,
-    isFavorite: false
   },
   {
-    id: 1,
-    name: `The Grand Budapest Hotel`,
-    posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
-    previewImage: `img/bohemian-rhapsody.jpg`,
-    backgroundImage: `img/bg-the-grand-budapest-hotel.jpg`,
-    backgroundColor: `#ffffff`,
-    videoLink: `https://some-link`,
-    previewVideoLink: `https://some-link`,
-    description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
-    rating: 8.9,
-    scoresCount: 240,
-    director: `Wes Andreson`,
-    starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
-    runTime: 99,
     genre: `Comedy`,
-    released: 2014,
-    isFavorite: false
   },
 ];
 
@@ -89,39 +53,23 @@ const comments = [
 ];
 
 const authInfo = {
-  id: 1,
-  email: `Oliver.conner@gmail.com`,
-  name: `Oliver.conner`,
   avatarUrl: `img/1.png`
 };
 
 it(`Render FilmPage`, () => {
-
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: `AUTH`,
-      authInfo,
-    },
-  });
-
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Provider store={store}>
-            <FilmPage
-              id={1}
-              film={film}
-              films={films}
-              comments={comments}
-              authorizationStatus={`AUTH`}
-              onFilmClick={() => {}}
-              onFilmPlayClick={() => {}}
-              onFilmAddToFavorites={() => {}}
-              loadComments={() => {}}
-            />
-          </Provider>
+          <FilmPage
+            film={film}
+            films={films}
+            comments={comments}
+            authorizationStatus={`AUTH`}
+            authInfo={authInfo}
+            onFilmAddToFavorites={() => {}}
+          />
         </Router>
     ).toJSON();
 

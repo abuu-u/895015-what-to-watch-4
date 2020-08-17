@@ -4,9 +4,6 @@ import Film from "./film.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-const onFilmMouseOver = () => {};
-const onFilmMouseLeave = () => {};
-
 const film = {
   id: 1,
   name: `Fantastic Beasts`,
@@ -22,8 +19,8 @@ it(`Render Film`, () => {
         >
           <Film
             film={film}
-            onFilmMouseOver={onFilmMouseOver}
-            onFilmMouseLeave={onFilmMouseLeave}
+            onFilmMouseOver={()=>{}}
+            onFilmMouseLeave={()=>{}}
             index={1}
             isActive={false}
           />

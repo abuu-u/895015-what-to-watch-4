@@ -1,16 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {AddReview} from "./add-review.jsx";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
+import AddReview from "./add-review.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-const mockStore = configureStore([]);
-
-
-const activeFilm = {
+const film = {
   id: 1,
   name: `The Grand Budapest Hotel`,
   posterImage: `img/the-grand-budapest-hotel-poster.jpg`,
@@ -18,36 +12,29 @@ const activeFilm = {
 };
 
 const authInfo = {
-  id: 1,
-  email: `Oliver.conner@gmail.com`,
-  name: `Oliver.conner`,
   avatarUrl: `img/1.png`
 };
 
 it(`Render AddReview`, () => {
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: `AUTH`,
-      authInfo,
-    },
-  });
-
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Provider store={store}>
-            <AddReview
-              activeFilm={activeFilm}
-              errorText={``}
-              isSubmitDisabled={false}
-              isFormDisabled={false}
-              onChange={() => {}}
-              onFormSubmit={() => {}}
-            />
-          </Provider>
-        </Router>
+          <AddReview
+            film={film}
+            errorText={``}
+            authInfo={authInfo}
+            isSubmitDisabled={false}
+            isFormDisabled={false}
+            onChange={() => {}}
+            onFormSubmit={() => {}}
+          />
+        </Router>, {
+          createNodeMock() {
+            return {};
+          }
+        }
     ).toJSON();
 
   expect(tree).toMatchSnapshot();

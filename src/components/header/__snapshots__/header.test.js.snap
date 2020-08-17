@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render authorized Header 1`] = `
+exports[`Render Header 1`] = `
 <header
-  className="page-header"
+  className="page-header "
 >
   <div
     className="logo"
@@ -28,32 +28,13 @@ exports[`Render authorized Header 1`] = `
         W
       </span>
     </a>
-  </div>
-  <div
-    className="user-block"
-  >
-    <div
-      className="user-block__avatar"
-    >
-      <a
-        href="/mylist"
-        onClick={[Function]}
-      >
-        <img
-          alt="User avatar"
-          height="63"
-          src="https://4.react.pages.academyimg/1.png"
-          width="63"
-        />
-      </a>
-    </div>
   </div>
 </header>
 `;
 
-exports[`Render unauthorized Header 1`] = `
+exports[`Render user page Header 1`] = `
 <header
-  className="page-header"
+  className="page-header user-page__head"
 >
   <div
     className="logo"
@@ -79,25 +60,6 @@ exports[`Render unauthorized Header 1`] = `
         W
       </span>
     </a>
-  </div>
-  <div
-    className="user-block"
-  >
-    <div
-      className="user-block__avatar"
-    >
-      <a
-        href="/mylist"
-        onClick={[Function]}
-      >
-        <img
-          alt="User avatar"
-          height="63"
-          src="https://4.react.pages.academyimg/1.png"
-          width="63"
-        />
-      </a>
-    </div>
   </div>
 </header>
 `;

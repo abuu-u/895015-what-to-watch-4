@@ -1,11 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
-
-const mockStore = configureStore([]);
 
 const promoFilm = {
   id: 1,
@@ -79,41 +74,32 @@ const films = [
 ];
 
 const authInfo = {
-  id: 1,
-  email: `Oliver.conner@gmail.com`,
-  name: `Oliver.conner`,
   avatarUrl: `img/1.png`
 };
 
 it(`Render App`, () => {
-  const store = mockStore({
-    [NameSpace.FILM]: {
-      activeGenre: `Comedy`,
-    },
-    [NameSpace.USER]: {
-      authorizationStatus: `AUTH`,
-      authInfo,
-    },
-  });
-
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <App
-            films={films}
-            filmsByGenre={films}
-            promoFilm={promoFilm}
-            favoriteFilms={films}
-            activeGenre={`Comedy`}
-            showingFilmsCount={8}
-            authorizationStatus={`AUTH`}
-            onGenreClick={() => {}}
-            onShowMoreClick={() => {}}
-            onCommentSubmit={() => {}}
-            onPromFilmAddToFavorites={() => {}}
-            login={() => {}}
-          />
-        </Provider>
+        <App
+          promoFilm={promoFilm}
+          films={films}
+          favoriteFilms={[]}
+          filmsByGenre={films}
+          activeGenre={`All genres`}
+          showingFilmsCount={8}
+          authorizationStatus={`AUTH`}
+          comments={[]}
+          authInfo={authInfo}
+          onGenreClick={()=>{}}
+          onShowMoreClick={()=>{}}
+          onCommentSubmit={()=>{}}
+          onPromFilmAddToFavorites={()=>{}}
+          onFilmAddToFavorites={()=>{}}
+          loadComments={()=>{}}
+          login={()=>{}}
+          getFilm={()=>{}}
+          loadFavoriteFilms={()=>{}}
+        />
     )
     .toJSON();
 

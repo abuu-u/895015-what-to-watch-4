@@ -11,8 +11,7 @@ const MockComponent = () => <div />;
 const MockComponentWrapped = withActiveFilm(MockComponent);
 
 it(`Should wait 1 second before  change activeFilmId`, () => {
-  const wrapper = shallow(<MockComponentWrapped
-  />);
+  const wrapper = shallow(<MockComponentWrapped/>);
 
   wrapper.props().onFilmMouseOver(1);
   expect(setTimeout).toHaveBeenCalledTimes(1);
@@ -20,8 +19,7 @@ it(`Should wait 1 second before  change activeFilmId`, () => {
 });
 
 it(`Should change activeFilmId`, () => {
-  const wrapper = shallow(<MockComponentWrapped
-  />);
+  const wrapper = shallow(<MockComponentWrapped/>);
 
   expect(wrapper.props().activeFilmId).toEqual(-1);
 

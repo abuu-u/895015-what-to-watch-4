@@ -29,7 +29,7 @@ it(`Should handlers be called`, () => {
   const onGenreClick = jest.fn();
   const clickEvt = {
     preventDefault() {},
-    currentTarget: {dataset: {id: 0}}
+    currentTarget: {dataset: {id: `Thriller`}}
   };
 
   const filmComponent = shallow(

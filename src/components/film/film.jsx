@@ -16,8 +16,8 @@ const Film = (props) => {
     <article
       id={film.id}
       className="small-movie-card catalog__movies-card"
-      onMouseOver={(evt) => {
-        onFilmMouseOver(Number(evt.currentTarget.id));
+      onMouseOver={() => {
+        onFilmMouseOver(film.id);
       }}
       onMouseLeave={onFilmMouseLeave}
     >

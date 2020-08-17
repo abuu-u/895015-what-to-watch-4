@@ -1,22 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Header} from "./header.jsx";
+import Header from "./header.jsx";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
 
-const authInfo = {
-  avatarUrl: `img/1.png`
-};
-
-it(`Render unauthorized Header`, () => {
+it(`Render Header`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
           <Header
-            authorizationStatus={`NO_AUTH`}
-            authInfo={authInfo}
+            isUserPage={false}
           />
         </Router>
     ).toJSON();
@@ -24,15 +19,14 @@ it(`Render unauthorized Header`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`Render authorized Header`, () => {
+it(`Render user page Header`, () => {
   const tree = renderer
     .create(
         <Router
           history={history}
         >
           <Header
-            authorizationStatus={`AUTH`}
-            authInfo={authInfo}
+            isUserPage={true}
           />
         </Router>
     ).toJSON();

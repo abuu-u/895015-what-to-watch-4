@@ -1,13 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PromoFilm from "./promo-film.jsx";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space.js";
 import {Router} from "react-router-dom";
 import history from "../../history.js";
-
-const mockStore = configureStore([]);
 
 const promoFilm = {
   id: 1,
@@ -20,32 +15,21 @@ const promoFilm = {
 };
 
 const authInfo = {
-  id: 1,
-  email: `Oliver.conner@gmail.com`,
-  name: `Oliver.conner`,
   avatarUrl: `img/1.png`
 };
 
 it(`Render PromoFilm`, () => {
-  const store = mockStore({
-    [NameSpace.USER]: {
-      authorizationStatus: `AUTH`,
-      authInfo,
-    },
-  });
-
   const tree = renderer
     .create(
         <Router
           history={history}
         >
-          <Provider store={store}>
-            <PromoFilm
-              promoFilm={promoFilm}
-              authorizationStatus={`AUTH`}
-              onPromFilmAddToFavorites={() => {}}
-            />
-          </Provider>
+          <PromoFilm
+            promoFilm={promoFilm}
+            authorizationStatus={`AUTH`}
+            authInfo={authInfo}
+            onPromFilmAddToFavorites={() => {}}
+          />
         </Router>
     ).toJSON();
 

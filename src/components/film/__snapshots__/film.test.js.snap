@@ -8,7 +8,7 @@ exports[`Render Film 1`] = `
   onMouseOver={[Function]}
 >
   <a
-    href="/films1"
+    href="/films/1"
     onClick={[Function]}
   >
     <div
@@ -27,7 +27,7 @@ exports[`Render Film 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/films1"
+      href="/films/1"
       onClick={[Function]}
     >
       Fantastic Beasts

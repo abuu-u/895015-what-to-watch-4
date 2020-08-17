@@ -18,7 +18,7 @@ exports[`Render PromoFilm 1`] = `
     WTW
   </h1>
   <header
-    className="page-header"
+    className="page-header "
   >
     <div
       className="logo"
@@ -108,7 +108,7 @@ exports[`Render PromoFilm 1`] = `
         >
           <a
             className="btn btn--play movie-card__button"
-            href="/player1"
+            href="/player/1"
             onClick={[Function]}
             type="button"
           >

@@ -19,7 +19,7 @@ Array [
       WTW
     </h1>
     <header
-      className="page-header"
+      className="page-header "
     >
       <div
         className="logo"
@@ -109,7 +109,7 @@ Array [
           >
             <a
               className="btn btn--play movie-card__button"
-              href="/player1"
+              href="/player/1"
               onClick={[Function]}
               type="button"
             >
@@ -198,7 +198,7 @@ Array [
           onMouseOver={[Function]}
         >
           <a
-            href="/films1"
+            href="/films/1"
             onClick={[Function]}
           >
             <div
@@ -217,7 +217,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films1"
+              href="/films/1"
               onClick={[Function]}
             >
               Fantastic Beasts
@@ -231,7 +231,7 @@ Array [
           onMouseOver={[Function]}
         >
           <a
-            href="/films1"
+            href="/films/1"
             onClick={[Function]}
           >
             <div
@@ -250,7 +250,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films1"
+              href="/films/1"
               onClick={[Function]}
             >
               Fantastic Beasts
@@ -264,7 +264,7 @@ Array [
           onMouseOver={[Function]}
         >
           <a
-            href="/films1"
+            href="/films/1"
             onClick={[Function]}
           >
             <div
@@ -283,7 +283,7 @@ Array [
           >
             <a
               className="small-movie-card__link"
-              href="/films1"
+              href="/films/1"
               onClick={[Function]}
             >
               Fantastic Beasts
@@ -300,6 +300,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"
