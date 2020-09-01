@@ -1,10 +1,12 @@
 {
   "name": "what-to-watch",
-  "homepage": "https://abuu-u.github.io/895015-what-to-watch-4/",
+  "homepage": ".",
   "version": "1.0.0",
   "private": true,
   "description": "Личный проект «Что посмотреть» от HTML Academy",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "webpack --mode production",
     "start": "webpack-dev-server",
     "eslint": "eslint --ext .jsx --ext .js src/",
@@ -23,6 +25,7 @@
     "eslint": "5.13.0",
     "eslint-config-htmlacademy": "0.5.2",
     "eslint-plugin-react": "7.20.0",
+    "gh-pages": "3.1.0",
     "jest": "26.1.0",
     "react-test-renderer": "16.13.1",
     "redux-devtools-extension": "2.13.8",
