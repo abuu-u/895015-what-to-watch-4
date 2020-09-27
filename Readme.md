@@ -3,7 +3,7 @@
 * Студент: [abuu](https://up.htmlacademy.ru/react/4/user/895015).
 * Наставник: [Артем Приходько](https://up.htmlacademy.ru/react/4/user/1012525).
 
-* [Опубликованная версия](https://pedantic-liskov-647305.netlify.app/)
+* [Опубликованная версия](https://ecstatic-swirles-c9408d.netlify.app/)
 
 ---
 
