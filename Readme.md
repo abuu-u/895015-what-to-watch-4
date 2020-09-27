@@ -3,6 +3,8 @@
 * Студент: [abuu](https://up.htmlacademy.ru/react/4/user/895015).
 * Наставник: [Артем Приходько](https://up.htmlacademy.ru/react/4/user/1012525).
 
+* [Опубликованная версия](https://pedantic-liskov-647305.netlify.app/)
+
 ---
 
 _Не удаляйте и не изменяйте папки и файлы:_
